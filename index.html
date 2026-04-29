@@ -57,8 +57,6 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 /* ── APP SHELL ── */
 #app{display:none;min-height:100vh;width:100%;}
 .layout{display:flex;min-height:100vh;width:100%;}
-
-/* Sidebar */
 .sidebar{width:270px;background:var(--sidebar);position:fixed;top:0;left:0;height:100vh;
   z-index:50;display:flex;flex-direction:column;}
 .sb-brand{display:flex;align-items:center;gap:10px;padding:20px 16px 18px;
@@ -79,9 +77,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   border-radius:9px;border:none;cursor:pointer;background:transparent;
   color:#93b8d8;font-size:13.5px;font-weight:600;font-family:inherit;transition:all .2s;}
 .btn-out:hover{background:#ff4d6d22;color:#ff7090;}
-
-/* Topbar */
-.main{margin-left:270px;display:flex;flex-direction:column;min-height:100vh;width:calc(100% - 270px);max-width:none;flex:1;min-width:0;}
+.main{margin-left:270px;display:flex;flex-direction:column;min-height:100vh;width:calc(100% - 270px);flex:1;min-width:0;}
 .topbar{background:var(--white);border-bottom:1px solid var(--border);height:58px;width:100%;
   padding:0 28px;display:flex;align-items:center;justify-content:space-between;
   position:sticky;top:0;z-index:40;}
@@ -90,14 +86,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .topbar-user{font-size:13px;color:var(--muted);font-weight:700;cursor:pointer;
   padding:6px 12px;border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:6px;}
 .topbar-user:hover{background:var(--teal-l);color:var(--teal-d);}
-
-/* Pages */
 .pg{display:none;padding:24px 28px;width:100%;}
 .pg.active{display:block;}
 .pg-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
 .pg-head h2{font-size:18px;font-weight:800;}
 
-/* ── KPI CARDS v2 ── */
+/* KPI Cards */
 .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px;}
 .kpi-v2{background:var(--white);border-radius:var(--radius);padding:20px 22px;
   border:1px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden;}
@@ -105,11 +99,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .kpi-v2.teal::before{background:var(--teal);}
 .kpi-v2.blue::before{background:var(--blue);}
 .kpi-v2.orange::before{background:var(--warn);}
+.kpi-v2.purple::before{background:#7c3aed;}
 .kpi-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
 .kpi-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
 .kpi-v2.teal .kpi-icon{background:var(--teal-l);}
 .kpi-v2.blue .kpi-icon{background:var(--blue-l);}
 .kpi-v2.orange .kpi-icon{background:var(--warn-l);}
+.kpi-v2.purple .kpi-icon{background:#f3e8ff;}
 .kpi-delta{display:inline-flex;align-items:center;gap:3px;padding:4px 9px;
   border-radius:20px;font-size:11.5px;font-weight:700;}
 .kpi-delta.pos{background:var(--green-l);color:#16a34a;}
@@ -120,9 +116,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .kpi-v2.teal .kpi-val{color:var(--teal-d);}
 .kpi-v2.blue .kpi-val{color:var(--blue);}
 .kpi-v2.orange .kpi-val{color:var(--warn);}
+.kpi-v2.purple .kpi-val{color:#7c3aed;}
 .kpi-sub{font-size:12px;color:var(--muted);margin-top:6px;}
 
-/* Card box */
+/* Box */
 .box{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);
   box-shadow:var(--shadow);margin-bottom:20px;overflow:hidden;}
 .box-hd{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;
@@ -130,7 +127,14 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .box-hd h4{font-size:14px;font-weight:800;}
 .box-bd{padding:16px 18px;}
 
-/* ── Filter Period ── */
+/* HPP Average Info Banner */
+.hpp-avg-banner{background:linear-gradient(135deg,#1e3a5f,#1a73e8);border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#fff;display:flex;align-items:center;gap:12px;}
+.hpp-avg-banner .ico{font-size:22px;}
+.hpp-avg-banner .txt strong{display:block;font-size:13px;font-weight:800;}
+.hpp-avg-banner .txt span{font-size:12px;opacity:.85;}
+.avg-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;background:#dbeafe;color:#1a73e8;font-size:11px;font-weight:700;}
+
+/* Period Filter */
 .period-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .pf-btn{padding:6px 12px;border:1.5px solid var(--border);border-radius:7px;background:transparent;
   cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;color:var(--muted);transition:all .2s;}
@@ -159,14 +163,14 @@ tbody tr.row-danger td{background:var(--red-l)!important;}
 tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 
 /* Badges */
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;
-  border-radius:20px;font-size:11.5px;font-weight:700;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11.5px;font-weight:700;}
 .badge-teal{background:var(--teal-l);color:var(--teal-d);}
 .badge-blue{background:var(--blue-l);color:var(--blue);}
 .badge-red{background:var(--red-l);color:var(--red);}
 .badge-warn{background:var(--warn-l);color:#b45309;}
 .badge-green{background:var(--green-l);color:#16a34a;}
 .badge-gray{background:#f0f4f8;color:#4b5e75;}
+.badge-purple{background:#f3e8ff;color:#7c3aed;}
 .mono{font-family:'JetBrains Mono';font-size:13px;}
 
 /* Buttons */
@@ -177,6 +181,7 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 .btn-red{background:var(--red);color:#fff;} .btn-red:hover{opacity:.85;}
 .btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text);}
 .btn-ghost:hover{border-color:var(--teal);color:var(--teal);}
+.btn-purple{background:#7c3aed;color:#fff;} .btn-purple:hover{background:#6d28d9;}
 .btn-sm{padding:5px 11px;font-size:12px;}
 .btn-icon{padding:6px 10px;border-radius:7px;border:1.5px solid var(--border);
   background:transparent;cursor:pointer;font-size:14px;transition:all .2s;}
@@ -184,11 +189,8 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 
 /* Forms */
 .fg{margin-bottom:14px;}
-.fg label{display:block;font-size:12px;font-weight:700;color:var(--muted);
-  margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase;}
-.fg input,.fg select,.fg textarea{width:100%;padding:10px 13px;
-  border:1.5px solid var(--border);border-radius:9px;
-  font-size:14px;font-family:inherit;color:var(--text);background:#f7fbff;transition:border .2s;}
+.fg label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase;}
+.fg input,.fg select,.fg textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;color:var(--text);background:#f7fbff;transition:border .2s;}
 .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--teal);background:#fff;}
 .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 
@@ -201,29 +203,23 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 .pag-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
 
 /* Modal */
-.modal-bg{display:none;position:fixed;inset:0;background:#00000055;z-index:200;
-  align-items:center;justify-content:center;}
+.modal-bg{display:none;position:fixed;inset:0;background:#00000055;z-index:200;align-items:center;justify-content:center;}
 .modal-bg.open{display:flex;}
-.modal{background:#fff;border-radius:16px;padding:28px;width:90%;max-width:560px;
-  max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px #00000035;}
-.modal h3{font-size:16px;font-weight:800;margin-bottom:20px;padding-bottom:12px;
-  border-bottom:2px solid var(--teal);}
-.modal-close{float:right;background:none;border:none;font-size:22px;cursor:pointer;
-  color:var(--muted);margin-top:-4px;}
+.modal{background:#fff;border-radius:16px;padding:28px;width:90%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px #00000035;}
+.modal h3{font-size:16px;font-weight:800;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--teal);}
+.modal-close{float:right;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);margin-top:-4px;}
 .modal-close:hover{color:var(--red);}
 
 /* Tabs */
 .tabs{display:flex;gap:3px;background:#eef3f9;border-radius:10px;padding:3px;width:fit-content;margin-bottom:20px;}
-.tab{padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;
-  color:var(--muted);border:none;background:transparent;font-family:inherit;transition:all .2s;}
+.tab{padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;color:var(--muted);border:none;background:transparent;font-family:inherit;transition:all .2s;}
 .tab.active{background:var(--teal);color:#fff;}
 
-/* ── LAPORAN v2 ── */
+/* Laporan */
 .lap-header{text-align:center;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--border);}
 .lap-header h2{font-size:17px;font-weight:800;color:var(--text);}
 .lap-header p{font-size:13px;color:var(--muted);margin-top:4px;}
-.lap-section-hd{background:#1a73e8;color:#fff;padding:9px 16px;font-size:12px;font-weight:800;
-  letter-spacing:.5px;text-transform:uppercase;border-radius:6px 6px 0 0;}
+.lap-section-hd{background:#1a73e8;color:#fff;padding:9px 16px;font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;border-radius:6px 6px 0 0;}
 .lap-section-hd.teal{background:var(--teal-d);}
 .lap-section-hd.gray{background:#4b5e75;}
 .lap-section-hd.flat{border-radius:0;}
@@ -236,26 +232,19 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 .lap-table .neg td:last-child{color:var(--red);}
 .lap-table .pos td:last-child{color:#16a34a;}
 .lap-total{background:var(--teal-l);}
-.lap-total td{font-weight:800!important;font-size:14px!important;color:var(--teal-d)!important;
-  padding:12px 16px!important;border-top:2px solid var(--teal)!important;}
+.lap-total td{font-weight:800!important;font-size:14px!important;color:var(--teal-d)!important;padding:12px 16px!important;border-top:2px solid var(--teal)!important;}
 .lap-total.laba-positif{background:var(--green-l);}
 .lap-total.laba-positif td{color:#16a34a!important;border-top-color:#22c55e!important;}
 .lap-total.laba-negatif{background:var(--red-l);}
 .lap-total.laba-negatif td{color:var(--red)!important;border-top-color:var(--red)!important;}
 .lap-mid{background:#dbeafe;}
 .lap-mid td{font-weight:700!important;}
-
-/* Neraca */
 .neraca-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.neraca-aktiva h5,.neraca-pasiva h5{font-size:13px;font-weight:800;margin-bottom:8px;
-  padding:8px 12px;border-radius:6px;color:#fff;}
+.neraca-aktiva h5,.neraca-pasiva h5{font-size:13px;font-weight:800;margin-bottom:8px;padding:8px 12px;border-radius:6px;color:#fff;}
 .neraca-aktiva h5{background:var(--blue);}
 .neraca-pasiva h5{background:#4b5e75;}
-
-/* Ekuitas */
 .ekuitas-table{width:100%;border-collapse:collapse;font-size:13px;}
-.ekuitas-table th{background:#1a73e8;color:#fff;padding:9px 12px;font-size:11px;
-  font-weight:700;text-transform:uppercase;letter-spacing:.4px;}
+.ekuitas-table th{background:#1a73e8;color:#fff;padding:9px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;}
 .ekuitas-table td{padding:9px 12px;border-bottom:1px solid var(--border);}
 .ekuitas-table td:not(:first-child):not(:nth-child(2)){text-align:right;font-family:'JetBrains Mono';font-size:12px;}
 .ekuitas-table .total-row td{background:var(--teal-l);font-weight:800;color:var(--teal-d);border-top:2px solid var(--teal);}
@@ -268,13 +257,11 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 .toggle-wrap span{font-size:14px;font-weight:600;}
 .toggle{width:44px;height:24px;background:#ddd;border-radius:20px;position:relative;cursor:pointer;transition:background .2s;border:none;}
 .toggle.on{background:var(--teal);}
-.toggle::after{content:'';width:18px;height:18px;background:#fff;border-radius:50%;
-  position:absolute;top:3px;left:3px;transition:left .2s;}
+.toggle::after{content:'';width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:left .2s;}
 .toggle.on::after{left:23px;}
 
 /* Stok panel */
-.stok-item{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;border-radius:9px;margin-bottom:6px;font-size:13.5px;}
+.stok-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:9px;margin-bottom:6px;font-size:13.5px;}
 .stok-item.warn{background:var(--warn-l);}
 .stok-item.danger{background:var(--red-l);}
 .stok-item.ok{background:var(--green-l);}
@@ -289,8 +276,7 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 
 /* Autocomplete */
 .ac-wrap{position:relative;}
-.ac-list{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--teal);
-  border-radius:9px;z-index:100;max-height:180px;overflow-y:auto;display:none;box-shadow:var(--shadow);}
+.ac-list{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--teal);border-radius:9px;z-index:100;max-height:180px;overflow-y:auto;display:none;box-shadow:var(--shadow);}
 .ac-list.open{display:block;}
 .ac-item{padding:9px 13px;cursor:pointer;font-size:13.5px;transition:background .15s;}
 .ac-item:hover{background:var(--teal-l);}
@@ -302,11 +288,22 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.err{background:var(--red);}
 
-/* ── PENYESUAIAN ── */
+/* Penyesuaian */
 .psd-info{background:linear-gradient(135deg,var(--blue-l),var(--teal-l));border:1px solid var(--teal);border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:13px;color:var(--text);}
 .psd-info strong{display:block;font-size:14px;font-weight:800;margin-bottom:4px;color:var(--teal-d);}
 .selisih-pos{color:#16a34a;font-weight:700;}
 .selisih-neg{color:var(--red);font-weight:700;}
+
+/* Stok Opname specific */
+.opname-info{background:linear-gradient(135deg,#f3e8ff,#e8f0fe);border:1px solid #7c3aed33;border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:13px;color:var(--text);}
+.opname-info strong{display:block;font-size:14px;font-weight:800;margin-bottom:4px;color:#7c3aed;}
+.opname-progress{background:#f0f4f8;border-radius:10px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:16px;font-size:13px;}
+.opname-progress .stat{text-align:center;}
+.opname-progress .stat .val{font-size:20px;font-weight:800;font-family:'JetBrains Mono';}
+.opname-progress .stat .lbl{font-size:11px;color:var(--muted);font-weight:600;}
+.opname-row-ok td{background:#f0fdf4;}
+.opname-row-diff td{background:#fff7ed;}
+.opname-row-miss td{background:#fef2f2;}
 
 /* Dark mode */
 body.dark{background:#1a1d27;color:#e0e6f0;}
@@ -317,9 +314,7 @@ body.dark tbody tr:hover td{background:#2a2d3f;}
 body.dark .fg input,body.dark .fg select,body.dark .fg textarea{background:#2a2d3f;border-color:#2e3347;color:#e0e6f0;}
 body.dark .filter-info{background:#1e2235;}
 body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
-
-/* Lap btn labels */
-#lapBtnPDF, #lapBtnExcel{min-width:130px;}
+body.dark .opname-progress{background:#2a2d3f;}
 
 @media print{
   .sidebar,.topbar,.pg-head button,.tabs,.btn,.btn-icon{display:none!important;}
@@ -332,7 +327,7 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
 </head>
 <body>
 
-<!-- ██ LOGIN ██ -->
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-bg"></div>
   <div class="lbox">
@@ -347,34 +342,34 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
     <div class="fw">
       <span class="ico">🔑</span>
       <input id="lp" type="password" placeholder="Password" style="padding-left:40px" onkeydown="if(event.key==='Enter')doLogin()"/>
-      <button class="eye" onclick="toggleEye()" id="eyeBtn" title="Tampilkan/Sembunyikan">👁️</button>
+      <button class="eye" onclick="toggleEye()" id="eyeBtn">👁️</button>
     </div>
     <button class="btn-login" onclick="doLogin()">Masuk →</button>
     <a href="#" class="lupa" onclick="showForgotPassword();return false">🔓 Lupa Password?</a>
   </div>
 </div>
 
-<!-- ██ APP ██ -->
+<!-- APP -->
 <div id="app">
 <div class="layout">
 
-<!-- Sidebar -->
 <aside class="sidebar">
   <div class="sb-brand">
     <span class="ico">🏪</span>
     <div><h2>Toko Jago</h2><span>Sumberarum</span></div>
   </div>
   <nav class="sb-nav">
-    <button class="snav active" onclick="showPg('dashboard',this)"><span class="nav-icon">📊</span> <span data-i18n="nav_dashboard">Dashboard</span></button>
-    <button class="snav" onclick="showPg('masuk',this)"><span class="nav-icon">📥</span> <span data-i18n="nav_masuk">Barang Masuk</span></button>
-    <button class="snav" onclick="showPg('keluar',this)"><span class="nav-icon">📤</span> <span data-i18n="nav_keluar">Barang Keluar</span></button>
-    <button class="snav" onclick="showPg('daftar',this)"><span class="nav-icon">📦</span> <span data-i18n="nav_daftar">Daftar Barang</span></button>
-    <button class="snav" onclick="showPg('penyesuaian',this)"><span class="nav-icon">⚖️</span> <span data-i18n="nav_penyesuaian">Penyesuaian Barang</span></button>
-    <button class="snav" onclick="showPg('laporan',this)"><span class="nav-icon">📈</span> <span data-i18n="nav_laporan">Laporan</span></button>
-    <button class="snav" onclick="showPg('settings',this)"><span class="nav-icon">⚙️</span> <span data-i18n="nav_settings">Settings</span></button>
+    <button class="snav active" onclick="showPg('dashboard',this)"><span class="nav-icon">📊</span> Dashboard</button>
+    <button class="snav" onclick="showPg('masuk',this)"><span class="nav-icon">📥</span> Barang Masuk</button>
+    <button class="snav" onclick="showPg('keluar',this)"><span class="nav-icon">📤</span> Barang Keluar</button>
+    <button class="snav" onclick="showPg('daftar',this)"><span class="nav-icon">📦</span> Daftar Barang</button>
+    <button class="snav" onclick="showPg('opname',this)"><span class="nav-icon">🔄</span> Stok Opname</button>
+    <button class="snav" onclick="showPg('penyesuaian',this)"><span class="nav-icon">⚖️</span> Penyesuaian Barang</button>
+    <button class="snav" onclick="showPg('laporan',this)"><span class="nav-icon">📈</span> Laporan</button>
+    <button class="snav" onclick="showPg('settings',this)"><span class="nav-icon">⚙️</span> Settings</button>
   </nav>
   <div class="sb-foot">
-    <button class="btn-out" onclick="doLogout()"><span>🚪</span> <span data-i18n="nav_logout">Logout</span></button>
+    <button class="btn-out" onclick="doLogout()"><span>🚪</span> Logout</button>
   </div>
 </aside>
 
@@ -382,20 +377,20 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
 <div class="topbar">
   <h3 id="pgTitle">Dashboard</h3>
   <div class="topbar-r">
-    <span class="topbar-user" id="topUser" onclick="showPg('settings',document.querySelectorAll('.snav')[6])" title="Klik untuk Settings">👤 Admin ▾</span>
+    <span class="topbar-user" id="topUser" onclick="showPg('settings',document.querySelectorAll('.snav')[7])">👤 Admin ▾</span>
   </div>
 </div>
 
-<!-- ══ DASHBOARD ══ -->
+<!-- DASHBOARD -->
 <div id="pg-dashboard" class="pg active">
   <div class="cards3" id="kpiCards"></div>
   <div class="box">
     <div class="box-hd">
-      <h4 data-i18n="chart_title">Grafik Transaksi</h4>
+      <h4>📊 Grafik Transaksi</h4>
       <div class="period-wrap" id="periodDash">
-        <button class="pf-btn active" onclick="setDashPeriod('week',this)" data-i18n="period_week">Minggu</button>
-        <button class="pf-btn" onclick="setDashPeriod('month',this)" data-i18n="period_month">Bulan</button>
-        <button class="pf-btn" onclick="setDashPeriod('custom',this)" data-i18n="period_custom">Custom</button>
+        <button class="pf-btn active" onclick="setDashPeriod('week',this)">Minggu</button>
+        <button class="pf-btn" onclick="setDashPeriod('month',this)">Bulan</button>
+        <button class="pf-btn" onclick="setDashPeriod('custom',this)">Custom</button>
         <div class="custom-date-wrap" id="cdDash">
           <input type="date" id="cdDashFrom" onchange="renderDashChart()"/>
           <span style="font-size:12px;color:var(--muted)">s/d</span>
@@ -407,30 +402,34 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
     <div class="box-bd"><canvas id="dashChart" height="80"></canvas></div>
   </div>
   <div class="box">
-    <div class="box-hd"><h4 data-i18n="stock_panel">Panel Stok</h4></div>
+    <div class="box-hd"><h4>📦 Panel Stok (Metode Average)</h4></div>
     <div class="box-bd" id="stokPanel"></div>
   </div>
 </div>
 
-<!-- ══ DAFTAR BARANG ══ -->
+<!-- DAFTAR BARANG -->
 <div id="pg-daftar" class="pg">
   <div class="pg-head">
-    <h2>📦 <span data-i18n="nav_daftar">Daftar Barang</span></h2>
+    <h2>📦 Daftar Barang</h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-teal" onclick="openModal('mBarang')">➕ <span data-i18n="btn_tambah">Tambah Barang</span></button>
+      <button class="btn btn-teal" onclick="openModal('mBarang')">➕ Tambah Barang</button>
       <button class="btn btn-ghost" onclick="dlCSV('barang')">⬇️ CSV</button>
     </div>
   </div>
+  <div class="hpp-avg-banner">
+    <span class="ico">📊</span>
+    <div class="txt"><strong>Metode HPP: Average (Rata-rata Bergerak)</strong><span>Harga rata-rata dihitung ulang otomatis setiap ada barang masuk. HPP penjualan = Qty × Harga Rata-rata.</span></div>
+  </div>
   <div class="box">
     <div class="box-hd">
-      <h4 data-i18n="nav_daftar">Data Barang</h4>
+      <h4>Data Barang</h4>
       <input type="text" id="srchBarang" placeholder="🔍 Cari barang..."
         style="width:220px;padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit"
         oninput="renderDaftar()"/>
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>#</th><th data-i18n="th_kode">Kode</th><th data-i18n="th_nama">Nama</th><th data-i18n="th_kat">Kategori</th><th data-i18n="th_hb">Harga Beli</th><th data-i18n="th_hj">Harga Jual</th><th>Stok</th><th>Status</th><th data-i18n="th_aksi">Aksi</th></tr></thead>
+        <thead><tr><th>#</th><th>Kode</th><th>Nama</th><th>Kategori</th><th>Harga Beli</th><th>Harga Rata-rata <span class="avg-tag">AVG</span></th><th>Harga Jual</th><th>Stok</th><th>Nilai Persediaan</th><th>Status</th><th>Aksi</th></tr></thead>
         <tbody id="tDaftar"></tbody>
       </table>
     </div>
@@ -438,10 +437,10 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- ══ BARANG MASUK ══ -->
+<!-- BARANG MASUK -->
 <div id="pg-masuk" class="pg">
   <div class="pg-head">
-    <h2>📥 <span data-i18n="nav_masuk">Barang Masuk</span></h2>
+    <h2>📥 Barang Masuk</h2>
     <div style="display:flex;gap:8px">
       <button class="btn btn-teal" onclick="openModal('mMasuk')">➕ Tambah</button>
       <button class="btn btn-ghost" onclick="dlCSV('masuk')">⬇️ CSV</button>
@@ -465,7 +464,7 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
     <div class="filter-info" id="filterInfoMasuk"></div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Tanggal</th><th>Kode</th><th>Barang</th><th>Supplier</th><th>Jumlah</th><th>Harga Beli</th><th>Total</th><th>No Faktur</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>Tanggal</th><th>Kode</th><th>Barang</th><th>Supplier</th><th>Jumlah</th><th>Harga Beli</th><th>Total</th><th>Harga Avg Baru <span class="avg-tag">AVG</span></th><th>No Faktur</th><th>Aksi</th></tr></thead>
         <tbody id="tMasuk"></tbody>
       </table>
     </div>
@@ -473,10 +472,10 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- ══ BARANG KELUAR ══ -->
+<!-- BARANG KELUAR -->
 <div id="pg-keluar" class="pg">
   <div class="pg-head">
-    <h2>📤 <span data-i18n="nav_keluar">Barang Keluar</span></h2>
+    <h2>📤 Barang Keluar</h2>
     <div style="display:flex;gap:8px">
       <button class="btn btn-teal" onclick="openModal('mKeluar')">➕ Transaksi</button>
       <button class="btn btn-ghost" onclick="dlCSV('keluar')">⬇️ CSV</button>
@@ -500,7 +499,7 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
     <div class="filter-info" id="filterInfoKeluar"></div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Tanggal</th><th>Kode</th><th>Barang</th><th>Jumlah</th><th>Harga Jual</th><th>Total</th><th>Kasir</th><th>Bayar</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>Tanggal</th><th>Kode</th><th>Barang</th><th>Jumlah</th><th>Harga Jual</th><th>Total Jual</th><th>HPP <span class="avg-tag">AVG</span></th><th>Laba Kotor</th><th>Kasir</th><th>Bayar</th><th>Aksi</th></tr></thead>
         <tbody id="tKeluar"></tbody>
       </table>
     </div>
@@ -508,18 +507,45 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- ══ PENYESUAIAN BARANG ══ -->
+<!-- STOK OPNAME -->
+<div id="pg-opname" class="pg">
+  <div class="pg-head">
+    <h2>🔄 Stok Opname</h2>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-purple" onclick="openModal('mOpname')">➕ Mulai Opname Baru</button>
+      <button class="btn btn-ghost" onclick="dlCSV('opname')">📤 Export</button>
+    </div>
+  </div>
+  
+  <div class="box">
+    <div class="box-hd">
+      <h4>Daftar Stok Opname</h4>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select id="filterStatusOpname" onchange="renderOpname()" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit">
+          <option value="">Semua Status</option>
+          <option value="Draft">Draft</option>
+          <option value="Selesai">Selesai</option>
+        </select>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>No</th><th>Tanggal</th><th>No Dokumen</th><th>Gudang</th><th>Total Barang</th><th>Barang Selisih</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody id="tOpname"></tbody>
+      </table>
+    </div>
+    <div class="pagination" id="pagOpname"></div>
+  </div>
+</div>
+
+<!-- PENYESUAIAN BARANG -->
 <div id="pg-penyesuaian" class="pg">
   <div class="pg-head">
     <h2>⚖️ Penyesuaian Barang</h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-teal" onclick="openModal('mPenyesuaian')">➕ Tambah Penyesuaian</button>
+      <button class="btn btn-teal" onclick="openModal('mPenyesuaian')">➕ Tambah Manual</button>
       <button class="btn btn-ghost" onclick="dlCSV('penyesuaian')">📤 Export</button>
     </div>
-  </div>
-  <div class="psd-info">
-    <strong>ℹ️ Tentang Penyesuaian Barang</strong>
-    Halaman ini digunakan untuk mencatat dan mengelola penyesuaian stok barang akibat kerusakan, pengembalian, atau selisih stok opname. Perubahan stok akan langsung memperbarui data inventori.
   </div>
   <div class="box">
     <div class="box-hd">
@@ -531,21 +557,21 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
           <option value="Barang Return">Barang Return</option>
           <option value="Selisih Stok">Selisih Stok</option>
         </select>
+        <select id="filterSumberPsd" onchange="renderPenyesuaian()" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit">
+          <option value="">Semua Sumber</option>
+          <option value="Manual">Manual</option>
+          <option value="Stok Opname">Stok Opname</option>
+        </select>
         <select id="filterStatusPsd" onchange="renderPenyesuaian()" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit">
           <option value="">Semua Status</option>
           <option value="Draft">Draft</option>
           <option value="Disetujui">Disetujui</option>
         </select>
-        <div class="custom-date-wrap show">
-          <input type="date" id="cdPsdFrom" onchange="renderPenyesuaian()" style="padding:5px 9px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit;background:#f7fbff"/>
-          <span style="font-size:12px;color:var(--muted)">s/d</span>
-          <input type="date" id="cdPsdTo" onchange="renderPenyesuaian()" style="padding:5px 9px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit;background:#f7fbff"/>
-        </div>
       </div>
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>No</th><th>Tanggal</th><th>No. Dokumen</th><th>Jenis</th><th>Gudang</th><th>Keterangan</th><th>Status</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>No</th><th>Tanggal</th><th>No. Dokumen</th><th>Jenis</th><th>Sumber</th><th>Gudang</th><th>Nilai Kerugian <span class="avg-tag">AVG</span></th><th>Keterangan</th><th>Status</th><th>Aksi</th></tr></thead>
         <tbody id="tPenyesuaian"></tbody>
       </table>
     </div>
@@ -553,10 +579,10 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- ══ LAPORAN ══ -->
+<!-- LAPORAN -->
 <div id="pg-laporan" class="pg">
   <div class="pg-head">
-    <h2>📈 <span data-i18n="nav_laporan">Laporan & Analisis</span></h2>
+    <h2>📈 Laporan & Analisis</h2>
     <div style="display:flex;gap:8px">
       <button class="btn btn-ghost" onclick="printLap()">🖨️ Cetak</button>
       <button class="btn btn-teal" id="lapBtnPDF" onclick="dlPDFByTab(currentLapTab)">📄 PDF Laba Rugi</button>
@@ -592,10 +618,9 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- ══ SETTINGS ══ -->
+<!-- SETTINGS -->
 <div id="pg-settings" class="pg">
-  <div class="pg-head"><h2>⚙️ <span data-i18n="nav_settings">Settings</span></h2></div>
-
+  <div class="pg-head"><h2>⚙️ Settings</h2></div>
   <div class="settings-section">
     <h3>👤 Profil Pengguna</h3>
     <div class="fg-row">
@@ -619,7 +644,6 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
     <div class="fg"><label>Konfirmasi Password Baru</label><input id="s-pconf" type="password"/></div>
     <button class="btn btn-teal btn-sm" onclick="ubahPW()">🔒 Ubah Password</button>
   </div>
-
   <div class="settings-section">
     <h3>🏪 Data Toko</h3>
     <div class="fg-row">
@@ -627,45 +651,19 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
       <div class="fg"><label>No Telepon</label><input id="s-telp" placeholder="031-xxxxxx"/></div>
     </div>
     <div class="fg"><label>Alamat</label><textarea id="s-alamat" rows="2" placeholder="Jl. Sumberarum No.1, Surabaya"></textarea></div>
-    <div class="fg"><label>Logo Toko (URL gambar)</label><input id="s-logo" placeholder="https://..."/></div>
     <button class="btn btn-teal btn-sm" onclick="simpanToko()">💾 Simpan Data Toko</button>
   </div>
-
   <div class="settings-section">
     <h3>🔔 Notifikasi</h3>
-    <div class="toggle-wrap">
-      <span>Notifikasi Stok Menipis</span>
-      <button class="toggle on" onclick="toggleBtn(this)"></button>
-    </div>
-    <div class="toggle-wrap">
-      <span>Notifikasi Transaksi Baru</span>
-      <button class="toggle on" onclick="toggleBtn(this)"></button>
-    </div>
-    <div class="toggle-wrap">
-      <span>Laporan Harian Otomatis</span>
-      <button class="toggle" onclick="toggleBtn(this)"></button>
-    </div>
+    <div class="toggle-wrap"><span>Notifikasi Stok Menipis</span><button class="toggle on" onclick="toggleBtn(this)"></button></div>
+    <div class="toggle-wrap"><span>Notifikasi Transaksi Baru</span><button class="toggle on" onclick="toggleBtn(this)"></button></div>
     <div class="fg" style="margin-top:14px"><label>Batas Stok Menipis</label>
-      <input id="s-batas" type="number" value="5" style="width:100px"
-        onchange="stokBatas=parseInt(this.value)||5;renderDash();saveState()"/>
+      <input id="s-batas" type="number" value="5" style="width:100px" onchange="stokBatas=parseInt(this.value)||5;renderDash();saveState()"/>
     </div>
   </div>
-
   <div class="settings-section">
     <h3>🎨 Preferensi</h3>
-    <div class="toggle-wrap">
-      <span>🌙 Dark Mode</span>
-      <button class="toggle" id="darkToggle" onclick="toggleDark(this)"></button>
-    </div>
-    <div class="fg" style="margin-top:14px"><label>Bahasa / Language</label>
-      <select id="s-lang" style="width:200px" onchange="changeLang(this.value)">
-        <option value="id">🇮🇩 Indonesia</option>
-        <option value="en">🇬🇧 English</option>
-      </select>
-    </div>
-    <div class="fg"><label>Mata Uang</label>
-      <select id="s-curr" style="width:160px"><option>Rupiah (Rp)</option><option>USD ($)</option></select>
-    </div>
+    <div class="toggle-wrap"><span>🌙 Dark Mode</span><button class="toggle" id="darkToggle" onclick="toggleDark(this)"></button></div>
   </div>
 </div>
 
@@ -673,9 +671,9 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
 </div><!-- /layout -->
 </div><!-- /app -->
 
-<!-- ══ MODALS ══ -->
+<!-- MODALS -->
 
-<!-- Modal Tambah Barang -->
+<!-- Tambah Barang -->
 <div id="mBarang" class="modal-bg">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('mBarang')">×</button>
@@ -698,11 +696,12 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
       <div class="fg"><label>Stok Awal</label><input id="mb-stok" type="number" value="0" min="0"/></div>
       <div class="fg"><label>Lokasi Rak</label><input id="mb-lok" placeholder="A1"/></div>
     </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">💡 Harga beli juga dipakai sebagai harga rata-rata awal (HPP Average)</p>
     <button class="btn btn-teal" onclick="addBarang()" style="width:100%">💾 Simpan Barang</button>
   </div>
 </div>
 
-<!-- Modal Edit Barang -->
+<!-- Edit Barang -->
 <div id="mEditBarang" class="modal-bg">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('mEditBarang')">×</button>
@@ -719,8 +718,8 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
       <div class="fg"><label>Satuan</label><input id="eb-sat"/></div>
     </div>
     <div class="fg-row">
-      <div class="fg"><label>Harga Beli (Rp)</label><input id="eb-hb-d" placeholder="Rp 0" oninput="fmtRp(this,'eb-hb')"/><input id="eb-hb" type="hidden" value="0"/></div>
-      <div class="fg"><label>Harga Jual (Rp)</label><input id="eb-hj-d" placeholder="Rp 0" oninput="fmtRp(this,'eb-hj')"/><input id="eb-hj" type="hidden" value="0"/></div>
+      <div class="fg"><label>Harga Beli (Rp)</label><input id="eb-hb-d" oninput="fmtRp(this,'eb-hb')"/><input id="eb-hb" type="hidden" value="0"/></div>
+      <div class="fg"><label>Harga Jual (Rp)</label><input id="eb-hj-d" oninput="fmtRp(this,'eb-hj')"/><input id="eb-hj" type="hidden" value="0"/></div>
     </div>
     <div class="fg-row">
       <div class="fg"><label>Stok</label><input id="eb-stok" type="number" min="0"/></div>
@@ -730,7 +729,7 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- Modal Barang Masuk -->
+<!-- Barang Masuk -->
 <div id="mMasuk" class="modal-bg">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('mMasuk')">×</button>
@@ -749,10 +748,12 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
         <div id="mm-ac" class="ac-list"></div>
       </div>
     </div>
+    <div id="mm-avg-info" style="display:none;background:var(--blue-l);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12.5px;color:var(--blue-d)"></div>
     <div class="fg-row">
       <div class="fg"><label>Jumlah</label><input id="mm-jml" type="number" min="1" value="1" oninput="calcMasukTotal()"/></div>
       <div class="fg"><label>Harga Beli (Rp)</label><input id="mm-hb-d" placeholder="Rp 0" oninput="fmtRp(this,'mm-hb');calcMasukTotal()"/><input id="mm-hb" type="hidden" value="0"/></div>
     </div>
+    <div id="mm-avg-preview" style="display:none;background:var(--teal-l);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12.5px;color:var(--teal-d)"></div>
     <div class="fg"><label>Total</label><input id="mm-total" readonly style="background:#f4f8fc;font-weight:700"/></div>
     <div class="fg"><label>Keterangan</label><textarea id="mm-ket" rows="2" placeholder="Opsional..."></textarea></div>
     <div style="display:flex;gap:8px">
@@ -762,7 +763,7 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- Modal Barang Keluar -->
+<!-- Barang Keluar -->
 <div id="mKeluar" class="modal-bg">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('mKeluar')">×</button>
@@ -778,11 +779,13 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
         <div id="mk-ac" class="ac-list"></div>
       </div>
     </div>
+    <div id="mk-hpp-info" style="display:none;background:var(--blue-l);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12.5px;color:var(--blue-d)"></div>
     <div class="fg"><label>Harga Jual</label><input id="mk-hj" readonly style="background:#f4f8fc;font-weight:700"/></div>
     <div class="fg-row">
       <div class="fg"><label>Jumlah</label><input id="mk-jml" type="number" min="1" value="1" oninput="calcKeluarTotal()"/></div>
-      <div class="fg"><label>Total</label><input id="mk-total" readonly style="background:#f4f8fc;font-weight:700"/></div>
+      <div class="fg"><label>Total Penjualan</label><input id="mk-total" readonly style="background:#f4f8fc;font-weight:700"/></div>
     </div>
+    <div id="mk-hpp-detail" style="display:none;background:var(--teal-l);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12.5px;color:var(--teal-d)"></div>
     <div class="fg"><label>Metode Pembayaran</label>
       <select id="mk-bayar"><option>Tunai</option><option>Transfer Bank</option><option>QRIS</option><option>Kartu Debit</option></select>
     </div>
@@ -790,11 +793,61 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- Modal Tambah Penyesuaian -->
+<!-- Stok Opname -->
+<div id="mOpname" class="modal-bg">
+  <div class="modal" style="max-width:780px">
+    <button class="modal-close" onclick="closeModal('mOpname')">×</button>
+    <h3>🔄 Stok Opname Baru</h3>
+    <div class="fg-row">
+      <div class="fg"><label>No Dokumen</label><input id="op-nodok" placeholder="OPN-0001"/></div>
+      <div class="fg"><label>Tanggal</label><input id="op-tgl" type="date"/></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Gudang</label>
+        <select id="op-gudang"><option>Gudang Utama</option><option>Gudang 2</option><option>Etalase</option></select>
+      </div>
+      <div class="fg"><label>Petugas</label><input id="op-petugas" value="Admin"/></div>
+    </div>
+    <div class="fg"><label>Keterangan</label><textarea id="op-ket" rows="2" placeholder="Misal: Opname bulanan April 2026..."></textarea></div>
+    <hr style="margin:14px 0;border:none;border-top:1.5px solid var(--border)"/>
+    <h4 style="font-size:13px;font-weight:800;margin-bottom:10px">📦 Input Stok Fisik Barang</h4>
+    <div id="opname-progress-bar" class="opname-progress">
+      <div class="stat"><div class="val" id="op-total-count">0</div><div class="lbl">Total Barang</div></div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div class="stat"><div class="val" id="op-ok-count" style="color:var(--green)">0</div><div class="lbl">Sesuai</div></div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div class="stat"><div class="val" id="op-diff-count" style="color:var(--warn)">0</div><div class="lbl">Ada Selisih</div></div>
+      <div style="width:1px;height:40px;background:var(--border)"></div>
+      <div class="stat"><div class="val" id="op-empty-count" style="color:var(--muted)">0</div><div class="lbl">Belum Diisi</div></div>
+    </div>
+    <div style="overflow-x:auto;max-height:320px;overflow-y:auto;border:1.5px solid var(--border);border-radius:9px">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead style="position:sticky;top:0;background:#f4f8fc;z-index:1">
+          <tr>
+            <th style="padding:9px 12px;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Kode</th>
+            <th style="padding:9px 12px;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Nama Barang</th>
+            <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Stok Sistem</th>
+            <th style="padding:9px 12px;text-align:center;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Stok Fisik</th>
+            <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Selisih</th>
+            <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Nilai Selisih <span class="avg-tag">AVG</span></th>
+          </tr>
+        </thead>
+        <tbody id="opname-items-table"></tbody>
+      </table>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" onclick="saveOpname('Draft')" style="flex:1">💾 Simpan Draft</button>
+      <button class="btn btn-purple" onclick="saveOpname('Selesai')" style="flex:1">✅ Selesaikan Opname</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center">⚡ Saat "Selesaikan", selisih stok otomatis dibuatkan entri Penyesuaian Barang</p>
+  </div>
+</div>
+
+<!-- Tambah Penyesuaian -->
 <div id="mPenyesuaian" class="modal-bg">
   <div class="modal" style="max-width:620px">
     <button class="modal-close" onclick="closeModal('mPenyesuaian')">×</button>
-    <h3>⚖️ Tambah Penyesuaian Barang</h3>
+    <h3>⚖️ Tambah Penyesuaian Manual</h3>
     <div class="fg-row">
       <div class="fg"><label>No. Dokumen</label><input id="psd-nodok" placeholder="PSD-0001"/></div>
       <div class="fg"><label>Tanggal</label><input id="psd-tgl" type="date"/></div>
@@ -807,9 +860,9 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
         <select id="psd-jenis"><option>Barang Rusak</option><option>Barang Return</option><option>Selisih Stok</option></select>
       </div>
     </div>
-    <div class="fg"><label>Keterangan</label><textarea id="psd-ket" rows="2" placeholder="Misal: Rusak akibat banjir, hasil stok opname..."></textarea></div>
+    <div class="fg"><label>Keterangan</label><textarea id="psd-ket" rows="2" placeholder="Misal: Rusak akibat banjir..."></textarea></div>
     <hr style="margin:14px 0;border:none;border-top:1.5px solid var(--border)"/>
-    <h4 style="font-size:13px;font-weight:800;margin-bottom:12px;color:var(--text)">🗂️ Detail Barang yang Disesuaikan</h4>
+    <h4 style="font-size:13px;font-weight:800;margin-bottom:12px">🗂️ Detail Barang yang Disesuaikan</h4>
     <div class="fg"><label>Pilih Barang</label>
       <div class="ac-wrap">
         <input id="psd-brg-d" placeholder="Ketik nama barang..." oninput="acBarang(this,'psd-brg','psd-ac')" autocomplete="off"/>
@@ -823,9 +876,11 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
       <div class="fg" style="margin:0"><label>Selisih</label><input id="psd-selisih" readonly style="background:#f4f8fc;font-weight:700"/></div>
       <div class="fg" style="margin:0"><label>Qty Sesuaikan</label><input id="psd-qty" type="number" min="1" placeholder="0"/></div>
     </div>
+    <div id="psd-nilai-avg" style="display:none;background:var(--blue-l);border-radius:8px;padding:10px;font-size:12.5px;color:var(--blue-d);margin-bottom:12px"></div>
     <div class="fg"><label>Keterangan Barang</label><input id="psd-ketbrg" placeholder="Misal: 3 pcs rusak kemasan..."/></div>
     <button class="btn btn-ghost btn-sm" onclick="addItemPsd()" style="margin-bottom:14px">➕ Tambah ke Daftar</button>
     <div id="psdItemList" style="margin-bottom:16px"></div>
+    <div id="psd-total-kerugian" style="display:none;background:var(--red-l);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--red);font-weight:700;margin-bottom:14px"></div>
     <div style="display:flex;gap:8px">
       <button class="btn btn-ghost" onclick="savePenyesuaian('Draft')" style="flex:1">💾 Simpan Draft</button>
       <button class="btn btn-teal" onclick="savePenyesuaian('Disetujui')" style="flex:1">✅ Simpan & Setujui</button>
@@ -833,7 +888,7 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- Modal Detail Penyesuaian -->
+<!-- Detail Penyesuaian -->
 <div id="mDetailPsd" class="modal-bg">
   <div class="modal" style="max-width:620px">
     <button class="modal-close" onclick="closeModal('mDetailPsd')">×</button>
@@ -842,12 +897,20 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
   </div>
 </div>
 
-<!-- Modal Lupa Password -->
+<!-- Detail Opname -->
+<div id="mDetailOpname" class="modal-bg">
+  <div class="modal" style="max-width:680px">
+    <button class="modal-close" onclick="closeModal('mDetailOpname')">×</button>
+    <h3>📋 Detail Stok Opname</h3>
+    <div id="detailOpnameContent"></div>
+  </div>
+</div>
+
+<!-- Lupa Password -->
 <div id="mForgot" class="modal-bg">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('mForgot')">×</button>
     <h3>🔓 Lupa Password</h3>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Masukkan username admin untuk reset password lokal aplikasi.</p>
     <div class="fg"><label>Username</label><input id="fp-user" placeholder="admin"/></div>
     <div class="fg-row">
       <div class="fg"><label>Password Baru</label><input id="fp-new" type="password" placeholder="Minimal 8 karakter"/></div>
@@ -861,87 +924,28 @@ body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
 
 <script>
 // ══════════════════════════════════════════
-//  I18N — Terjemahan
-// ══════════════════════════════════════════
-const i18n = {
-  id: {
-    nav_dashboard:'Dashboard', nav_masuk:'Barang Masuk', nav_keluar:'Barang Keluar',
-    nav_daftar:'Daftar Barang', nav_penyesuaian:'Penyesuaian Barang',
-    nav_laporan:'Laporan', nav_settings:'Settings', nav_logout:'Logout',
-    chart_title:'Grafik Transaksi', stock_panel:'Panel Stok',
-    period_week:'Minggu', period_month:'Bulan', period_custom:'Custom',
-    btn_tambah:'Tambah Barang',
-    th_kode:'Kode', th_nama:'Nama', th_kat:'Kategori', th_hb:'Harga Beli',
-    th_hj:'Harga Jual', th_aksi:'Aksi',
-    pg_dashboard:'Dashboard', pg_masuk:'Barang Masuk', pg_keluar:'Barang Keluar',
-    pg_daftar:'Daftar Barang', pg_penyesuaian:'Penyesuaian Barang',
-    pg_laporan:'Laporan & Analisis', pg_settings:'Settings',
-    kpi_stok:'Total Stok Barang', kpi_masuk:'Transaksi Masuk', kpi_keluar:'Transaksi Keluar',
-    kpi_sub_stok:'unit vs periode lalu', kpi_sub_masuk:'item masuk vs periode lalu', kpi_sub_keluar:'item terjual vs periode lalu',
-    status_habis:'Habis', status_menipis:'Menipis', status_cukup:'Cukup',
-    no_data:'Tidak ada data pada periode ini',
-  },
-  en: {
-    nav_dashboard:'Dashboard', nav_masuk:'Incoming Goods', nav_keluar:'Outgoing Goods',
-    nav_daftar:'Product List', nav_penyesuaian:'Stock Adjustment',
-    nav_laporan:'Reports', nav_settings:'Settings', nav_logout:'Logout',
-    chart_title:'Transaction Chart', stock_panel:'Stock Panel',
-    period_week:'Week', period_month:'Month', period_custom:'Custom',
-    btn_tambah:'Add Product',
-    th_kode:'Code', th_nama:'Name', th_kat:'Category', th_hb:'Purchase Price',
-    th_hj:'Selling Price', th_aksi:'Action',
-    pg_dashboard:'Dashboard', pg_masuk:'Incoming Goods', pg_keluar:'Outgoing Goods',
-    pg_daftar:'Product List', pg_penyesuaian:'Stock Adjustment',
-    pg_laporan:'Reports & Analysis', pg_settings:'Settings',
-    kpi_stok:'Total Stock', kpi_masuk:'Incoming Transactions', kpi_keluar:'Outgoing Transactions',
-    kpi_sub_stok:'units vs last period', kpi_sub_masuk:'items in vs last period', kpi_sub_keluar:'items sold vs last period',
-    status_habis:'Out of Stock', status_menipis:'Low Stock', status_cukup:'In Stock',
-    no_data:'No data for this period',
-  }
-};
-let currentLang = 'id';
-function t(key){ return (i18n[currentLang] && i18n[currentLang][key]) || (i18n['id'][key]) || key; }
-function changeLang(lang){
-  currentLang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const key = el.getAttribute('data-i18n');
-    el.textContent = t(key);
-  });
-  // Update page title
-  const pgMap = {dashboard:'pg_dashboard',masuk:'pg_masuk',keluar:'pg_keluar',daftar:'pg_daftar',penyesuaian:'pg_penyesuaian',laporan:'pg_laporan',settings:'pg_settings'};
-  const activePg = document.querySelector('.pg.active');
-  if(activePg){
-    const pgId = activePg.id.replace('pg-','');
-    document.getElementById('pgTitle').textContent = t('pg_'+pgId);
-  }
-  renderDash();
-  renderDaftar();
-  renderMasuk();
-  renderKeluar();
-  renderPenyesuaian();
-  saveState();
-}
-
-// ══════════════════════════════════════════
-//  DATA
+//  DATA — hargaAvg ditambahkan ke setiap barang
 // ══════════════════════════════════════════
 let barang = [
-  {kode:'BRG-001',nama:'Indomie Goreng',kat:'Makanan',sat:'pcs',hb:2800,hj:3500,stok:150,lok:'A1'},
-  {kode:'BRG-002',nama:'Aqua 600ml',kat:'Minuman',sat:'botol',hb:2000,hj:3000,stok:4,lok:'B1'},
-  {kode:'BRG-003',nama:'Beras 5kg',kat:'Makanan',sat:'karung',hb:65000,hj:75000,stok:30,lok:'C2'},
-  {kode:'BRG-004',nama:'Sabun Lifebuoy',kat:'Lainnya',sat:'pcs',hb:4500,hj:6000,stok:0,lok:'D1'},
-  {kode:'BRG-005',nama:'Minyak Goreng 1L',kat:'Makanan',sat:'botol',hb:14000,hj:16500,stok:25,lok:'C1'},
+  {kode:'BRG-001',nama:'Indomie Goreng',kat:'Makanan',sat:'pcs',hb:2800,hj:3500,stok:150,lok:'A1',hargaAvg:2800},
+  {kode:'BRG-002',nama:'Aqua 600ml',kat:'Minuman',sat:'botol',hb:2000,hj:3000,stok:4,lok:'B1',hargaAvg:2000},
+  {kode:'BRG-003',nama:'Beras 5kg',kat:'Makanan',sat:'karung',hb:65000,hj:75000,stok:30,lok:'C2',hargaAvg:65000},
+  {kode:'BRG-004',nama:'Sabun Lifebuoy',kat:'Lainnya',sat:'pcs',hb:4500,hj:6000,stok:0,lok:'D1',hargaAvg:4500},
+  {kode:'BRG-005',nama:'Minyak Goreng 1L',kat:'Makanan',sat:'botol',hb:14000,hj:16500,stok:25,lok:'C1',hargaAvg:14000},
 ];
+// masuk kini punya field hargaAvgBaru
 let masuk = [
-  {tgl:'28/04/2026',kode:'BRG-001',nama:'Indomie Goreng',sup:'PT Supplier Utama',jml:100,hb:2800,total:280000,fak:'FK-0001',ket:''},
-  {tgl:'29/04/2026',kode:'BRG-003',nama:'Beras 5kg',sup:'CV Maju Bersama',jml:10,hb:65000,total:650000,fak:'FK-0002',ket:''},
+  {tgl:'28/04/2026',kode:'BRG-001',nama:'Indomie Goreng',sup:'PT Supplier Utama',jml:100,hb:2800,total:280000,fak:'FK-0001',ket:'',hargaAvgBaru:2800},
+  {tgl:'29/04/2026',kode:'BRG-003',nama:'Beras 5kg',sup:'CV Maju Bersama',jml:10,hb:65000,total:650000,fak:'FK-0002',ket:'',hargaAvgBaru:65000},
 ];
+// keluar kini punya field hpp dan labaKotor
 let keluar = [
-  {tgl:'28/04/2026',kode:'BRG-001',nama:'Indomie Goreng',jml:5,hj:3500,total:17500,kasir:'Admin',bayar:'Tunai'},
-  {tgl:'29/04/2026',kode:'BRG-001',nama:'Indomie Goreng',jml:10,hj:3500,total:35000,kasir:'Admin',bayar:'Tunai'},
-  {tgl:'29/04/2026',kode:'BRG-005',nama:'Minyak Goreng 1L',jml:3,hj:16500,total:49500,kasir:'Admin',bayar:'QRIS'},
+  {tgl:'28/04/2026',kode:'BRG-001',nama:'Indomie Goreng',jml:5,hj:3500,total:17500,hpp:14000,labaKotor:3500,kasir:'Admin',bayar:'Tunai'},
+  {tgl:'29/04/2026',kode:'BRG-001',nama:'Indomie Goreng',jml:10,hj:3500,total:35000,hpp:28000,labaKotor:7000,kasir:'Admin',bayar:'Tunai'},
+  {tgl:'29/04/2026',kode:'BRG-005',nama:'Minyak Goreng 1L',jml:3,hj:16500,total:49500,hpp:42000,labaKotor:7500,kasir:'Admin',bayar:'QRIS'},
 ];
 let penyesuaian = [];
+let opname = [];
 let psdTempItems = [];
 
 let currentPW = 'admin';
@@ -950,15 +954,7 @@ let lapCharts = {};
 let currentLapTab = 'laba';
 let prevStok = 205, prevMasuk = 80, prevKeluar = 8;
 let periodState = { masuk: 'today', keluar: 'today' };
-
-const pgTitlesKey = {
-  dashboard:'pg_dashboard', daftar:'pg_daftar', masuk:'pg_masuk',
-  keluar:'pg_keluar', penyesuaian:'pg_penyesuaian', laporan:'pg_laporan', settings:'pg_settings'
-};
-
-const lapTabNames = {
-  laba:'Laba Rugi', neraca:'Neraca', kas:'Arus Kas', ekuitas:'Ekuitas', grafik:'Top Selling'
-};
+let currentOpnameInputs = {}; // {kode: stokFisik}
 
 // ══════════════════════════════════════════
 //  UTILS
@@ -978,7 +974,7 @@ function setRpDisplay(dispId, hidId, val){
 function toast(msg, err=false){
   const to=document.getElementById('toast');
   to.textContent=msg; to.className='show'+(err?' err':'');
-  setTimeout(()=>to.className='',3000);
+  setTimeout(()=>to.className='',3200);
 }
 function todayStr(){
   const d=new Date();
@@ -991,6 +987,102 @@ function todayInput(){
 function inputToDisp(s){ if(!s)return todayStr(); const[y,m,dd]=s.split('-'); return `${dd}/${m}/${y}`; }
 function fmtDate(d){ return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; }
 function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+// ══════════════════════════════════════════
+//  HPP AVERAGE CALCULATION
+// ══════════════════════════════════════════
+// Hitung harga rata-rata baru saat barang masuk
+function hitungHargaAvgBaru(stokLama, hargaAvgLama, qtyMasuk, hargaBeli) {
+  const totalStokBaru = stokLama + qtyMasuk;
+  if (totalStokBaru === 0) return hargaAvgLama;
+  return Math.round((stokLama * hargaAvgLama + qtyMasuk * hargaBeli) / totalStokBaru);
+}
+
+// Update harga avg setelah barang masuk
+function updateHargaAvg(kode, qtyMasuk, hargaBeli) {
+  const b = barang.find(x => x.kode === kode);
+  if (!b) return 0;
+  const avgBaru = hitungHargaAvgBaru(b.stok, b.hargaAvg || b.hb, qtyMasuk, hargaBeli);
+  b.hargaAvg = avgBaru;
+  return avgBaru;
+}
+
+// Dapatkan nilai persediaan berdasarkan harga rata-rata
+function nilaiPersediaan() {
+  return barang.reduce((s, b) => s + (b.hargaAvg || b.hb) * b.stok, 0);
+}
+
+// Preview kalkulasi avg di modal masuk
+function calcMasukTotal() {
+  const kode = document.getElementById('mm-brg').value;
+  const jml = parseInt(document.getElementById('mm-jml').value) || 0;
+  const hb = getRp('mm-hb');
+  document.getElementById('mm-total').value = rp(jml * hb);
+  
+  const preview = document.getElementById('mm-avg-preview');
+  if (kode && jml > 0 && hb > 0) {
+    const b = barang.find(x => x.kode === kode);
+    if (b) {
+      const avgBaru = hitungHargaAvgBaru(b.stok, b.hargaAvg || b.hb, jml, hb);
+      preview.style.display = 'block';
+      preview.innerHTML = `📊 <strong>Simulasi Harga Rata-rata (Average):</strong><br>
+        Stok lama: ${b.stok} × Avg lama: ${rp(b.hargaAvg || b.hb)} = ${rp(b.stok * (b.hargaAvg || b.hb))}<br>
+        Masuk: ${jml} × ${rp(hb)} = ${rp(jml * hb)}<br>
+        <strong>Harga Avg Baru = ${rp(avgBaru)} / ${b.sat}</strong>`;
+    }
+  } else {
+    preview.style.display = 'none';
+  }
+}
+
+function calcKeluarTotal() {
+  const kode = document.getElementById('mk-brg').value;
+  const jml = parseInt(document.getElementById('mk-jml').value) || 0;
+  const hjStr = document.getElementById('mk-hj').value.replace(/[^0-9]/g,'');
+  const hj = parseInt(hjStr) || 0;
+  document.getElementById('mk-total').value = rp(jml * hj);
+  
+  const detail = document.getElementById('mk-hpp-detail');
+  if (kode && jml > 0) {
+    const b = barang.find(x => x.kode === kode);
+    if (b) {
+      const hpp = jml * (b.hargaAvg || b.hb);
+      const labaKotor = jml * hj - hpp;
+      detail.style.display = 'block';
+      detail.innerHTML = `📊 <strong>Kalkulasi HPP Average:</strong><br>
+        HPP = ${jml} qty × ${rp(b.hargaAvg || b.hb)} (avg) = <strong>${rp(hpp)}</strong><br>
+        Laba Kotor = ${rp(jml * hj)} - ${rp(hpp)} = <strong style="color:${labaKotor>=0?'#16a34a':'var(--red)'}">${rp(labaKotor)}</strong>`;
+    }
+  } else {
+    detail.style.display = 'none';
+  }
+}
+
+function calcSelisih() {
+  const sistem = parseInt(document.getElementById('psd-sistem').value) || 0;
+  const fisik = parseInt(document.getElementById('psd-fisik').value) || 0;
+  const selisih = fisik - sistem;
+  const el = document.getElementById('psd-selisih');
+  el.value = (selisih >= 0 ? '+' : '') + selisih;
+  el.style.color = selisih >= 0 ? '#16a34a' : 'var(--red)';
+  el.style.fontWeight = '700';
+  
+  // Tampilkan nilai kerugian berdasarkan avg
+  const kode = document.getElementById('psd-brg').value;
+  const nilaiEl = document.getElementById('psd-nilai-avg');
+  if (kode && selisih < 0) {
+    const b = barang.find(x => x.kode === kode);
+    if (b) {
+      const qty = document.getElementById('psd-qty').value || Math.abs(selisih);
+      const nilaiKerugian = Math.abs(selisih) * (b.hargaAvg || b.hb);
+      nilaiEl.style.display = 'block';
+      nilaiEl.innerHTML = `📊 Estimasi nilai kerugian (HPP Average): <strong>${rp(nilaiKerugian)}</strong><br>
+        (${Math.abs(selisih)} qty × ${rp(b.hargaAvg || b.hb)} harga rata-rata)`;
+    }
+  } else {
+    nilaiEl.style.display = 'none';
+  }
+}
 
 // ══════════════════════════════════════════
 //  PERIOD FILTER
@@ -1012,8 +1104,7 @@ function getPeriodRange(period, type) {
     const fromVal = document.getElementById(`cd${cap(type)}From`).value;
     const toVal = document.getElementById(`cd${cap(type)}To`).value;
     if(!fromVal || !toVal) return { from: null, to: null, label: 'Pilih rentang tanggal di atas' };
-    const f = new Date(fromVal), tv = new Date(toVal);
-    return { from: f, to: tv, label: `${inputToDisp(fromVal)} – ${inputToDisp(toVal)}` };
+    return { from: new Date(fromVal), to: new Date(toVal), label: `${inputToDisp(fromVal)} – ${inputToDisp(toVal)}` };
   }
   return { from: null, to: null, label: 'Semua Data' };
 }
@@ -1065,16 +1156,22 @@ function doLogout(){
 // ══════════════════════════════════════════
 //  NAVIGATION
 // ══════════════════════════════════════════
+const pgTitles = {
+  dashboard:'Dashboard', daftar:'Daftar Barang', masuk:'Barang Masuk',
+  keluar:'Barang Keluar', opname:'Stok Opname', penyesuaian:'Penyesuaian Barang',
+  laporan:'Laporan & Analisis', settings:'Settings'
+};
 function showPg(id, btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.snav').forEach(b=>b.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
-  document.getElementById('pgTitle').textContent = t(pgTitlesKey[id])||id;
+  document.getElementById('pgTitle').textContent = pgTitles[id]||id;
   if(id==='dashboard') renderDash();
   if(id==='daftar') renderDaftar();
   if(id==='masuk') renderMasuk();
   if(id==='keluar') renderKeluar();
+  if(id==='opname') renderOpname();
   if(id==='penyesuaian') renderPenyesuaian();
   if(id==='laporan') renderLaporan();
 }
@@ -1084,16 +1181,28 @@ function showPg(id, btn){
 // ══════════════════════════════════════════
 function openModal(id){
   document.getElementById(id).classList.add('open');
-  if(id==='mMasuk'){ document.getElementById('mm-tgl').value=todayInput(); calcMasukTotal(); }
+  if(id==='mMasuk'){
+    document.getElementById('mm-tgl').value=todayInput();
+    calcMasukTotal();
+  }
   if(id==='mKeluar'){ document.getElementById('mk-tgl').value=todayInput(); }
   if(id==='mPenyesuaian'){
     document.getElementById('psd-tgl').value=todayInput();
     document.getElementById('psd-nodok').value=`PSD-${String(penyesuaian.length+1).padStart(4,'0')}`;
     psdTempItems=[];
     renderPsdTempItems();
-    ['psd-brg','psd-brg-d','psd-sistem','psd-fisik','psd-selisih','psd-qty','psd-ketbrg'].forEach(id=>{
-      const el=document.getElementById(id); if(el) el.value='';
+    ['psd-brg','psd-brg-d','psd-sistem','psd-fisik','psd-selisih','psd-qty','psd-ketbrg'].forEach(i=>{
+      const el=document.getElementById(i); if(el){ el.value=''; el.style.color=''; el.style.fontWeight=''; }
     });
+    document.getElementById('psd-nilai-avg').style.display='none';
+    document.getElementById('psd-total-kerugian').style.display='none';
+  }
+  if(id==='mOpname'){
+    document.getElementById('op-tgl').value=todayInput();
+    document.getElementById('op-nodok').value=`OPN-${String(opname.length+1).padStart(4,'0')}`;
+    document.getElementById('op-ket').value='';
+    currentOpnameInputs={};
+    renderOpnameItemsTable();
   }
 }
 function closeModal(id){ document.getElementById(id).classList.remove('open'); }
@@ -1115,13 +1224,24 @@ function acBarang(inputEl, hidId, acId){
   matches.forEach(b=>{
     const div=document.createElement('div');
     div.className='ac-item';
-    div.textContent=`${b.kode} — ${b.nama} (Stok: ${b.stok})`;
+    div.innerHTML=`${b.kode} — ${b.nama} <span style="color:var(--muted)">(Stok: ${b.stok} | Avg: ${rp(b.hargaAvg||b.hb)})</span>`;
     div.onclick=()=>{
       inputEl.value=b.nama;
       document.getElementById(hidId).value=b.kode;
       list.classList.remove('open');
+      if(acId==='mm-ac'){
+        // Show avg info
+        const info=document.getElementById('mm-avg-info');
+        info.style.display='block';
+        info.innerHTML=`📊 <strong>Info Harga Rata-rata Saat Ini:</strong> Stok=${b.stok} ${b.sat} | Avg=${rp(b.hargaAvg||b.hb)}/pcs`;
+        setRpDisplay('mm-hb-d','mm-hb',b.hb);
+        calcMasukTotal();
+      }
       if(acId==='mk-ac'){
         document.getElementById('mk-hj').value=rp(b.hj);
+        const hppInfo=document.getElementById('mk-hpp-info');
+        hppInfo.style.display='block';
+        hppInfo.innerHTML=`📊 <strong>HPP Average:</strong> ${rp(b.hargaAvg||b.hb)} / ${b.sat} | Stok tersedia: ${b.stok} ${b.sat}`;
         calcKeluarTotal();
       }
       if(acId==='psd-ac'){
@@ -1129,6 +1249,7 @@ function acBarang(inputEl, hidId, acId){
         document.getElementById('psd-fisik').value='';
         document.getElementById('psd-selisih').value='';
         document.getElementById('psd-qty').value='';
+        document.getElementById('psd-nilai-avg').style.display='none';
       }
     };
     list.appendChild(div);
@@ -1136,51 +1257,41 @@ function acBarang(inputEl, hidId, acId){
   list.classList.add('open');
 }
 
-function calcMasukTotal(){
-  const jml=parseInt(document.getElementById('mm-jml').value)||0;
-  const hb=getRp('mm-hb');
-  document.getElementById('mm-total').value=rp(jml*hb);
-}
-function calcKeluarTotal(){
-  const jml=parseInt(document.getElementById('mk-jml').value)||0;
-  const hjStr=document.getElementById('mk-hj').value.replace(/[^0-9]/g,'');
-  document.getElementById('mk-total').value=rp(jml*(parseInt(hjStr)||0));
-}
-function calcSelisih(){
-  const sistem=parseInt(document.getElementById('psd-sistem').value)||0;
-  const fisik=parseInt(document.getElementById('psd-fisik').value)||0;
-  const selisih=fisik-sistem;
-  const el=document.getElementById('psd-selisih');
-  el.value=(selisih>=0?'+':'')+selisih;
-  el.style.color=selisih>=0?'#16a34a':'var(--red)';
-  el.style.fontWeight='700';
-}
-
 // ══════════════════════════════════════════
 //  DASHBOARD
 // ══════════════════════════════════════════
 function renderDash(){
-  const totalStok = barang.reduce((s,b)=>s+b.stok, 0);
-  const totalMasuk = masuk.reduce((s,m)=>s+m.jml, 0);
-  const totalKeluar = keluar.reduce((s,k)=>s+k.jml, 0);
-  const dStok = totalStok - prevStok;
-  const dMasuk = totalMasuk - prevMasuk;
-  const dKeluar = totalKeluar - prevKeluar;
+  const totalStok=barang.reduce((s,b)=>s+b.stok,0);
+  const totalMasuk=masuk.reduce((s,m)=>s+m.jml,0);
+  const totalKeluar=keluar.reduce((s,k)=>s+k.jml,0);
+  const totalNilai=nilaiPersediaan();
+
+  const dStok=totalStok-prevStok, dMasuk=totalMasuk-prevMasuk, dKeluar=totalKeluar-prevKeluar;
 
   document.getElementById('kpiCards').innerHTML = `
-    ${kpiCard('teal','📦',t('kpi_stok'), totalStok.toLocaleString('id-ID'), dStok, t('kpi_sub_stok'))}
-    ${kpiCard('blue','📥',t('kpi_masuk'), totalMasuk.toLocaleString('id-ID'), dMasuk, t('kpi_sub_masuk'))}
-    ${kpiCard('orange','📤',t('kpi_keluar'), totalKeluar.toLocaleString('id-ID'), dKeluar, t('kpi_sub_keluar'))}
-  `;
+    <div class="cards3" style="margin:0">
+      ${kpiCard('teal','📦','Total Stok Barang',totalStok.toLocaleString('id-ID'),dStok,'unit vs periode lalu')}
+      ${kpiCard('blue','📥','Transaksi Masuk',totalMasuk.toLocaleString('id-ID'),dMasuk,'item masuk vs periode lalu')}
+      ${kpiCard('orange','📤','Transaksi Keluar',totalKeluar.toLocaleString('id-ID'),dKeluar,'item terjual vs periode lalu')}
+    </div>
+    <div style="margin-bottom:22px">
+      ${kpiCard('purple','💰','Nilai Persediaan (Avg)',rp(totalNilai),0,'HPP Average method')}
+    </div>`;
+
+  // Override karena layout khusus
+  document.getElementById('kpiCards').innerHTML = kpiCard('teal','📦','Total Stok Barang',totalStok.toLocaleString('id-ID'),dStok,'unit vs periode lalu') +
+    kpiCard('blue','📥','Transaksi Masuk',totalMasuk.toLocaleString('id-ID'),dMasuk,'item masuk vs periode lalu') +
+    kpiCard('orange','📤','Transaksi Keluar',totalKeluar.toLocaleString('id-ID'),dKeluar,'item terjual vs periode lalu');
+
   renderStokPanel();
   renderDashChart();
 }
 
-function kpiCard(color, icon, label, val, delta, sub){
-  const isPos = delta > 0, isNeu = delta === 0;
-  const deltaClass = isNeu ? 'neu' : (isPos ? 'pos' : 'neg');
-  const arrow = isNeu ? '—' : (isPos ? '▲' : '▼');
-  const deltaStr = isNeu ? '0' : (isPos ? '+'+delta : String(delta));
+function kpiCard(color,icon,label,val,delta,sub){
+  const isPos=delta>0, isNeu=delta===0;
+  const deltaClass=isNeu?'neu':(isPos?'pos':'neg');
+  const arrow=isNeu?'—':(isPos?'▲':'▼');
+  const deltaStr=isNeu?'0':(isPos?'+'+delta:String(delta));
   return `<div class="kpi-v2 ${color}">
     <div class="kpi-top">
       <div class="kpi-icon">${icon}</div>
@@ -1198,9 +1309,12 @@ function renderStokPanel(){
   const sorted=[...barang].sort((a,b)=>a.stok-b.stok);
   sorted.forEach(b=>{
     const cls=b.stok===0?'danger':b.stok<=stokBatas?'warn':'ok';
-    const label=b.stok===0?t('status_habis'):b.stok<=stokBatas?t('status_menipis'):t('status_cukup');
+    const label=b.stok===0?'Habis':b.stok<=stokBatas?'Menipis':'Cukup';
     panel.innerHTML+=`<div class="stok-item ${cls}">
-      <span class="stok-name"><strong>${b.nama}</strong><span class="stok-code">${b.kode}</span></span>
+      <span class="stok-name">
+        <strong>${b.nama}</strong>
+        <span class="stok-code">${b.kode} | Avg: ${rp(b.hargaAvg||b.hb)}</span>
+      </span>
       <span class="stok-right">
         <span class="badge ${cls==='danger'?'badge-red':cls==='warn'?'badge-warn':'badge-green'}">${b.stok} ${b.sat}</span>
         <span class="status-pill ${cls}">${label}</span>
@@ -1210,11 +1324,11 @@ function renderStokPanel(){
 }
 
 let dashChartObj=null, dashPeriod='week';
-function setDashPeriod(period, btn){
+function setDashPeriod(period,btn){
   dashPeriod=period;
   document.querySelectorAll('#periodDash .pf-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  document.getElementById('cdDash').classList.toggle('show', period==='custom');
+  document.getElementById('cdDash').classList.toggle('show',period==='custom');
   renderDashChart();
 }
 function parseDispDate(tglDisp){
@@ -1240,16 +1354,16 @@ function buildDashSeries(){
   const r=dashRange();
   document.getElementById('filterInfoDash').textContent='Periode: '+r.label;
   if(!r.from||!r.to) return {labels:[],masukData:[],keluarData:[]};
-  const labels=[], masukData=[], keluarData=[];
+  const labels=[],masukData=[],keluarData=[];
   if(r.mode==='month'){
-    ['Minggu 1','Minggu 2','Minggu 3','Minggu 4','Minggu 5'].forEach((w)=>{labels.push(w); masukData.push(0); keluarData.push(0);});
-    masuk.forEach(m=>{const d=parseDispDate(m.tgl); if(d>=r.from&&d<=r.to){const idx=Math.min(4,Math.floor((d.getDate()-1)/7)); masukData[idx]+=m.jml;}});
-    keluar.forEach(k=>{const d=parseDispDate(k.tgl); if(d>=r.from&&d<=r.to){const idx=Math.min(4,Math.floor((d.getDate()-1)/7)); keluarData[idx]+=k.jml;}});
+    ['Minggu 1','Minggu 2','Minggu 3','Minggu 4','Minggu 5'].forEach(w=>{labels.push(w);masukData.push(0);keluarData.push(0);});
+    masuk.forEach(m=>{const d=parseDispDate(m.tgl);if(d>=r.from&&d<=r.to){const idx=Math.min(4,Math.floor((d.getDate()-1)/7));masukData[idx]+=m.jml;}});
+    keluar.forEach(k=>{const d=parseDispDate(k.tgl);if(d>=r.from&&d<=r.to){const idx=Math.min(4,Math.floor((d.getDate()-1)/7));keluarData[idx]+=k.jml;}});
   } else {
     const d=new Date(r.from);
-    while(d<=r.to){labels.push(fmtDate(d)); masukData.push(0); keluarData.push(0); d.setDate(d.getDate()+1);}
-    masuk.forEach(m=>{const d=parseDispDate(m.tgl); if(d>=r.from&&d<=r.to){const key=fmtDate(d); const idx=labels.indexOf(key); if(idx>-1) masukData[idx]+=m.jml;}});
-    keluar.forEach(k=>{const d=parseDispDate(k.tgl); if(d>=r.from&&d<=r.to){const key=fmtDate(d); const idx=labels.indexOf(key); if(idx>-1) keluarData[idx]+=k.jml;}});
+    while(d<=r.to){labels.push(fmtDate(d));masukData.push(0);keluarData.push(0);d.setDate(d.getDate()+1);}
+    masuk.forEach(m=>{const d=parseDispDate(m.tgl);if(d>=r.from&&d<=r.to){const key=fmtDate(d);const idx=labels.indexOf(key);if(idx>-1)masukData[idx]+=m.jml;}});
+    keluar.forEach(k=>{const d=parseDispDate(k.tgl);if(d>=r.from&&d<=r.to){const key=fmtDate(d);const idx=labels.indexOf(key);if(idx>-1)keluarData[idx]+=k.jml;}});
   }
   return {labels,masukData,keluarData};
 }
@@ -1258,8 +1372,8 @@ function renderDashChart(){
   const series=buildDashSeries();
   if(dashChartObj) dashChartObj.destroy();
   dashChartObj=new Chart(ctx,{type:'line',data:{labels:series.labels,datasets:[
-    {label:t('nav_masuk'),data:series.masukData,borderColor:'#1a73e8',backgroundColor:'#1a73e815',fill:true,tension:.35},
-    {label:t('nav_keluar'),data:series.keluarData,borderColor:'#00C9A7',backgroundColor:'#00C9A715',fill:true,tension:.35}
+    {label:'Barang Masuk',data:series.masukData,borderColor:'#1a73e8',backgroundColor:'#1a73e815',fill:true,tension:.35},
+    {label:'Barang Keluar',data:series.keluarData,borderColor:'#00C9A7',backgroundColor:'#00C9A715',fill:true,tension:.35}
   ]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
 }
 
@@ -1277,15 +1391,18 @@ function renderDaftar(){
   tbody.innerHTML='';
   slice.forEach((b,i)=>{
     const cls=b.stok===0?'row-danger':b.stok<=stokBatas?'row-warn':'';
-    const badge=b.stok===0?`<span class="badge badge-red">${t('status_habis')}</span>`:b.stok<=stokBatas?`<span class="badge badge-warn">${t('status_menipis')}</span>`:`<span class="badge badge-teal">${t('status_cukup')}</span>`;
+    const badge=b.stok===0?'<span class="badge badge-red">Habis</span>':b.stok<=stokBatas?'<span class="badge badge-warn">Menipis</span>':'<span class="badge badge-teal">Cukup</span>';
+    const nilaiPers=(b.hargaAvg||b.hb)*b.stok;
     tbody.innerHTML+=`<tr class="${cls}${i%2===1&&!cls?' zeb':''}">
       <td class="mono">${(daftarPage-1)*daftarPP+i+1}</td>
       <td class="mono">${b.kode}</td>
       <td><strong>${b.nama}</strong></td>
       <td>${b.kat}</td>
       <td class="mono">${rp(b.hb)}</td>
+      <td class="mono"><strong style="color:var(--blue)">${rp(b.hargaAvg||b.hb)}</strong></td>
       <td class="mono">${rp(b.hj)}</td>
       <td class="mono"><strong>${b.stok}</strong> ${b.sat}</td>
+      <td class="mono">${rp(nilaiPers)}</td>
       <td>${badge}</td>
       <td>
         <button class="btn-icon" onclick="openEdit(${barang.indexOf(b)})">✏️</button>
@@ -1293,7 +1410,7 @@ function renderDaftar(){
       </td>
     </tr>`;
   });
-  renderPag('pagDaftar', pages, daftarPage, p=>{daftarPage=p; renderDaftar();});
+  renderPag('pagDaftar',pages,daftarPage,p=>{daftarPage=p;renderDaftar();});
 }
 function openEdit(idx){
   const b=barang[idx];
@@ -1310,14 +1427,18 @@ function openEdit(idx){
 }
 function saveEditBarang(){
   const idx=parseInt(document.getElementById('eb-idx').value);
+  const hbBaru = getRp('eb-hb');
   barang[idx]={
+    ...barang[idx],
     kode:document.getElementById('eb-kode').value.trim(),
     nama:document.getElementById('eb-nama').value.trim(),
     kat:document.getElementById('eb-kat').value,
     sat:document.getElementById('eb-sat').value.trim(),
-    hb:getRp('eb-hb'), hj:getRp('eb-hj'),
+    hb:hbBaru,
+    hj:getRp('eb-hj'),
     stok:parseInt(document.getElementById('eb-stok').value)||0,
     lok:document.getElementById('eb-lok').value.trim()
+    // hargaAvg tidak diubah dari edit — hanya berubah dari transaksi
   };
   closeModal('mEditBarang'); renderDaftar(); saveState(); toast('✅ Barang diperbarui');
 }
@@ -1325,7 +1446,8 @@ function addBarang(){
   const nama=document.getElementById('mb-nama').value.trim();
   const kode=document.getElementById('mb-kode').value.trim();
   if(!nama||!kode){ toast('Kode dan Nama wajib diisi',true); return; }
-  barang.push({kode,nama,kat:document.getElementById('mb-kat').value,sat:document.getElementById('mb-sat').value.trim()||'pcs',hb:getRp('mb-hb'),hj:getRp('mb-hj'),stok:parseInt(document.getElementById('mb-stok').value)||0,lok:document.getElementById('mb-lok').value.trim()});
+  const hb=getRp('mb-hb');
+  barang.push({kode,nama,kat:document.getElementById('mb-kat').value,sat:document.getElementById('mb-sat').value.trim()||'pcs',hb,hj:getRp('mb-hj'),stok:parseInt(document.getElementById('mb-stok').value)||0,lok:document.getElementById('mb-lok').value.trim(),hargaAvg:hb});
   closeModal('mBarang');
   ['mb-kode','mb-nama','mb-sat','mb-hb-d','mb-hj-d','mb-lok'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('mb-stok').value='0';
@@ -1339,20 +1461,20 @@ function hapusBarang(idx){
 }
 
 // ══════════════════════════════════════════
-//  BARANG MASUK
+//  BARANG MASUK — Update HPP Average
 // ══════════════════════════════════════════
 let masukPage=1; const masukPP=10;
 function renderMasuk(){
   const range=getPeriodRange(periodState.masuk,'masuk');
-  document.getElementById('filterInfoMasuk').textContent='📅 ' + range.label;
-  const filtered=masuk.filter(m=>inRange(m.tgl, range.from, range.to));
+  document.getElementById('filterInfoMasuk').textContent='📅 '+range.label;
+  const filtered=masuk.filter(m=>inRange(m.tgl,range.from,range.to));
   const pages=Math.max(1,Math.ceil(filtered.length/masukPP));
   if(masukPage>pages) masukPage=1;
-  const slice=[...filtered].reverse().slice((masukPage-1)*masukPP, masukPage*masukPP);
+  const slice=[...filtered].reverse().slice((masukPage-1)*masukPP,masukPage*masukPP);
   const tbody=document.getElementById('tMasuk');
   tbody.innerHTML='';
   if(!slice.length){
-    tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--muted)">${t('no_data')}</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">Tidak ada data pada periode ini</td></tr>`;
     renderPag('pagMasuk',1,1,()=>{}); return;
   }
   slice.forEach((m,i)=>{
@@ -1361,11 +1483,12 @@ function renderMasuk(){
       <td><strong>${m.nama}</strong></td><td>${m.sup}</td>
       <td class="mono">${m.jml}</td><td class="mono">${rp(m.hb)}</td>
       <td class="mono"><strong>${rp(m.total)}</strong></td>
+      <td class="mono" style="color:var(--blue);font-weight:700">${rp(m.hargaAvgBaru||m.hb)}</td>
       <td class="mono">${m.fak}</td>
       <td><button class="btn-icon btn-sm" onclick="dlFakturData(${masuk.indexOf(m)})">📄</button></td>
     </tr>`;
   });
-  renderPag('pagMasuk', pages, masukPage, p=>{masukPage=p; renderMasuk();});
+  renderPag('pagMasuk',pages,masukPage,p=>{masukPage=p;renderMasuk();});
 }
 function addMasuk(){
   const kode=document.getElementById('mm-brg').value;
@@ -1377,40 +1500,57 @@ function addMasuk(){
   if(jml<1){ toast('Jumlah minimal 1',true); return; }
   const b=barang.find(x=>x.kode===kode);
   if(!b){ toast('Barang tidak ditemukan',true); return; }
-  b.stok+=jml;
-  masuk.push({tgl,kode,nama:b.nama,sup:document.getElementById('mm-sup').value,jml,hb:hb||b.hb,total:(hb||b.hb)*jml,fak,ket:document.getElementById('mm-ket').value});
+  
+  const hargaBeli = hb || b.hb;
+  // Hitung harga average baru SEBELUM update stok
+  const avgBaru = hitungHargaAvgBaru(b.stok, b.hargaAvg||b.hb, jml, hargaBeli);
+  
+  // Update stok dan harga avg
+  b.stok += jml;
+  b.hargaAvg = avgBaru;
+  
+  masuk.push({tgl,kode,nama:b.nama,sup:document.getElementById('mm-sup').value,jml,hb:hargaBeli,total:hargaBeli*jml,fak,ket:document.getElementById('mm-ket').value,hargaAvgBaru:avgBaru});
+  
   closeModal('mMasuk');
   ['mm-brg','mm-brg-d','mm-fak','mm-ket'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('mm-jml').value=1;
   document.getElementById('mm-hb').value=0;
   document.getElementById('mm-hb-d').value='';
   document.getElementById('mm-total').value='';
-  renderMasuk(); renderDash(); saveState(); toast('✅ Barang masuk dicatat');
+  document.getElementById('mm-avg-info').style.display='none';
+  document.getElementById('mm-avg-preview').style.display='none';
+  
+  renderMasuk(); renderDash(); renderDaftar(); saveState();
+  toast(`✅ Barang masuk dicatat | Harga Avg baru: ${rp(avgBaru)}`);
 }
 
 // ══════════════════════════════════════════
-//  BARANG KELUAR
+//  BARANG KELUAR — HPP dari Average
 // ══════════════════════════════════════════
 let keluarPage=1; const keluarPP=10;
 function renderKeluar(){
   const range=getPeriodRange(periodState.keluar,'keluar');
-  document.getElementById('filterInfoKeluar').textContent='📅 ' + range.label;
-  const filtered=keluar.filter(k=>inRange(k.tgl, range.from, range.to));
+  document.getElementById('filterInfoKeluar').textContent='📅 '+range.label;
+  const filtered=keluar.filter(k=>inRange(k.tgl,range.from,range.to));
   const pages=Math.max(1,Math.ceil(filtered.length/keluarPP));
   if(keluarPage>pages) keluarPage=1;
-  const slice=[...filtered].reverse().slice((keluarPage-1)*keluarPP, keluarPage*keluarPP);
+  const slice=[...filtered].reverse().slice((keluarPage-1)*keluarPP,keluarPage*keluarPP);
   const tbody=document.getElementById('tKeluar');
   tbody.innerHTML='';
   if(!slice.length){
-    tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--muted)">${t('no_data')}</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;padding:24px;color:var(--muted)">Tidak ada data pada periode ini</td></tr>`;
     renderPag('pagKeluar',1,1,()=>{}); return;
   }
   slice.forEach((k,i)=>{
     const ri=keluar.indexOf(k);
+    const labaClass=k.labaKotor>=0?'color:#16a34a':'color:var(--red)';
     tbody.innerHTML+=`<tr class="${i%2===1?'zeb':''}">
       <td>${k.tgl}</td><td class="mono">${k.kode}</td>
       <td><strong>${k.nama}</strong></td><td class="mono">${k.jml}</td>
-      <td class="mono">${rp(k.hj)}</td><td class="mono"><strong>${rp(k.total)}</strong></td>
+      <td class="mono">${rp(k.hj)}</td>
+      <td class="mono"><strong>${rp(k.total)}</strong></td>
+      <td class="mono" style="color:var(--blue)">${rp(k.hpp||0)}</td>
+      <td class="mono" style="${labaClass};font-weight:700">${rp(k.labaKotor||0)}</td>
       <td>${k.kasir}</td>
       <td><span class="badge badge-blue">${k.bayar}</span></td>
       <td>
@@ -1419,7 +1559,7 @@ function renderKeluar(){
       </td>
     </tr>`;
   });
-  renderPag('pagKeluar', pages, keluarPage, p=>{keluarPage=p; renderKeluar();});
+  renderPag('pagKeluar',pages,keluarPage,p=>{keluarPage=p;renderKeluar();});
 }
 function addKeluar(){
   const kode=document.getElementById('mk-brg').value;
@@ -1434,25 +1574,41 @@ function addKeluar(){
   const b=barang.find(x=>x.kode===kode);
   if(!b){ toast('Barang tidak ditemukan',true); return; }
   if(b.stok<jml){ toast('Stok tidak mencukupi!',true); return; }
-  b.stok-=jml;
-  keluar.push({tgl,kode,nama:b.nama,jml,hj:hj||b.hj,total:(hj||b.hj)*jml,kasir,bayar});
+  
+  // Hitung HPP dengan metode Average
+  const hargaAvgSaatIni = b.hargaAvg || b.hb;
+  const hppTotal = jml * hargaAvgSaatIni;
+  const totalJual = jml * hj;
+  const labaKotor = totalJual - hppTotal;
+  
+  b.stok -= jml;
+  // Harga avg TIDAK berubah saat barang keluar (ini benar di metode average)
+  
+  keluar.push({tgl,kode,nama:b.nama,jml,hj:hj||b.hj,total:totalJual,hpp:hppTotal,labaKotor,kasir,bayar,hargaAvgUsed:hargaAvgSaatIni});
+  
   closeModal('mKeluar');
   ['mk-brg','mk-brg-d','mk-hj','mk-total'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('mk-jml').value=1;
-  renderKeluar(); renderDash(); saveState(); toast('✅ Transaksi disimpan');
+  document.getElementById('mk-hpp-info').style.display='none';
+  document.getElementById('mk-hpp-detail').style.display='none';
+  renderKeluar(); renderDash(); renderDaftar(); saveState();
+  toast(`✅ Transaksi disimpan | HPP: ${rp(hppTotal)} | Laba: ${rp(labaKotor)}`);
 }
 function batalKeluar(idx){
   if(!confirm('Batalkan transaksi ini? Stok akan dikembalikan.')) return;
   const k=keluar[idx];
   const b=barang.find(x=>x.kode===k.kode);
-  if(b) b.stok+=k.jml;
+  if(b){
+    b.stok+=k.jml;
+    // Catatan: idealnya harga avg direcalculate, tapi untuk simplisitas kita biarkan
+  }
   keluar.splice(idx,1);
-  renderKeluar(); renderDash(); saveState(); toast('↩️ Transaksi dibatalkan');
+  renderKeluar(); renderDash(); renderDaftar(); saveState(); toast('↩️ Transaksi dibatalkan');
 }
 function cetakStruk(idx){
   const k=keluar[idx];
-  const w=window.open('','_blank','width=380,height=500');
-  w.document.write(`<html><head><title>Struk</title><style>body{font-family:monospace;font-size:13px;padding:16px;max-width:320px;margin:0 auto}h3{text-align:center;margin:0 0 4px}p{text-align:center;margin:2px 0;font-size:12px}hr{border:1px dashed #000;margin:10px 0}.row{display:flex;justify-content:space-between;margin:4px 0}.total{font-weight:bold;font-size:15px}@media print{button{display:none}}</style></head><body>
+  const w=window.open('','_blank','width=380,height=520');
+  w.document.write(`<html><head><title>Struk</title><style>body{font-family:monospace;font-size:13px;padding:16px;max-width:320px;margin:0 auto}h3{text-align:center;margin:0 0 4px}p{text-align:center;margin:2px 0;font-size:12px}hr{border:1px dashed #000;margin:10px 0}.row{display:flex;justify-content:space-between;margin:4px 0}.total{font-weight:bold;font-size:15px}.laba{color:green;font-size:11px;text-align:right}@media print{button{display:none}}</style></head><body>
     <h3>TOKO JAGO SUMBERARUM</h3><p>Jl. Sumberarum, Surabaya</p><p>${k.tgl} | Kasir: ${k.kasir}</p><hr>
     <div class="row"><span>${k.nama}</span></div>
     <div class="row"><span>${k.jml} x ${rp(k.hj)}</span><span>${rp(k.total)}</span></div><hr>
@@ -1462,6 +1618,284 @@ function cetakStruk(idx){
     <p>Terima kasih sudah berbelanja!</p>
     <button onclick="window.print()" style="width:100%;padding:8px;margin-top:12px;cursor:pointer">🖨️ Cetak</button>
   </body></html>`);
+}
+
+// ══════════════════════════════════════════
+//  STOK OPNAME
+// ══════════════════════════════════════════
+let opnamePage=1; const opnamePP=10;
+
+function renderOpnameItemsTable(){
+  const tbody=document.getElementById('opname-items-table');
+  tbody.innerHTML='';
+  let totalOk=0, totalDiff=0, totalEmpty=0;
+  
+  barang.forEach((b,i)=>{
+    const fisik=currentOpnameInputs[b.kode];
+    const fisikVal = fisik !== undefined ? fisik : null;
+    const selisih = fisikVal !== null ? fisikVal - b.stok : null;
+    const nilaiSelisih = selisih !== null ? selisih * (b.hargaAvg||b.hb) : null;
+    
+    let rowClass='';
+    if(fisikVal===null){ totalEmpty++; }
+    else if(selisih===0){ totalOk++; rowClass='opname-row-ok'; }
+    else { totalDiff++; rowClass='opname-row-diff'; }
+    
+    const selisihDisplay = selisih===null ? '<span style="color:var(--muted)">—</span>' :
+      `<strong style="color:${selisih===0?'#16a34a':selisih>0?'var(--blue)':'var(--red)'}">${selisih>=0?'+':''}${selisih}</strong>`;
+    
+    const nilaiDisplay = nilaiSelisih===null ? '—' :
+      nilaiSelisih===0 ? '<span style="color:#16a34a">0</span>' :
+      `<strong style="color:${nilaiSelisih>0?'var(--blue)':'var(--red)'}">${rp(Math.abs(nilaiSelisih))}</strong>`;
+    
+    tbody.innerHTML+=`<tr class="${rowClass}" id="opname-row-${b.kode}">
+      <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono';font-size:12px">${b.kode}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid var(--border)"><strong>${b.nama}</strong><br><span style="font-size:11px;color:var(--muted)">${b.kat} | Avg: ${rp(b.hargaAvg||b.hb)}</span></td>
+      <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;font-family:'JetBrains Mono'">${b.stok}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:center">
+        <input type="number" min="0" value="${fisikVal!==null?fisikVal:''}" 
+          placeholder="Isi stok fisik"
+          style="width:90px;padding:5px 8px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;text-align:center"
+          oninput="updateOpnameInput('${b.kode}',this.value)"/>
+      </td>
+      <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:right" id="op-selisih-${b.kode}">${selisihDisplay}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:right" id="op-nilai-${b.kode}">${nilaiDisplay}</td>
+    </tr>`;
+  });
+  
+  document.getElementById('op-total-count').textContent=barang.length;
+  document.getElementById('op-ok-count').textContent=totalOk;
+  document.getElementById('op-diff-count').textContent=totalDiff;
+  document.getElementById('op-empty-count').textContent=totalEmpty;
+}
+
+function updateOpnameInput(kode, val){
+  const b=barang.find(x=>x.kode===kode);
+  if(!b) return;
+  const fisik = val==='' ? null : parseInt(val);
+  if(fisik!==null) currentOpnameInputs[kode]=fisik;
+  else delete currentOpnameInputs[kode];
+  
+  const selisih = fisik!==null ? fisik - b.stok : null;
+  const nilaiSelisih = selisih!==null ? selisih*(b.hargaAvg||b.hb) : null;
+  
+  const selEl=document.getElementById(`op-selisih-${kode}`);
+  const nilEl=document.getElementById(`op-nilai-${kode}`);
+  const row=document.getElementById(`opname-row-${kode}`);
+  
+  if(selisih===null){
+    selEl.innerHTML='<span style="color:var(--muted)">—</span>';
+    nilEl.innerHTML='—';
+    row.className='';
+  } else if(selisih===0){
+    selEl.innerHTML='<strong style="color:#16a34a">0</strong>';
+    nilEl.innerHTML='<span style="color:#16a34a">0</span>';
+    row.className='opname-row-ok';
+  } else {
+    selEl.innerHTML=`<strong style="color:${selisih>0?'var(--blue)':'var(--red)'}">${selisih>=0?'+':''}${selisih}</strong>`;
+    nilEl.innerHTML=`<strong style="color:${nilaiSelisih>0?'var(--blue)':'var(--red)'}">${rp(Math.abs(nilaiSelisih))}</strong>`;
+    row.className='opname-row-diff';
+  }
+  
+  // Update progress counters
+  let ok=0,diff=0,empty=0;
+  barang.forEach(b=>{
+    const f=currentOpnameInputs[b.kode];
+    if(f===undefined) empty++;
+    else if(f===b.stok) ok++;
+    else diff++;
+  });
+  document.getElementById('op-ok-count').textContent=ok;
+  document.getElementById('op-diff-count').textContent=diff;
+  document.getElementById('op-empty-count').textContent=empty;
+}
+
+function saveOpname(status){
+  const nodok=document.getElementById('op-nodok').value.trim()||`OPN-${String(opname.length+1).padStart(4,'0')}`;
+  const tgl=inputToDisp(document.getElementById('op-tgl').value);
+  const gudang=document.getElementById('op-gudang').value;
+  const petugas=document.getElementById('op-petugas').value;
+  const ket=document.getElementById('op-ket').value;
+  
+  // Buat items dari semua barang yang sudah diisi stok fisiknya
+  const items=[];
+  barang.forEach(b=>{
+    const fisik=currentOpnameInputs[b.kode];
+    if(fisik!==undefined){
+      items.push({
+        kode:b.kode, nama:b.nama, sat:b.sat,
+        stokSistem:b.stok, stokFisik:fisik,
+        selisih:fisik-b.stok,
+        hargaAvg:b.hargaAvg||b.hb,
+        nilaiSelisih:(fisik-b.stok)*(b.hargaAvg||b.hb)
+      });
+    }
+  });
+  
+  if(items.length===0 && status==='Selesai'){
+    toast('Isi minimal 1 stok fisik barang',true); return;
+  }
+  
+  const docOpname={nodok,tgl,gudang,petugas,ket,status,items:[...items]};
+  
+  if(status==='Selesai'){
+    // Hitung selisih dan buat penyesuaian otomatis
+    const itemsSelisih=items.filter(x=>x.selisih!==0);
+    
+    if(itemsSelisih.length>0){
+      // Update stok
+      itemsSelisih.forEach(item=>{
+        const b=barang.find(x=>x.kode===item.kode);
+        if(b) b.stok=item.stokFisik;
+        // Harga avg tetap sama (tidak berubah karena penyesuaian)
+      });
+      
+      // Auto-generate penyesuaian barang
+      const psdItems=itemsSelisih.map(item=>({
+        kode:item.kode, nama:item.nama,
+        sistem:item.stokSistem, fisik:item.stokFisik,
+        selisih:item.selisih, qty:Math.abs(item.selisih),
+        ketbrg:`Hasil Stok Opname ${nodok}`,
+        hargaAvg:item.hargaAvg,
+        nilaiKerugian:Math.abs(item.nilaiSelisih)
+      }));
+      
+      const totalNilaiKerugian=psdItems.reduce((s,x)=>s+x.nilaiKerugian,0);
+      
+      penyesuaian.push({
+        nodok:`PSD-AUTO-${nodok}`,
+        tgl, gudang, jenis:'Selisih Stok',
+        ket:`Hasil Stok Opname ${nodok}`,
+        status:'Disetujui',
+        sumber:'Stok Opname',
+        refOpname:nodok,
+        items:psdItems,
+        totalNilaiKerugian
+      });
+      
+      toast(`✅ Opname selesai! ${itemsSelisih.length} barang ada selisih. Penyesuaian otomatis dibuat.`);
+    } else {
+      toast('✅ Opname selesai! Semua stok sesuai, tidak ada selisih.');
+    }
+  } else {
+    toast('💾 Draft opname disimpan');
+  }
+  
+  opname.push(docOpname);
+  closeModal('mOpname');
+  currentOpnameInputs={};
+  renderOpname(); renderPenyesuaian(); renderDash(); renderDaftar(); saveState();
+}
+
+function renderOpname(){
+  const filterStatus=document.getElementById('filterStatusOpname').value;
+  let filtered=[...opname];
+  if(filterStatus) filtered=filtered.filter(x=>x.status===filterStatus);
+  
+  const pages=Math.max(1,Math.ceil(filtered.length/opnamePP));
+  if(opnamePage>pages) opnamePage=1;
+  const slice=[...filtered].reverse().slice((opnamePage-1)*opnamePP,opnamePage*opnamePP);
+  
+  const tbody=document.getElementById('tOpname');
+  tbody.innerHTML='';
+  if(!slice.length){
+    tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--muted)">Belum ada data stok opname</td></tr>';
+    renderPag('pagOpname',1,1,()=>{}); return;
+  }
+  slice.forEach((op,i)=>{
+    const ri=opname.indexOf(op);
+    const statusBadge=op.status==='Selesai'?'<span class="badge badge-green">✅ Selesai</span>':'<span class="badge badge-gray">📝 Draft</span>';
+    const itemsSelisih=op.items.filter(x=>x.selisih!==0).length;
+    tbody.innerHTML+=`<tr class="${i%2===1?'zeb':''}">
+      <td class="mono">${(opnamePage-1)*opnamePP+i+1}</td>
+      <td>${op.tgl}</td>
+      <td class="mono"><strong>${op.nodok}</strong></td>
+      <td>${op.gudang}</td>
+      <td class="mono">${op.items.length}</td>
+      <td><span class="badge ${itemsSelisih>0?'badge-warn':'badge-green'}">${itemsSelisih} barang</span></td>
+      <td>${statusBadge}</td>
+      <td>
+        <button class="btn-icon btn-sm" onclick="detailOpname(${ri})" title="Detail">🔍</button>
+        ${op.status==='Draft'?`<button class="btn-icon btn-sm" onclick="finishOpname(${ri})" title="Selesaikan" style="color:var(--teal-d)">✅</button>`:''}
+        <button class="btn-icon btn-sm" onclick="hapusOpname(${ri})" title="Hapus" style="color:var(--red)">🗑️</button>
+      </td>
+    </tr>`;
+  });
+  renderPag('pagOpname',pages,opnamePage,p=>{opnamePage=p;renderOpname();});
+}
+
+function detailOpname(idx){
+  const op=opname[idx];
+  const statusBadge=op.status==='Selesai'?'<span class="badge badge-green">✅ Selesai</span>':'<span class="badge badge-gray">📝 Draft</span>';
+  let rows='';
+  op.items.forEach(item=>{
+    const selClass=item.selisih>0?'color:var(--blue)':item.selisih<0?'color:var(--red)':'color:#16a34a';
+    const selStr=(item.selisih>0?'+':'')+item.selisih;
+    const nilaiStr=item.selisih!==0?`${rp(Math.abs(item.nilaiSelisih))}`:'-';
+    rows+=`<tr style="border-bottom:1px solid var(--border)">
+      <td style="padding:8px 12px;font-size:12px;font-family:'JetBrains Mono'">${item.kode}</td>
+      <td style="padding:8px 12px"><strong>${item.nama}</strong></td>
+      <td style="padding:8px 12px;text-align:right">${item.stokSistem}</td>
+      <td style="padding:8px 12px;text-align:right">${item.stokFisik}</td>
+      <td style="padding:8px 12px;text-align:right;font-weight:700;${selClass}">${selStr}</td>
+      <td style="padding:8px 12px;text-align:right;font-family:'JetBrains Mono';font-size:12px">${rp(item.hargaAvg)}</td>
+      <td style="padding:8px 12px;text-align:right;font-family:'JetBrains Mono';font-size:12px;${item.selisih<0?'color:var(--red);font-weight:700':''}">${nilaiStr}</td>
+    </tr>`;
+  });
+  const totalKerugian=op.items.filter(x=>x.selisih<0).reduce((s,x)=>s+Math.abs(x.nilaiSelisih),0);
+  document.getElementById('detailOpnameContent').innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;background:#f9fbff;border-radius:10px;padding:14px">
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">No. Dokumen</span><br><strong style="font-family:'JetBrains Mono'">${op.nodok}</strong></div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Tanggal</span><br><strong>${op.tgl}</strong></div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Gudang</span><br><strong>${op.gudang}</strong></div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Petugas</span><br><strong>${op.petugas}</strong></div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Status</span><br>${statusBadge}</div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Keterangan</span><br>${op.ket||'-'}</div>
+    </div>
+    ${totalKerugian>0?`<div style="background:var(--red-l);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--red);font-weight:700">📉 Total Nilai Kerugian (HPP Avg): ${rp(totalKerugian)}</div>`:''}
+    <h4 style="font-size:13px;font-weight:800;margin-bottom:10px">📦 Detail Barang</h4>
+    <div style="overflow-x:auto">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead style="background:#7c3aed"><tr>
+        <th style="padding:8px 12px;color:#fff;font-size:11px">Kode</th>
+        <th style="padding:8px 12px;color:#fff;font-size:11px">Barang</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Stok Sistem</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Stok Fisik</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Selisih</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Harga Avg</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Nilai Selisih</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    </div>`;
+  openModal('mDetailOpname');
+}
+
+function finishOpname(idx){
+  if(!confirm('Selesaikan opname ini? Stok dan penyesuaian akan diperbarui.')) return;
+  const op=opname[idx];
+  const itemsSelisih=op.items.filter(x=>x.selisih!==0);
+  itemsSelisih.forEach(item=>{
+    const b=barang.find(x=>x.kode===item.kode);
+    if(b) b.stok=item.stokFisik;
+  });
+  if(itemsSelisih.length>0){
+    penyesuaian.push({
+      nodok:`PSD-AUTO-${op.nodok}`, tgl:op.tgl, gudang:op.gudang, jenis:'Selisih Stok',
+      ket:`Hasil Stok Opname ${op.nodok}`, status:'Disetujui', sumber:'Stok Opname',
+      refOpname:op.nodok,
+      items:itemsSelisih.map(item=>({...item,qty:Math.abs(item.selisih),ketbrg:`Hasil Opname ${op.nodok}`,nilaiKerugian:Math.abs(item.nilaiSelisih)})),
+      totalNilaiKerugian:itemsSelisih.reduce((s,x)=>s+Math.abs(x.nilaiSelisih),0)
+    });
+  }
+  op.status='Selesai';
+  renderOpname(); renderPenyesuaian(); renderDash(); renderDaftar(); saveState();
+  toast(`✅ Opname diselesaikan! ${itemsSelisih.length} penyesuaian dibuat.`);
+}
+
+function hapusOpname(idx){
+  if(!confirm('Hapus data opname ini?')) return;
+  opname.splice(idx,1); renderOpname(); saveState(); toast('🗑️ Opname dihapus');
 }
 
 // ══════════════════════════════════════════
@@ -1479,17 +1913,25 @@ function addItemPsd(){
   if(isNaN(fisik)){ toast('Isi stok fisik terlebih dahulu',true); return; }
   if(qty<1){ toast('Qty penyesuaian minimal 1',true); return; }
   const b=barang.find(x=>x.kode===kode);
-  psdTempItems.push({kode,nama:b?b.nama:'',sistem,fisik,selisih:fisik-sistem,qty,ketbrg});
+  const hargaAvg=b?(b.hargaAvg||b.hb):0;
+  const nilaiKerugian=qty*hargaAvg;
+  psdTempItems.push({kode,nama:b?b.nama:'',sistem,fisik,selisih:fisik-sistem,qty,ketbrg,hargaAvg,nilaiKerugian});
   ['psd-brg','psd-brg-d','psd-sistem','psd-fisik','psd-selisih','psd-qty','psd-ketbrg'].forEach(id=>{
     const el=document.getElementById(id); if(el){ el.value=''; el.style.color=''; el.style.fontWeight=''; }
   });
+  document.getElementById('psd-nilai-avg').style.display='none';
   renderPsdTempItems();
   toast('➕ Barang ditambahkan ke daftar');
 }
 
 function renderPsdTempItems(){
   const el=document.getElementById('psdItemList');
-  if(!psdTempItems.length){ el.innerHTML='<div style="color:var(--muted);font-size:13px;padding:8px 0">Belum ada barang ditambahkan.</div>'; return; }
+  const totalKerEl=document.getElementById('psd-total-kerugian');
+  if(!psdTempItems.length){
+    el.innerHTML='<div style="color:var(--muted);font-size:13px;padding:8px 0">Belum ada barang ditambahkan.</div>';
+    totalKerEl.style.display='none'; return;
+  }
+  let totalKerugian=0;
   let html=`<table style="width:100%;border-collapse:collapse;font-size:13px">
     <thead style="background:#f4f8fc"><tr>
       <th style="padding:8px 10px;text-align:left;font-size:11px;color:var(--muted);text-transform:uppercase">Barang</th>
@@ -1497,23 +1939,28 @@ function renderPsdTempItems(){
       <th style="padding:8px 10px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase">Fisik</th>
       <th style="padding:8px 10px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase">Selisih</th>
       <th style="padding:8px 10px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase">Qty</th>
+      <th style="padding:8px 10px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase">Nilai (Avg)</th>
       <th style="padding:8px 10px;text-align:center;font-size:11px;color:var(--muted);text-transform:uppercase">Hapus</th>
     </tr></thead><tbody>`;
   psdTempItems.forEach((item,i)=>{
     const selClass=item.selisih>=0?'selisih-pos':'selisih-neg';
+    totalKerugian+=item.nilaiKerugian||0;
     html+=`<tr style="border-bottom:1px solid var(--border)">
       <td style="padding:8px 10px"><strong>${item.nama}</strong><br><span style="font-size:11px;color:var(--muted)">${item.ketbrg||''}</span></td>
       <td style="padding:8px 10px;text-align:right">${item.sistem}</td>
       <td style="padding:8px 10px;text-align:right">${item.fisik}</td>
       <td style="padding:8px 10px;text-align:right" class="${selClass}">${item.selisih>=0?'+':''}${item.selisih}</td>
       <td style="padding:8px 10px;text-align:right">${item.qty}</td>
+      <td style="padding:8px 10px;text-align:right;font-family:'JetBrains Mono';font-size:12px;color:var(--red)">${rp(item.nilaiKerugian)}</td>
       <td style="padding:8px 10px;text-align:center"><button class="btn-icon btn-sm" onclick="removePsdItem(${i})">🗑️</button></td>
     </tr>`;
   });
   html+='</tbody></table>';
   el.innerHTML=html;
+  
+  totalKerEl.style.display='block';
+  totalKerEl.innerHTML=`📉 Total Nilai Kerugian (HPP Average): ${rp(totalKerugian)}`;
 }
-
 function removePsdItem(i){ psdTempItems.splice(i,1); renderPsdTempItems(); }
 
 function savePenyesuaian(status){
@@ -1523,75 +1970,60 @@ function savePenyesuaian(status){
   const gudang=document.getElementById('psd-gudang').value;
   const jenis=document.getElementById('psd-jenis').value;
   const ket=document.getElementById('psd-ket').value;
+  const totalNilaiKerugian=psdTempItems.reduce((s,x)=>s+(x.nilaiKerugian||0),0);
 
-  // Jika disetujui, update stok
   if(status==='Disetujui'){
     psdTempItems.forEach(item=>{
       const b=barang.find(x=>x.kode===item.kode);
       if(b){
-        // Sesuaikan stok berdasarkan selisih
-        if(item.selisih<0){
-          // stok berkurang
-          b.stok=Math.max(0, b.stok-item.qty);
-        } else {
-          // stok bertambah
-          b.stok+=item.qty;
-        }
+        if(item.selisih<0) b.stok=Math.max(0,b.stok-item.qty);
+        else b.stok+=item.qty;
       }
     });
   }
 
-  penyesuaian.push({
-    nodok, tgl, gudang, jenis, ket, status,
-    items:[...psdTempItems]
-  });
+  penyesuaian.push({nodok,tgl,gudang,jenis,ket,status,sumber:'Manual',refOpname:null,items:[...psdTempItems],totalNilaiKerugian});
   closeModal('mPenyesuaian');
   psdTempItems=[];
-  renderPenyesuaian(); renderDash(); saveState();
+  renderPenyesuaian(); renderDash(); renderDaftar(); saveState();
   toast(status==='Disetujui'?'✅ Penyesuaian disetujui & stok diperbarui':'💾 Draft penyesuaian disimpan');
 }
 
 function renderPenyesuaian(){
   const filterJenis=document.getElementById('filterJenisPsd').value;
+  const filterSumber=document.getElementById('filterSumberPsd').value;
   const filterStatus=document.getElementById('filterStatusPsd').value;
-  const fromVal=document.getElementById('cdPsdFrom').value;
-  const toVal=document.getElementById('cdPsdTo').value;
-  const fromD=fromVal?new Date(fromVal):null;
-  const toD=toVal?new Date(toVal):null;
 
   let filtered=[...penyesuaian];
   if(filterJenis) filtered=filtered.filter(p=>p.jenis===filterJenis);
+  if(filterSumber) filtered=filtered.filter(p=>(p.sumber||'Manual')===filterSumber);
   if(filterStatus) filtered=filtered.filter(p=>p.status===filterStatus);
-  if(fromD&&toD) filtered=filtered.filter(p=>inRange(p.tgl,fromD,toD));
 
   const pages=Math.max(1,Math.ceil(filtered.length/psdPP));
   if(psdPage>pages) psdPage=1;
-  const slice=[...filtered].reverse().slice((psdPage-1)*psdPP, psdPage*psdPP);
+  const slice=[...filtered].reverse().slice((psdPage-1)*psdPP,psdPage*psdPP);
   const tbody=document.getElementById('tPenyesuaian');
   tbody.innerHTML='';
 
   if(!slice.length){
-    tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--muted)">Belum ada data penyesuaian</td></tr>';
+    tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">Belum ada data penyesuaian</td></tr>';
     renderPag('pagPsd',1,1,()=>{}); return;
   }
 
   slice.forEach((p,i)=>{
     const ri=penyesuaian.indexOf(p);
-    const statusBadge=p.status==='Disetujui'
-      ?'<span class="badge badge-green">✅ Disetujui</span>'
-      :'<span class="badge badge-gray">📝 Draft</span>';
-    const jenisBadge=p.jenis==='Barang Rusak'
-      ?'<span class="badge badge-red">🔴 Rusak</span>'
-      :p.jenis==='Barang Return'
-      ?'<span class="badge badge-blue">🔄 Return</span>'
-      :'<span class="badge badge-warn">⚖️ Selisih</span>';
+    const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">✅ Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
+    const jenisBadge=p.jenis==='Barang Rusak'?'<span class="badge badge-red">🔴 Rusak</span>':p.jenis==='Barang Return'?'<span class="badge badge-blue">🔄 Return</span>':'<span class="badge badge-warn">⚖️ Selisih</span>';
+    const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">🔄 Opname</span>':'<span class="badge badge-gray">✏️ Manual</span>';
     tbody.innerHTML+=`<tr class="${i%2===1?'zeb':''}">
       <td class="mono">${(psdPage-1)*psdPP+i+1}</td>
       <td>${p.tgl}</td>
       <td class="mono"><strong>${p.nodok}</strong></td>
       <td>${jenisBadge}</td>
+      <td>${sumberBadge}</td>
       <td>${p.gudang}</td>
-      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.ket||'-'}</td>
+      <td class="mono" style="color:var(--red);font-weight:700">${rp(p.totalNilaiKerugian||0)}</td>
+      <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.ket||'-'}</td>
       <td>${statusBadge}</td>
       <td>
         <button class="btn-icon btn-sm" onclick="detailPsd(${ri})" title="Detail">🔍</button>
@@ -1600,21 +2032,24 @@ function renderPenyesuaian(){
       </td>
     </tr>`;
   });
-  renderPag('pagPsd', pages, psdPage, p=>{psdPage=p; renderPenyesuaian();});
+  renderPag('pagPsd',pages,psdPage,p=>{psdPage=p;renderPenyesuaian();});
 }
 
 function detailPsd(idx){
   const p=penyesuaian[idx];
   const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">✅ Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
+  const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">🔄 Stok Opname</span>':'<span class="badge badge-gray">✏️ Manual</span>';
   let rows='';
   p.items.forEach(item=>{
     const selClass=item.selisih>=0?'color:#16a34a':'color:var(--red)';
     rows+=`<tr style="border-bottom:1px solid var(--border)">
       <td style="padding:8px 12px"><strong>${item.nama}</strong><br><span style="font-size:11px;color:var(--muted)">${item.kode}</span></td>
-      <td style="padding:8px 12px;text-align:right">${item.sistem}</td>
-      <td style="padding:8px 12px;text-align:right">${item.fisik}</td>
+      <td style="padding:8px 12px;text-align:right">${item.sistem||item.stokSistem||'-'}</td>
+      <td style="padding:8px 12px;text-align:right">${item.fisik||item.stokFisik||'-'}</td>
       <td style="padding:8px 12px;text-align:right;font-weight:700;${selClass}">${item.selisih>=0?'+':''}${item.selisih}</td>
       <td style="padding:8px 12px;text-align:right">${item.qty}</td>
+      <td style="padding:8px 12px;text-align:right;font-family:'JetBrains Mono';font-size:12px">${rp(item.hargaAvg||0)}</td>
+      <td style="padding:8px 12px;text-align:right;font-family:'JetBrains Mono';font-size:12px;color:var(--red);font-weight:700">${rp(item.nilaiKerugian||0)}</td>
       <td style="padding:8px 12px">${item.ketbrg||'-'}</td>
     </tr>`;
   });
@@ -1622,9 +2057,9 @@ function detailPsd(idx){
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;background:#f9fbff;border-radius:10px;padding:14px">
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">No. Dokumen</span><br><strong style="font-family:'JetBrains Mono'">${p.nodok}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Tanggal</span><br><strong>${p.tgl}</strong></div>
-      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Jenis</span><br><strong>${p.jenis}</strong></div>
-      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Gudang</span><br><strong>${p.gudang}</strong></div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Sumber</span><br>${sumberBadge}${p.refOpname?` <span style="font-size:12px;color:var(--muted)">Ref: ${p.refOpname}</span>`:''}</div>
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Status</span><br>${statusBadge}</div>
+      <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Nilai Kerugian Total</span><br><strong style="color:var(--red)">${rp(p.totalNilaiKerugian||0)}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Keterangan</span><br>${p.ket||'-'}</div>
     </div>
     <h4 style="font-size:13px;font-weight:800;margin-bottom:10px">🗂️ Detail Barang</h4>
@@ -1636,6 +2071,8 @@ function detailPsd(idx){
         <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Stok Fisik</th>
         <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Selisih</th>
         <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Qty</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Harga Avg</th>
+        <th style="padding:8px 12px;color:#fff;text-align:right;font-size:11px">Nilai Kerugian</th>
         <th style="padding:8px 12px;color:#fff;text-align:left;font-size:11px">Keterangan</th>
       </tr></thead>
       <tbody>${rows}</tbody>
@@ -1650,30 +2087,31 @@ function approvePsd(idx){
   p.items.forEach(item=>{
     const b=barang.find(x=>x.kode===item.kode);
     if(b){
-      if(item.selisih<0){ b.stok=Math.max(0, b.stok-item.qty); }
-      else { b.stok+=item.qty; }
+      if(item.selisih<0) b.stok=Math.max(0,b.stok-item.qty);
+      else b.stok+=item.qty;
     }
   });
   p.status='Disetujui';
-  renderPenyesuaian(); renderDash(); saveState(); toast('✅ Penyesuaian disetujui & stok diperbarui');
+  renderPenyesuaian(); renderDash(); renderDaftar(); saveState(); toast('✅ Penyesuaian disetujui & stok diperbarui');
 }
-
 function hapusPsd(idx){
   if(!confirm('Hapus penyesuaian ini?')) return;
   penyesuaian.splice(idx,1); renderPenyesuaian(); saveState(); toast('🗑️ Penyesuaian dihapus');
 }
 
 // ══════════════════════════════════════════
-//  LAPORAN
+//  LAPORAN — HPP dari Average
 // ══════════════════════════════════════════
 function getLapData(){
   const penjualan=keluar.reduce((s,k)=>s+k.total,0);
+  // HPP dari transaksi keluar menggunakan metode average
+  const hppTotal=keluar.reduce((s,k)=>s+(k.hpp||0),0);
   const totalPembelian=masuk.reduce((s,m)=>s+m.total,0);
-  const persediaan=barang.reduce((s,b)=>s+b.hb*b.stok,0);
-  const persediaanAwal=450000, retPenjualan=0, pendapatanLain=0, retPembelian=0;
+  const persediaan=nilaiPersediaan();
+  const pendapatanLain=0, retPenjualan=0;
   const totalPendapatan=penjualan+pendapatanLain-retPenjualan;
-  const hpp=persediaanAwal+totalPembelian-retPembelian-persediaan;
-  const labaKotor=totalPendapatan-hpp;
+  // Laba kotor = total penjualan - HPP (dari transaksi)
+  const labaKotor=keluar.reduce((s,k)=>s+(k.labaKotor||0),0);
   const biayaGaji=0, biayaIklan=0, biayaLain=50000;
   const totalBeban=biayaGaji+biayaIklan+biayaLain;
   const labaBersih=labaKotor-totalBeban;
@@ -1684,16 +2122,15 @@ function getLapData(){
   const totalPasiva=utang+totalEkuitas;
   const kasAwal=4500000, kasOps=penjualan-totalPembelian-totalBeban;
   const kasAkhir=kasAwal+kasOps;
-  return {penjualan,retPenjualan,pendapatanLain,totalPendapatan,persediaanAwal,totalPembelian,retPembelian,persediaan,hpp,labaKotor,biayaGaji,biayaIklan,biayaLain,totalBeban,labaBersih,kas,piutang,totalAktiva,utang,modalAwal,labaDitahan,totalEkuitas,totalPasiva,kasOps,kasInvestasi:0,kasPendanaan:0,kasAwal,kasAkhir};
+  return {penjualan,retPenjualan,pendapatanLain,totalPendapatan,hppTotal,labaKotor,totalPembelian,persediaan,biayaGaji,biayaIklan,biayaLain,totalBeban,labaBersih,kas,piutang,totalAktiva,utang,modalAwal,labaDitahan,totalEkuitas,totalPasiva,kasOps,kasInvestasi:0,kasPendanaan:0,kasAwal,kasAkhir};
 }
 
+const lapTabNames={laba:'Laba Rugi',neraca:'Neraca',kas:'Arus Kas',ekuitas:'Ekuitas',grafik:'Top Selling'};
 function updateLapBtns(tab){
-  const names=lapTabNames;
-  document.getElementById('lapBtnPDF').textContent=`📄 PDF ${names[tab]||tab}`;
-  document.getElementById('lapBtnExcel').textContent=`📊 Excel ${names[tab]||tab}`;
+  document.getElementById('lapBtnPDF').textContent=`📄 PDF ${lapTabNames[tab]||tab}`;
+  document.getElementById('lapBtnExcel').textContent=`📊 Excel ${lapTabNames[tab]||tab}`;
 }
-
-function showLapTab(id, btn){
+function showLapTab(id,btn){
   currentLapTab=id;
   ['laba','neraca','kas','ekuitas','grafik'].forEach(t=>{
     document.getElementById('lt-'+t).style.display=t===id?'block':'none';
@@ -1710,7 +2147,7 @@ function renderLaporan(){
   const isPos=d.labaBersih>=0;
 
   document.getElementById('lt-laba').innerHTML=`
-    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Laba Rugi &nbsp;|&nbsp; Periode: ${periode}</p></div>
+    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Laba Rugi &nbsp;|&nbsp; Periode: ${periode} &nbsp;|&nbsp; <span style="background:#dbeafe;color:#1a73e8;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700">Metode HPP: Average</span></p></div>
     <div class="lap-section-hd">Pendapatan</div>
     <table class="lap-table">
       <tr class="indent"><td>Penjualan Barang</td><td>${rp(d.penjualan)}</td></tr>
@@ -1718,13 +2155,11 @@ function renderLaporan(){
       <tr class="indent neg"><td>Retur & Potongan Penjualan</td><td>(${rp(d.retPenjualan)})</td></tr>
       <tr class="sub"><td>Jumlah Pendapatan</td><td>${rp(d.totalPendapatan)}</td></tr>
     </table>
-    <div class="lap-section-hd flat">Harga Pokok Penjualan (HPP)</div>
+    <div class="lap-section-hd flat">Harga Pokok Penjualan (HPP — Metode Average)</div>
     <table class="lap-table">
-      <tr class="indent"><td>Persediaan Awal</td><td>${rp(d.persediaanAwal)}</td></tr>
-      <tr class="indent"><td>Pembelian</td><td>${rp(d.totalPembelian)}</td></tr>
-      <tr class="indent neg"><td>Retur Pembelian</td><td>(${rp(d.retPembelian)})</td></tr>
-      <tr class="indent neg"><td>Persediaan Akhir</td><td>(${rp(d.persediaan)})</td></tr>
-      <tr class="sub neg"><td>Jumlah HPP</td><td>(${rp(d.hpp)})</td></tr>
+      <tr class="indent"><td>HPP dari Transaksi Penjualan (Qty × Harga Avg)</td><td>${rp(d.hppTotal)}</td></tr>
+      <tr class="indent"><td>Nilai Persediaan Akhir (Harga Avg)</td><td>${rp(d.persediaan)}</td></tr>
+      <tr class="sub neg"><td>Jumlah HPP</td><td>(${rp(d.hppTotal)})</td></tr>
     </table>
     <table class="lap-table"><tr class="lap-mid"><td><strong>Laba Kotor</strong></td><td><strong>${rp(d.labaKotor)}</strong></td></tr></table>
     <div class="lap-section-hd gray">Beban Operasional</div>
@@ -1742,7 +2177,7 @@ function renderLaporan(){
     </table>`;
 
   document.getElementById('lt-neraca').innerHTML=`
-    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Posisi Keuangan (Neraca) &nbsp;|&nbsp; Per ${todayStr()}</p></div>
+    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Posisi Keuangan (Neraca) &nbsp;|&nbsp; Per ${todayStr()} &nbsp;|&nbsp; <span style="background:#dbeafe;color:#1a73e8;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700">Persediaan @ Harga Avg</span></p></div>
     <div class="neraca-grid">
       <div class="neraca-aktiva">
         <h5>AKTIVA</h5>
@@ -1750,14 +2185,8 @@ function renderLaporan(){
         <table class="lap-table">
           <tr class="indent"><td>Kas & Setara Kas</td><td>${rp(d.kas)}</td></tr>
           <tr class="indent"><td>Piutang Usaha</td><td>${rp(d.piutang)}</td></tr>
-          <tr class="indent"><td>Persediaan Barang</td><td>${rp(d.persediaan)}</td></tr>
+          <tr class="indent"><td>Persediaan Barang (Avg)</td><td>${rp(d.persediaan)}</td></tr>
           <tr class="sub"><td>Total Aktiva Lancar</td><td>${rp(d.totalAktiva)}</td></tr>
-        </table>
-        <div class="lap-section-hd flat" style="font-size:11px">Aktiva Tetap</div>
-        <table class="lap-table">
-          <tr class="indent"><td>Peralatan</td><td>${rp(0)}</td></tr>
-          <tr class="indent"><td>Inventaris</td><td>${rp(0)}</td></tr>
-          <tr class="sub"><td>Total Aktiva Tetap</td><td>${rp(0)}</td></tr>
         </table>
         <table class="lap-table"><tr class="lap-total"><td>Total Aktiva</td><td>${rp(d.totalAktiva)}</td></tr></table>
       </div>
@@ -1766,7 +2195,6 @@ function renderLaporan(){
         <div class="lap-section-hd gray" style="font-size:11px">Kewajiban</div>
         <table class="lap-table">
           <tr class="indent"><td>Utang Usaha</td><td>${rp(d.utang)}</td></tr>
-          <tr class="indent"><td>Utang Lain-lain</td><td>${rp(0)}</td></tr>
           <tr class="sub"><td>Total Kewajiban</td><td>${rp(d.utang)}</td></tr>
         </table>
         <div class="lap-section-hd teal flat" style="font-size:11px">Ekuitas</div>
@@ -1777,13 +2205,10 @@ function renderLaporan(){
           <tr class="sub"><td>Total Ekuitas</td><td>${rp(d.totalEkuitas)}</td></tr>
         </table>
         <table class="lap-table"><tr class="lap-total"><td>Total Pasiva</td><td>${rp(d.totalPasiva)}</td></tr></table>
-        <div style="text-align:center;padding:10px;font-size:13px;color:${d.totalAktiva===d.totalPasiva?'#16a34a':'var(--red)'};font-weight:700;background:${d.totalAktiva===d.totalPasiva?'var(--green-l)':'var(--red-l)'};border-radius:8px;margin-top:8px">
-          ${d.totalAktiva===d.totalPasiva?'✅ Neraca Balance':'⚠️ Neraca Tidak Balance'}
-        </div>
       </div>
     </div>`;
 
-  const kasNet=d.kasOps+d.kasInvestasi+d.kasPendanaan;
+  const kasNet=d.kasOps;
   document.getElementById('lt-kas').innerHTML=`
     <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Arus Kas &nbsp;|&nbsp; Periode: ${periode}</p></div>
     <div class="lap-section-hd">Aktivitas Operasi</div>
@@ -1795,41 +2220,28 @@ function renderLaporan(){
     </table>
     <div class="lap-section-hd gray flat">Aktivitas Investasi</div>
     <table class="lap-table">
-      <tr class="indent"><td>Pembelian Aset Tetap</td><td>${rp(0)}</td></tr>
-      <tr class="sub"><td>Arus Kas dari Aktivitas Investasi</td><td>${rp(d.kasInvestasi)}</td></tr>
-    </table>
-    <div class="lap-section-hd teal flat">Aktivitas Pendanaan</div>
-    <table class="lap-table">
-      <tr class="indent"><td>Penerimaan Pinjaman</td><td>${rp(0)}</td></tr>
-      <tr class="indent"><td>Setoran Modal</td><td>${rp(0)}</td></tr>
-      <tr class="sub"><td>Arus Kas dari Aktivitas Pendanaan</td><td>${rp(d.kasPendanaan)}</td></tr>
+      <tr class="sub"><td>Arus Kas dari Aktivitas Investasi</td><td>${rp(0)}</td></tr>
     </table>
     <table class="lap-table">
-      <tr class="lap-mid"><td>Kenaikan (Penurunan) Kas Bersih</td><td>${rp(kasNet)}</td></tr>
+      <tr class="lap-mid"><td>Kenaikan Kas Bersih</td><td>${rp(kasNet)}</td></tr>
       <tr class="indent"><td>Kas Awal Periode</td><td>${rp(d.kasAwal)}</td></tr>
       <tr class="lap-total"><td>💵 Kas Akhir Periode</td><td>${rp(d.kasAkhir)}</td></tr>
     </table>`;
 
-  const modalSaham=d.modalAwal, tambahanModal=0, dividen=0, pendKomp=0;
+  const modalSaham=d.modalAwal;
   document.getElementById('lt-ekuitas').innerHTML=`
-    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Perubahan Ekuitas &nbsp;|&nbsp; Periode: 01/04/2026 – 30/04/2026 &nbsp;|&nbsp; (dalam IDR)</p></div>
+    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Perubahan Ekuitas &nbsp;|&nbsp; Periode: 01/04/2026 – 30/04/2026</p></div>
     <div style="overflow-x:auto">
     <table class="ekuitas-table">
       <thead><tr><th>Kode</th><th>Nama Akun</th><th>Permulaan (Rp)</th><th>Debit (Rp)</th><th>Kredit (Rp)</th><th>Saldo Akhir (Rp)</th></tr></thead>
       <tbody>
         <tr><td>301</td><td>Modal Saham</td><td>${fmt(modalSaham)}</td><td>${fmt(0)}</td><td>${fmt(0)}</td><td>${fmt(modalSaham)}</td></tr>
-        <tr><td>302</td><td>Tambahan Modal Disetor</td><td>${fmt(tambahanModal)}</td><td>${fmt(0)}</td><td>${fmt(0)}</td><td>${fmt(tambahanModal)}</td></tr>
-        <tr><td>303</td><td>Laba Ditahan</td><td>${fmt(d.labaDitahan)}</td><td>${fmt(dividen)}</td><td>${fmt(d.labaBersih)}</td><td>${fmt(d.labaDitahan-dividen+d.labaBersih)}</td></tr>
-        <tr><td>304</td><td>Dividen</td><td>${fmt(0)}</td><td>${fmt(dividen)}</td><td>${fmt(0)}</td><td>${fmt(-dividen)}</td></tr>
-        <tr><td>305</td><td>Pendapatan Komprehensif Lainnya</td><td>${fmt(pendKomp)}</td><td>${fmt(0)}</td><td>${fmt(0)}</td><td>${fmt(pendKomp)}</td></tr>
+        <tr><td>302</td><td>Tambahan Modal Disetor</td><td>${fmt(0)}</td><td>${fmt(0)}</td><td>${fmt(0)}</td><td>${fmt(0)}</td></tr>
+        <tr><td>303</td><td>Laba Ditahan</td><td>${fmt(d.labaDitahan)}</td><td>${fmt(0)}</td><td>${fmt(d.labaBersih)}</td><td>${fmt(d.labaDitahan+d.labaBersih)}</td></tr>
         <tr class="total-row"><td colspan="2">TOTAL</td><td>${fmt(modalSaham+d.labaDitahan)}</td><td>${fmt(0)}</td><td>${fmt(d.labaBersih)}</td><td>${fmt(d.totalEkuitas)}</td></tr>
       </tbody>
-    </table></div>
-    <div style="background:var(--teal-l);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:13.5px;border-left:4px solid var(--teal)">
-      <strong>📊 Pergerakan Ekuitas:</strong> &nbsp; Total perubahan selama periode ini sebesar
-      <strong style="color:var(--teal-d)">${rp(d.labaBersih)}</strong> — berasal dari laba bersih operasional.
-    </div>`;
-  
+    </table></div>`;
+
   updateLapBtns(currentLapTab);
 }
 
@@ -1837,24 +2249,22 @@ function renderLapGrafik(){
   if(lapCharts.line) lapCharts.line.destroy();
   if(lapCharts.bar) lapCharts.bar.destroy();
   if(lapCharts.pie) lapCharts.pie.destroy();
-  lapCharts.line=new Chart(document.getElementById('lapLine'),{type:'line',data:{labels:['Nov','Des','Jan','Feb','Mar','Apr'],datasets:[{label:'Pendapatan',data:[1200000,1800000,900000,1500000,2100000,keluar.reduce((s,k)=>s+k.total,0)],borderColor:'#00C9A7',backgroundColor:'#00C9A715',fill:true,tension:.4}]},options:{responsive:true,scales:{y:{beginAtZero:true,ticks:{callback:v=>'Rp '+(v/1000000).toFixed(1)+'jt'}}}}});
+  lapCharts.line=new Chart(document.getElementById('lapLine'),{type:'line',data:{labels:['Nov','Des','Jan','Feb','Mar','Apr'],datasets:[{label:'Pendapatan',data:[1200000,1800000,900000,1500000,2100000,keluar.reduce((s,k)=>s+k.total,0)],borderColor:'#00C9A7',backgroundColor:'#00C9A715',fill:true,tension:.4},{label:'HPP (Avg)',data:[900000,1350000,700000,1100000,1600000,keluar.reduce((s,k)=>s+(k.hpp||0),0)],borderColor:'#1a73e8',backgroundColor:'#1a73e815',fill:true,tension:.4}]},options:{responsive:true,scales:{y:{beginAtZero:true,ticks:{callback:v=>'Rp '+(v/1000000).toFixed(1)+'jt'}}}}});
   const kats=[...new Set(barang.map(b=>b.kat))];
   lapCharts.bar=new Chart(document.getElementById('lapBar'),{type:'bar',data:{labels:kats,datasets:[{label:'Stok',data:kats.map(k=>barang.filter(b=>b.kat===k).reduce((s,b)=>s+b.stok,0)),backgroundColor:'#1a73e8'}]},options:{responsive:true,scales:{y:{beginAtZero:true}}}});
   const topSelling=[...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty).slice(0,5);
   if(topSelling.length){
-    lapCharts.pie=new Chart(document.getElementById('lapPie'),{type:'pie',data:{labels:topSelling.map(x=>`${x.nama} (${x.qty})`),datasets:[{label:'Qty Terjual',data:topSelling.map(x=>x.qty),backgroundColor:['#00C9A7','#1a73e8','#f59e0b','#22c55e','#e53935']}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
+    lapCharts.pie=new Chart(document.getElementById('lapPie'),{type:'pie',data:{labels:topSelling.map(x=>`${x.nama} (${x.qty})`),datasets:[{data:topSelling.map(x=>x.qty),backgroundColor:['#00C9A7','#1a73e8','#f59e0b','#22c55e','#e53935']}]},options:{responsive:true,plugins:{legend:{position:'bottom'}}}});
   }
 }
 
 // ══════════════════════════════════════════
 //  PAGINATION
 // ══════════════════════════════════════════
-function renderPag(elId, pages, current, cb){
+function renderPag(elId,pages,current,cb){
   const el=document.getElementById(elId);
   let html=`<button class="pag-btn" onclick="(${cb.toString()})(${Math.max(1,current-1)})">‹</button>`;
-  for(let i=1;i<=pages;i++){
-    html+=`<button class="pag-btn${i===current?' active':''}" onclick="(${cb.toString()})(${i})">${i}</button>`;
-  }
+  for(let i=1;i<=pages;i++) html+=`<button class="pag-btn${i===current?' active':''}" onclick="(${cb.toString()})(${i})">${i}</button>`;
   html+=`<button class="pag-btn" onclick="(${cb.toString()})(${Math.min(pages,current+1)})">›</button>`;
   el.innerHTML=html;
 }
@@ -1891,30 +2301,32 @@ function ubahPW(){
 function dlCSV(type){
   let csv='',fn='';
   if(type==='barang'){
-    csv='Kode,Nama,Kategori,Satuan,Harga Beli,Harga Jual,Stok,Lokasi\n';
-    barang.forEach(b=>csv+=`${b.kode},${b.nama},${b.kat},${b.sat},${b.hb},${b.hj},${b.stok},${b.lok}\n`);
+    csv='Kode,Nama,Kategori,Satuan,Harga Beli,Harga Rata-rata (Avg),Harga Jual,Stok,Nilai Persediaan,Lokasi\n';
+    barang.forEach(b=>csv+=`${b.kode},${b.nama},${b.kat},${b.sat},${b.hb},${b.hargaAvg||b.hb},${b.hj},${b.stok},${(b.hargaAvg||b.hb)*b.stok},${b.lok}\n`);
     fn='daftar_barang.csv';
   } else if(type==='masuk'){
-    csv='Tanggal,Kode,Nama,Supplier,Jumlah,Harga Beli,Total,No Faktur\n';
-    masuk.forEach(m=>csv+=`${m.tgl},${m.kode},${m.nama},${m.sup},${m.jml},${m.hb},${m.total},${m.fak}\n`);
+    csv='Tanggal,Kode,Nama,Supplier,Jumlah,Harga Beli,Total,Harga Avg Baru,No Faktur\n';
+    masuk.forEach(m=>csv+=`${m.tgl},${m.kode},${m.nama},${m.sup},${m.jml},${m.hb},${m.total},${m.hargaAvgBaru||m.hb},${m.fak}\n`);
     fn='barang_masuk.csv';
   } else if(type==='keluar'){
-    csv='Tanggal,Kode,Nama,Jumlah,Harga Jual,Total,Kasir,Pembayaran\n';
-    keluar.forEach(k=>csv+=`${k.tgl},${k.kode},${k.nama},${k.jml},${k.hj},${k.total},${k.kasir},${k.bayar}\n`);
+    csv='Tanggal,Kode,Nama,Jumlah,Harga Jual,Total Jual,HPP (Avg),Laba Kotor,Kasir,Pembayaran\n';
+    keluar.forEach(k=>csv+=`${k.tgl},${k.kode},${k.nama},${k.jml},${k.hj},${k.total},${k.hpp||0},${k.labaKotor||0},${k.kasir},${k.bayar}\n`);
     fn='barang_keluar.csv';
   } else if(type==='penyesuaian'){
-    csv='No Dokumen,Tanggal,Jenis,Gudang,Status,Keterangan,Barang,Stok Sistem,Stok Fisik,Selisih,Qty\n';
-    penyesuaian.forEach(p=>p.items.forEach(item=>csv+=`${p.nodok},${p.tgl},${p.jenis},${p.gudang},${p.status},"${p.ket||''}",${item.nama},${item.sistem},${item.fisik},${item.selisih},${item.qty}\n`));
+    csv='No Dokumen,Tanggal,Jenis,Sumber,Gudang,Status,Nilai Kerugian,Keterangan\n';
+    penyesuaian.forEach(p=>csv+=`${p.nodok},${p.tgl},${p.jenis},${p.sumber||'Manual'},${p.gudang},${p.status},${p.totalNilaiKerugian||0},"${p.ket||''}"\n`);
     fn='penyesuaian_barang.csv';
+  } else if(type==='opname'){
+    csv='No Dokumen,Tanggal,Gudang,Status,Total Barang,Barang Selisih\n';
+    opname.forEach(op=>csv+=`${op.nodok},${op.tgl},${op.gudang},${op.status},${op.items.length},${op.items.filter(x=>x.selisih!==0).length}\n`);
+    fn='stok_opname.csv';
   }
   const a=document.createElement('a');
   a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
   a.download=fn; a.click(); toast('⬇️ '+fn+' didownload');
 }
 
-function getReportName(tab){
-  return ({laba:'laba_rugi',neraca:'neraca',kas:'arus_kas',ekuitas:'ekuitas',grafik:'top_selling'})[tab]||'laporan';
-}
+function getReportName(tab){ return ({laba:'laba_rugi',neraca:'neraca',kas:'arus_kas',ekuitas:'ekuitas',grafik:'top_selling'})[tab]||'laporan'; }
 
 function dlPDFByTab(tab){
   const {jsPDF}=window.jspdf;
@@ -1928,7 +2340,7 @@ function dlPDFByTab(tab){
     doc.setFontSize(15);doc.setFont(undefined,'bold');doc.setTextColor(26,42,58);
     doc.text('Toko Jago Sumberarum',105,y,{align:'center'}); y+=7;
     doc.setFontSize(11);doc.setFont(undefined,'normal');doc.setTextColor(107,127,153);
-    doc.text(judul+' | '+sub,105,y,{align:'center'}); y+=8;
+    doc.text(judul+' | '+sub+' | Metode: HPP Average',105,y,{align:'center'}); y+=8;
     doc.setDrawColor(224,231,239);doc.line(14,y,196,y);y+=8;resetFont();
   };
   const section=(title,color=[26,115,232])=>{
@@ -1953,59 +2365,29 @@ function dlPDFByTab(tab){
     header('Laporan Laba Rugi','Periode: '+periode);
     section('Pendapatan');
     row('Penjualan Barang',rp(d.penjualan),{indent:true});
-    row('Pendapatan Lain-lain',rp(d.pendapatanLain),{indent:true});
-    row('Retur & Potongan Penjualan','('+rp(d.retPenjualan)+')',{indent:true,neg:true});
-    line();row('Jumlah Pendapatan',rp(d.totalPendapatan),{bold:true,fill:[244,248,252]});y+=3;
-    section('Harga Pokok Penjualan (HPP)');
-    row('Persediaan Awal',rp(d.persediaanAwal),{indent:true});
-    row('Pembelian',rp(d.totalPembelian),{indent:true});
-    row('Persediaan Akhir','('+rp(d.persediaan)+')',{indent:true,neg:true});
-    line();row('Jumlah HPP','('+rp(d.hpp)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
+    row('Jumlah Pendapatan',rp(d.totalPendapatan),{bold:true,fill:[244,248,252]});y+=3;
+    section('HPP (Metode Average)');
+    row('HPP dari Transaksi Penjualan','('+rp(d.hppTotal)+')',{indent:true,neg:true});
+    line();row('Jumlah HPP','('+rp(d.hppTotal)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
     row('Laba Kotor',rp(d.labaKotor),{bold:true,fill:[219,234,254]});y+=3;
     section('Beban Operasional',[75,94,117]);
-    row('Beban Gaji',rp(d.biayaGaji),{indent:true});
     row('Beban Lain-lain',rp(d.biayaLain),{indent:true});
-    line();row('Total Beban','('+rp(d.totalBeban)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
+    row('Total Beban','('+rp(d.totalBeban)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
     row('Laba Bersih',rp(d.labaBersih),{total:true,fill:d.labaBersih>=0?[220,252,231]:[253,236,234]});
   } else if(tab==='neraca'){
     header('Laporan Posisi Keuangan (Neraca)','Per '+todayStr());
-    doc.setFontSize(10);doc.setFont(undefined,'bold');doc.setFillColor(26,115,232);doc.roundedRect(14,y,84,8,1.5,1.5,'F');doc.setTextColor(255,255,255);doc.text('AKTIVA',18,y+5.5);
-    doc.setFillColor(75,94,117);doc.roundedRect(112,y,84,8,1.5,1.5,'F');doc.text('PASIVA',116,y+5.5);y+=13;resetFont();
     const pair=(l,lv,r,rv,b=false)=>{checkPage(8);doc.setFontSize(9.2);doc.setFont(undefined,b?'bold':'normal');doc.text(l,16,y);doc.text(lv,98,y,{align:'right'});doc.text(r,114,y);doc.text(rv,194,y,{align:'right'});y+=6;resetFont();};
     pair('Kas & Setara Kas',rp(d.kas),'Utang Usaha',rp(d.utang));
-    pair('Piutang Usaha',rp(d.piutang),'Modal Pemilik',rp(d.modalAwal));
-    pair('Persediaan Barang',rp(d.persediaan),'Laba Bersih',rp(d.labaBersih));
+    pair('Persediaan (Avg)',rp(d.persediaan),'Modal Pemilik',rp(d.modalAwal));
+    pair('','','Laba Bersih',rp(d.labaBersih));
     doc.setDrawColor(224,231,239);doc.line(14,y-2,196,y-2);
     pair('Total Aktiva',rp(d.totalAktiva),'Total Pasiva',rp(d.totalPasiva),true);
-  } else if(tab==='kas'){
-    header('Laporan Arus Kas','Periode: '+periode);
-    section('Aktivitas Operasi');
-    row('Penerimaan dari Penjualan',rp(d.penjualan),{indent:true});
-    row('Pembayaran Pembelian Barang','('+rp(d.totalPembelian)+')',{indent:true,neg:true});
-    row('Pembayaran Beban Operasional','('+rp(d.totalBeban)+')',{indent:true,neg:true});
-    row('Arus Kas dari Aktivitas Operasi',rp(d.kasOps),{bold:true,fill:[244,248,252]});y+=3;
-    section('Aktivitas Investasi',[75,94,117]);
-    row('Arus Kas dari Aktivitas Investasi',rp(0),{bold:true,fill:[244,248,252]});y+=3;
-    section('Aktivitas Pendanaan',[0,158,132]);
-    row('Arus Kas dari Aktivitas Pendanaan',rp(0),{bold:true,fill:[244,248,252]});y+=3;
-    row('Kas Awal Periode',rp(d.kasAwal),{indent:true});
-    row('Kas Akhir Periode',rp(d.kasAkhir),{total:true,fill:[230,255,249]});
-  } else if(tab==='ekuitas'){
-    header('Laporan Perubahan Ekuitas','Periode: 01/04/2026 - 30/04/2026');
-    doc.setFillColor(26,115,232);doc.rect(14,y,182,8,'F');doc.setTextColor(255,255,255);doc.setFont(undefined,'bold');doc.setFontSize(8);
-    ['Kode','Nama Akun','Permulaan','Debit','Kredit','Saldo Akhir'].forEach((h,i)=>doc.text(h,[16,34,89,119,146,174][i],y+5));y+=12;resetFont();
-    const tr=(kode,nama,awal,debit,kredit,akhir,b=false)=>{checkPage(7);doc.setFontSize(7.6);doc.setFont(undefined,b?'bold':'normal');doc.text(kode,16,y);doc.text(nama,34,y);doc.text(fmt(awal),108,y,{align:'right'});doc.text(fmt(debit),136,y,{align:'right'});doc.text(fmt(kredit),164,y,{align:'right'});doc.text(fmt(akhir),194,y,{align:'right'});y+=6;resetFont();};
-    tr('301','Modal Saham',d.modalAwal,0,0,d.modalAwal);
-    tr('302','Tambahan Modal Disetor',0,0,0,0);
-    tr('303','Laba Ditahan',d.labaDitahan,0,d.labaBersih,d.labaDitahan+d.labaBersih);
-    tr('304','Dividen',0,0,0,0);
-    doc.setDrawColor(224,231,239);doc.line(14,y-2,196,y-2);
-    tr('','TOTAL',d.modalAwal+d.labaDitahan,0,d.labaBersih,d.totalEkuitas,true);
   } else {
-    header('Top Selling Product','Berdasarkan jumlah produk terjual');
-    const top=[...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty);
-    doc.setFillColor(26,115,232);doc.rect(14,y,182,8,'F');doc.setTextColor(255,255,255);doc.setFont(undefined,'bold');doc.setFontSize(9);doc.text('Produk',18,y+5.5);doc.text('Qty',145,y+5.5);doc.text('Total',194,y+5.5,{align:'right'});y+=12;resetFont();
-    top.forEach((x,i)=>{row(`${i+1}. ${x.nama}`,`${x.qty} terjual   ${rp(x.total)}`);});
+    header('Laporan: '+lapTabNames[tab],'Per '+todayStr());
+    row('Total Penjualan',rp(d.penjualan));
+    row('HPP Average',rp(d.hppTotal));
+    row('Laba Kotor',rp(d.labaKotor));
+    row('Laba Bersih',rp(d.labaBersih),{total:true,fill:[220,252,231]});
   }
   doc.save(fileName); toast('📄 PDF '+lapTabNames[tab]+' didownload');
 }
@@ -2013,12 +2395,11 @@ function dlPDFByTab(tab){
 function dlExcelByTab(tab){
   const d=getLapData();
   let csv=''; const name=lapTabNames[tab]||tab;
-  csv+=`${name.toUpperCase()} - TOKO JAGO SUMBERARUM\nDicetak: ${todayStr()}\n\n`;
-  if(tab==='laba') csv+='Keterangan,Jumlah\n'+`Penjualan Barang,${d.penjualan}\nJumlah Pendapatan,${d.totalPendapatan}\nHPP,${d.hpp}\nLaba Kotor,${d.labaKotor}\nTotal Beban,${d.totalBeban}\nLaba Bersih,${d.labaBersih}\n`;
-  else if(tab==='neraca') csv+='Keterangan,Jumlah\n'+`Kas,${d.kas}\nPersediaan,${d.persediaan}\nTotal Aktiva,${d.totalAktiva}\nUtang,${d.utang}\nModal,${d.modalAwal}\nTotal Pasiva,${d.totalPasiva}\n`;
-  else if(tab==='kas') csv+='Keterangan,Jumlah\n'+`Penerimaan,${d.penjualan}\nPembayaran,${-d.totalPembelian}\nKas Operasi,${d.kasOps}\nKas Awal,${d.kasAwal}\nKas Akhir,${d.kasAkhir}\n`;
-  else if(tab==='ekuitas') csv+='Keterangan,Jumlah\n'+`Modal,${d.modalAwal}\nLaba Bersih,${d.labaBersih}\nTotal Ekuitas,${d.totalEkuitas}\n`;
-  else { csv+='Produk,Qty Terjual,Total Penjualan\n'; [...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty).forEach(x=>csv+=`${x.nama},${x.qty},${x.total}\n`); }
+  csv+=`${name.toUpperCase()} - TOKO JAGO SUMBERARUM\nMetode HPP: Average (Rata-rata Bergerak)\nDicetak: ${todayStr()}\n\n`;
+  if(tab==='laba') csv+='Keterangan,Jumlah\n'+`Penjualan,${d.penjualan}\nJumlah Pendapatan,${d.totalPendapatan}\nHPP (Average),${d.hppTotal}\nLaba Kotor,${d.labaKotor}\nTotal Beban,${d.totalBeban}\nLaba Bersih,${d.labaBersih}\n`;
+  else if(tab==='neraca') csv+='Keterangan,Jumlah\n'+`Kas,${d.kas}\nPersediaan (Avg),${d.persediaan}\nTotal Aktiva,${d.totalAktiva}\nUtang,${d.utang}\nModal,${d.modalAwal}\nTotal Pasiva,${d.totalPasiva}\n`;
+  else if(tab==='kas') csv+='Keterangan,Jumlah\n'+`Penerimaan,${d.penjualan}\nPembayaran,${d.totalPembelian}\nKas Operasi,${d.kasOps}\nKas Awal,${d.kasAwal}\nKas Akhir,${d.kasAkhir}\n`;
+  else { csv+='Produk,Qty Terjual,Total Penjualan,Total HPP\n'; [...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0),hpp:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+(k.hpp||0),0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty).forEach(x=>csv+=`${x.nama},${x.qty},${x.total},${x.hpp}\n`); }
   const a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv); a.download=getReportName(tab)+'.csv'; a.click(); toast('📊 Excel '+name+' didownload');
 }
 
@@ -2046,15 +2427,14 @@ function cetakFakturData(m){
     <button onclick="window.print()" style="width:100%;padding:10px;background:#00C9A7;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">🖨️ Cetak Faktur</button>
   </body></html>`);
 }
-
 function printLap(){ window.print(); }
 
 // ══════════════════════════════════════════
 //  LOCAL STORAGE
 // ══════════════════════════════════════════
-const LS_KEY='tokoJagoSumberarum_v3';
+const LS_KEY='tokoJagoSumberarum_v4_avg';
 function saveState(){
-  const state={barang,masuk,keluar,penyesuaian,currentPW,stokBatas,periodState,dark:document.body.classList.contains('dark'),lang:currentLang};
+  const state={barang,masuk,keluar,penyesuaian,opname,currentPW,stokBatas,periodState,dark:document.body.classList.contains('dark')};
   try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){}
 }
 function loadState(){
@@ -2062,15 +2442,15 @@ function loadState(){
     const raw=localStorage.getItem(LS_KEY);
     if(!raw) return;
     const s=JSON.parse(raw);
-    if(Array.isArray(s.barang)) barang=s.barang;
+    if(Array.isArray(s.barang)) barang=s.barang.map(b=>({...b,hargaAvg:b.hargaAvg||b.hb}));
     if(Array.isArray(s.masuk)) masuk=s.masuk;
     if(Array.isArray(s.keluar)) keluar=s.keluar;
     if(Array.isArray(s.penyesuaian)) penyesuaian=s.penyesuaian;
+    if(Array.isArray(s.opname)) opname=s.opname;
     if(s.currentPW) currentPW=s.currentPW;
     if(s.stokBatas) stokBatas=s.stokBatas;
     if(s.periodState) periodState=s.periodState;
     if(s.dark) document.body.classList.add('dark');
-    if(s.lang){ currentLang=s.lang; const el=document.getElementById('s-lang'); if(el) el.value=s.lang; }
   }catch(e){ console.warn('Gagal load data lokal',e); }
 }
 
@@ -2095,17 +2475,15 @@ setInterval(saveState,3000);
 // ══════════════════════════════════════════
 function initAll(){
   loadState();
-  // Apply loaded dark mode to toggle
   if(document.body.classList.contains('dark')){
     const dt=document.getElementById('darkToggle');
     if(dt) dt.classList.add('on');
   }
-  // Apply loaded lang
-  if(currentLang!=='id') changeLang(currentLang);
   renderDash();
   renderDaftar();
   renderMasuk();
   renderKeluar();
+  renderOpname();
   renderPenyesuaian();
   renderLaporan();
 }

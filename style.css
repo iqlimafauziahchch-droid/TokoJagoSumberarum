@@ -1,0 +1,67 @@
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f7fa;
+}
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  background: #20c997;
+  color: white;
+  padding: 20px;
+}
+.sidebar a {
+  display: block;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  margin: 5px 0;
+}
+.sidebar a:hover {
+  background: rgba(255,255,255,0.2);
+  border-radius: 8px;
+}
+.header {
+  margin-left: 240px;
+  padding: 15px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  margin-left: 240px;
+  padding: 20px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-primary { background: #0d6efd; color: white; }
+.btn-success { background: #20c997; color: white; }
+.btn-danger { background: #dc3545; color: white; }
+input, select {
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+th { background: #f1f1f1; }
+</style>

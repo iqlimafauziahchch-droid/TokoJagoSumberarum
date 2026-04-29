@@ -20,6 +20,8 @@
   --sidebar:#1e3a5f;--sidebar2:#2e4f72;
   --shadow:0 2px 12px #0000001a;
   --radius:12px;
+  --currency-symbol:Rp;
+  --currency-rate:1;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
@@ -84,8 +86,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 .topbar h3{font-size:17px;font-weight:800;}
 .topbar-r{display:flex;align-items:center;gap:12px;}
 .topbar-user{font-size:13px;color:var(--muted);font-weight:700;cursor:pointer;
-  padding:6px 12px;border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:6px;}
+  padding:6px 12px;border-radius:8px;transition:all .2s;display:flex;align-items:center;gap:8px;}
 .topbar-user:hover{background:var(--teal-l);color:var(--teal-d);}
+.topbar-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid var(--teal);background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.topbar-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover;}
 .pg{display:none;padding:24px 28px;width:100%;}
 .pg.active{display:block;}
 .pg-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
@@ -215,7 +219,7 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 .tab{padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;color:var(--muted);border:none;background:transparent;font-family:inherit;transition:all .2s;}
 .tab.active{background:var(--teal);color:#fff;}
 
-/* Laporan */
+/* Laporan & Analisis */
 .lap-header{text-align:center;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--border);}
 .lap-header h2{font-size:17px;font-weight:800;color:var(--text);}
 .lap-header p{font-size:13px;color:var(--muted);margin-top:4px;}
@@ -305,6 +309,17 @@ tbody tr.row-danger:hover td{background:#fcd5d5!important;}
 .opname-row-diff td{background:#fff7ed;}
 .opname-row-miss td{background:#fef2f2;}
 
+/* Profile photo */
+.profile-photo-wrap{display:flex;align-items:center;gap:20px;margin-bottom:20px;padding:16px;background:var(--bg);border-radius:12px;}
+.profile-photo-circle{width:88px;height:88px;border-radius:50%;background:var(--teal-l);border:3px solid var(--teal);display:flex;align-items:center;justify-content:center;font-size:36px;overflow:hidden;cursor:pointer;position:relative;flex-shrink:0;}
+.profile-photo-circle img{width:100%;height:100%;object-fit:cover;}
+.profile-photo-circle:hover .overlay{opacity:1;}
+.overlay{position:absolute;inset:0;background:#00000060;display:flex;align-items:center;justify-content:center;font-size:20px;opacity:0;transition:opacity .2s;border-radius:50%;}
+.profile-photo-info{flex:1;}
+.profile-photo-info h4{font-size:14px;font-weight:800;margin-bottom:4px;}
+.profile-photo-info p{font-size:12px;color:var(--muted);margin-bottom:10px;}
+#photoInput{display:none;}
+
 /* Dark mode */
 body.dark{background:#1a1d27;color:#e0e6f0;}
 body.dark .box,body.dark .kpi-v2,body.dark .settings-section,body.dark .modal,body.dark .topbar{background:#22263a;border-color:#2e3347;}
@@ -315,6 +330,7 @@ body.dark .fg input,body.dark .fg select,body.dark .fg textarea{background:#2a2d
 body.dark .filter-info{background:#1e2235;}
 body.dark .lbox{background:rgba(30,35,58,0.97);color:#e0e6f0;}
 body.dark .opname-progress{background:#2a2d3f;}
+body.dark .profile-photo-wrap{background:#2a2d3f;}
 
 @media print{
   .sidebar,.topbar,.pg-head button,.tabs,.btn,.btn-icon{display:none!important;}
@@ -333,7 +349,7 @@ body.dark .opname-progress{background:#2a2d3f;}
   <div class="lbox">
     <div class="logo">🏪</div>
     <h1>Toko Jago Sumberarum</h1>
-    <p>Sistem Manajemen Inventori & Keuangan</p>
+    <p>Sistem Manajemen Persediaan & Keuangan</p>
     <div class="lerr" id="lerr">⚠️ Username atau password salah</div>
     <div class="fw">
       <span class="ico">👤</span>
@@ -359,17 +375,17 @@ body.dark .opname-progress{background:#2a2d3f;}
     <div><h2>Toko Jago</h2><span>Sumberarum</span></div>
   </div>
   <nav class="sb-nav">
-    <button class="snav active" onclick="showPg('dashboard',this)"><span class="nav-icon">📊</span> Dashboard</button>
-    <button class="snav" onclick="showPg('masuk',this)"><span class="nav-icon">📥</span> Barang Masuk</button>
-    <button class="snav" onclick="showPg('keluar',this)"><span class="nav-icon">📤</span> Barang Keluar</button>
-    <button class="snav" onclick="showPg('daftar',this)"><span class="nav-icon">📦</span> Daftar Barang</button>
-    <button class="snav" onclick="showPg('opname',this)"><span class="nav-icon">🔄</span> Stok Opname</button>
-    <button class="snav" onclick="showPg('penyesuaian',this)"><span class="nav-icon">⚖️</span> Penyesuaian Barang</button>
-    <button class="snav" onclick="showPg('laporan',this)"><span class="nav-icon">📈</span> Laporan</button>
-    <button class="snav" onclick="showPg('settings',this)"><span class="nav-icon">⚙️</span> Settings</button>
+    <button class="snav active" onclick="showPg('dashboard',this)"><span class="nav-icon">📊</span> <span class="nav-label" data-key="nav_dashboard">Dashboard</span></button>
+    <button class="snav" onclick="showPg('masuk',this)"><span class="nav-icon">📥</span> <span class="nav-label" data-key="nav_masuk">Barang Masuk</span></button>
+    <button class="snav" onclick="showPg('keluar',this)"><span class="nav-icon">📤</span> <span class="nav-label" data-key="nav_keluar">Barang Keluar</span></button>
+    <button class="snav" onclick="showPg('daftar',this)"><span class="nav-icon">📦</span> <span class="nav-label" data-key="nav_daftar">Daftar Barang</span></button>
+    <button class="snav" onclick="showPg('opname',this)"><span class="nav-icon">🔄</span> <span class="nav-label" data-key="nav_opname">Stok Opname</span></button>
+    <button class="snav" onclick="showPg('penyesuaian',this)"><span class="nav-icon">⚖️</span> <span class="nav-label" data-key="nav_penyesuaian">Penyesuaian Barang</span></button>
+    <button class="snav" onclick="showPg('laporan',this)"><span class="nav-icon">📈</span> <span class="nav-label" data-key="nav_laporan">Laporan & Analisis</span></button>
+    <button class="snav" onclick="showPg('settings',this)"><span class="nav-icon">⚙️</span> <span class="nav-label" data-key="nav_settings">Settings</span></button>
   </nav>
   <div class="sb-foot">
-    <button class="btn-out" onclick="doLogout()"><span>🚪</span> Logout</button>
+    <button class="btn-out" onclick="doLogout()"><span>🚪</span> <span data-key="btn_logout">Logout</span></button>
   </div>
 </aside>
 
@@ -377,7 +393,10 @@ body.dark .opname-progress{background:#2a2d3f;}
 <div class="topbar">
   <h3 id="pgTitle">Dashboard</h3>
   <div class="topbar-r">
-    <span class="topbar-user" id="topUser" onclick="showPg('settings',document.querySelectorAll('.snav')[7])">👤 Admin ▾</span>
+    <span class="topbar-user" id="topUser" onclick="showPg('settings',document.querySelectorAll('.snav')[7])">
+      <div class="topbar-avatar" id="topbarAvatarWrap"><span id="topbarAvatarEmoji">👤</span></div>
+      <span id="topbarUserName">Admin</span> ▾
+    </span>
   </div>
 </div>
 
@@ -386,11 +405,11 @@ body.dark .opname-progress{background:#2a2d3f;}
   <div class="cards3" id="kpiCards"></div>
   <div class="box">
     <div class="box-hd">
-      <h4>📊 Grafik Transaksi</h4>
+      <h4>📊 <span data-key="grafik_transaksi">Grafik Transaksi</span></h4>
       <div class="period-wrap" id="periodDash">
-        <button class="pf-btn active" onclick="setDashPeriod('week',this)">Minggu</button>
-        <button class="pf-btn" onclick="setDashPeriod('month',this)">Bulan</button>
-        <button class="pf-btn" onclick="setDashPeriod('custom',this)">Custom</button>
+        <button class="pf-btn active" onclick="setDashPeriod('week',this)" data-key="minggu">Minggu</button>
+        <button class="pf-btn" onclick="setDashPeriod('month',this)" data-key="bulan">Bulan</button>
+        <button class="pf-btn" onclick="setDashPeriod('custom',this)" data-key="custom">Custom</button>
         <div class="custom-date-wrap" id="cdDash">
           <input type="date" id="cdDashFrom" onchange="renderDashChart()"/>
           <span style="font-size:12px;color:var(--muted)">s/d</span>
@@ -402,7 +421,7 @@ body.dark .opname-progress{background:#2a2d3f;}
     <div class="box-bd"><canvas id="dashChart" height="80"></canvas></div>
   </div>
   <div class="box">
-    <div class="box-hd"><h4>📦 Panel Stok (Metode Average)</h4></div>
+    <div class="box-hd"><h4>📦 <span data-key="panel_stok">Panel Stok</span></h4></div>
     <div class="box-bd" id="stokPanel"></div>
   </div>
 </div>
@@ -410,26 +429,22 @@ body.dark .opname-progress{background:#2a2d3f;}
 <!-- DAFTAR BARANG -->
 <div id="pg-daftar" class="pg">
   <div class="pg-head">
-    <h2>📦 Daftar Barang</h2>
+    <h2>📦 <span data-key="daftar_barang">Daftar Barang</span></h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-teal" onclick="openModal('mBarang')">➕ Tambah Barang</button>
+      <button class="btn btn-teal" onclick="openModal('mBarang')">➕ <span data-key="tambah_barang">Tambah Barang</span></button>
       <button class="btn btn-ghost" onclick="dlCSV('barang')">⬇️ CSV</button>
     </div>
   </div>
-  <div class="hpp-avg-banner">
-    <span class="ico">📊</span>
-    <div class="txt"><strong>Metode HPP: Average (Rata-rata Bergerak)</strong><span>Harga rata-rata dihitung ulang otomatis setiap ada barang masuk. HPP penjualan = Qty × Harga Rata-rata.</span></div>
-  </div>
   <div class="box">
     <div class="box-hd">
-      <h4>Data Barang</h4>
-      <input type="text" id="srchBarang" placeholder="🔍 Cari barang..."
+      <h4 data-key="data_barang">Data Barang</h4>
+      <input type="text" id="srchBarang" data-key-placeholder="cari_barang" placeholder="🔍 Cari barang..."
         style="width:220px;padding:7px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit"
         oninput="renderDaftar()"/>
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>#</th><th>Kode</th><th>Nama</th><th>Kategori</th><th>Harga Beli</th><th>Harga Rata-rata <span class="avg-tag">AVG</span></th><th>Harga Jual</th><th>Stok</th><th>Nilai Persediaan</th><th>Status</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>#</th><th data-key="kode">Kode</th><th data-key="nama">Nama</th><th data-key="kategori">Kategori</th><th data-key="harga_beli">Harga Beli</th><th>Harga Rata-rata <span class="avg-tag">AVG</span></th><th data-key="harga_jual">Harga Jual</th><th data-key="stok">Stok</th><th data-key="nilai_persediaan">Nilai Persediaan</th><th data-key="status">Status</th><th data-key="aksi">Aksi</th></tr></thead>
         <tbody id="tDaftar"></tbody>
       </table>
     </div>
@@ -440,20 +455,20 @@ body.dark .opname-progress{background:#2a2d3f;}
 <!-- BARANG MASUK -->
 <div id="pg-masuk" class="pg">
   <div class="pg-head">
-    <h2>📥 Barang Masuk</h2>
+    <h2>📥 <span data-key="barang_masuk">Barang Masuk</span></h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-teal" onclick="openModal('mMasuk')">➕ Tambah</button>
+      <button class="btn btn-teal" onclick="openModal('mMasuk')">➕ <span data-key="tambah">Tambah</span></button>
       <button class="btn btn-ghost" onclick="dlCSV('masuk')">⬇️ CSV</button>
     </div>
   </div>
   <div class="box">
     <div class="box-hd">
-      <h4>Riwayat Barang Masuk</h4>
+      <h4 data-key="riwayat_masuk">Riwayat Barang Masuk</h4>
       <div class="period-wrap" id="periodMasuk">
-        <button class="pf-btn active" onclick="setPeriod('masuk','today',this)">Hari Ini</button>
-        <button class="pf-btn" onclick="setPeriod('masuk','week',this)">Minggu Ini</button>
-        <button class="pf-btn" onclick="setPeriod('masuk','month',this)">Bulan Ini</button>
-        <button class="pf-btn" onclick="setPeriod('masuk','custom',this)">Custom</button>
+        <button class="pf-btn active" onclick="setPeriod('masuk','today',this)" data-key="hari_ini">Hari Ini</button>
+        <button class="pf-btn" onclick="setPeriod('masuk','week',this)" data-key="minggu_ini">Minggu Ini</button>
+        <button class="pf-btn" onclick="setPeriod('masuk','month',this)" data-key="bulan_ini">Bulan Ini</button>
+        <button class="pf-btn" onclick="setPeriod('masuk','custom',this)" data-key="custom">Custom</button>
         <div class="custom-date-wrap" id="cdMasuk">
           <input type="date" id="cdMasukFrom" onchange="renderMasuk()"/>
           <span style="font-size:12px;color:var(--muted)">s/d</span>
@@ -464,7 +479,7 @@ body.dark .opname-progress{background:#2a2d3f;}
     <div class="filter-info" id="filterInfoMasuk"></div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Tanggal</th><th>Kode</th><th>Barang</th><th>Supplier</th><th>Jumlah</th><th>Harga Beli</th><th>Total</th><th>Harga Avg Baru <span class="avg-tag">AVG</span></th><th>No Faktur</th><th>Aksi</th></tr></thead>
+        <thead><tr><th data-key="tanggal">Tanggal</th><th>Kode</th><th data-key="barang">Barang</th><th>Supplier</th><th data-key="jumlah">Jumlah</th><th data-key="harga_beli">Harga Beli</th><th>Total</th><th>Harga Avg Baru</th><th>No Faktur</th><th data-key="aksi">Aksi</th></tr></thead>
         <tbody id="tMasuk"></tbody>
       </table>
     </div>
@@ -475,20 +490,20 @@ body.dark .opname-progress{background:#2a2d3f;}
 <!-- BARANG KELUAR -->
 <div id="pg-keluar" class="pg">
   <div class="pg-head">
-    <h2>📤 Barang Keluar</h2>
+    <h2>📤 <span data-key="barang_keluar">Barang Keluar</span></h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-teal" onclick="openModal('mKeluar')">➕ Transaksi</button>
+      <button class="btn btn-teal" onclick="openModal('mKeluar')">➕ <span data-key="transaksi">Transaksi</span></button>
       <button class="btn btn-ghost" onclick="dlCSV('keluar')">⬇️ CSV</button>
     </div>
   </div>
   <div class="box">
     <div class="box-hd">
-      <h4>Riwayat Transaksi Keluar</h4>
+      <h4 data-key="riwayat_keluar">Riwayat Transaksi Keluar</h4>
       <div class="period-wrap" id="periodKeluar">
-        <button class="pf-btn active" onclick="setPeriod('keluar','today',this)">Hari Ini</button>
-        <button class="pf-btn" onclick="setPeriod('keluar','week',this)">Minggu Ini</button>
-        <button class="pf-btn" onclick="setPeriod('keluar','month',this)">Bulan Ini</button>
-        <button class="pf-btn" onclick="setPeriod('keluar','custom',this)">Custom</button>
+        <button class="pf-btn active" onclick="setPeriod('keluar','today',this)" data-key="hari_ini">Hari Ini</button>
+        <button class="pf-btn" onclick="setPeriod('keluar','week',this)" data-key="minggu_ini">Minggu Ini</button>
+        <button class="pf-btn" onclick="setPeriod('keluar','month',this)" data-key="bulan_ini">Bulan Ini</button>
+        <button class="pf-btn" onclick="setPeriod('keluar','custom',this)" data-key="custom">Custom</button>
         <div class="custom-date-wrap" id="cdKeluar">
           <input type="date" id="cdKeluarFrom" onchange="renderKeluar()"/>
           <span style="font-size:12px;color:var(--muted)">s/d</span>
@@ -499,7 +514,7 @@ body.dark .opname-progress{background:#2a2d3f;}
     <div class="filter-info" id="filterInfoKeluar"></div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>Tanggal</th><th>Kode</th><th>Barang</th><th>Jumlah</th><th>Harga Jual</th><th>Total Jual</th><th>HPP <span class="avg-tag">AVG</span></th><th>Laba Kotor</th><th>Kasir</th><th>Bayar</th><th>Aksi</th></tr></thead>
+        <thead><tr><th data-key="tanggal">Tanggal</th><th>Kode</th><th data-key="barang">Barang</th><th data-key="jumlah">Jumlah</th><th data-key="harga_jual">Harga Jual</th><th>Total Jual</th><th>HPP</th><th>Laba Kotor</th><th>Kasir</th><th data-key="bayar">Bayar</th><th data-key="aksi">Aksi</th></tr></thead>
         <tbody id="tKeluar"></tbody>
       </table>
     </div>
@@ -512,25 +527,24 @@ body.dark .opname-progress{background:#2a2d3f;}
   <div class="pg-head">
     <h2>🔄 Stok Opname</h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-purple" onclick="openModal('mOpname')">➕ Mulai Opname Baru</button>
+      <button class="btn btn-purple" onclick="openModal('mOpname')">➕ <span data-key="mulai_opname">Mulai Opname Baru</span></button>
       <button class="btn btn-ghost" onclick="dlCSV('opname')">📤 Export</button>
     </div>
   </div>
-  
   <div class="box">
     <div class="box-hd">
-      <h4>Daftar Stok Opname</h4>
+      <h4 data-key="daftar_opname">Daftar Stok Opname</h4>
       <div style="display:flex;gap:8px;align-items:center">
         <select id="filterStatusOpname" onchange="renderOpname()" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit">
-          <option value="">Semua Status</option>
+          <option value="" data-key="semua_status">Semua Status</option>
           <option value="Draft">Draft</option>
-          <option value="Selesai">Selesai</option>
+          <option value="Selesai" data-key="selesai">Selesai</option>
         </select>
       </div>
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>No</th><th>Tanggal</th><th>No Dokumen</th><th>Gudang</th><th>Total Barang</th><th>Barang Selisih</th><th>Status</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>No</th><th data-key="tanggal">Tanggal</th><th>No Dokumen</th><th>Gudang</th><th>Total Barang</th><th>Barang Selisih</th><th data-key="status">Status</th><th data-key="aksi">Aksi</th></tr></thead>
         <tbody id="tOpname"></tbody>
       </table>
     </div>
@@ -541,15 +555,15 @@ body.dark .opname-progress{background:#2a2d3f;}
 <!-- PENYESUAIAN BARANG -->
 <div id="pg-penyesuaian" class="pg">
   <div class="pg-head">
-    <h2>⚖️ Penyesuaian Barang</h2>
+    <h2>⚖️ <span data-key="penyesuaian_barang">Penyesuaian Barang</span></h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-teal" onclick="openModal('mPenyesuaian')">➕ Tambah Manual</button>
+      <button class="btn btn-teal" onclick="openModal('mPenyesuaian')">➕ <span data-key="tambah_manual">Tambah Manual</span></button>
       <button class="btn btn-ghost" onclick="dlCSV('penyesuaian')">📤 Export</button>
     </div>
   </div>
   <div class="box">
     <div class="box-hd">
-      <h4>Daftar Penyesuaian</h4>
+      <h4 data-key="daftar_penyesuaian">Daftar Penyesuaian</h4>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <select id="filterJenisPsd" onchange="renderPenyesuaian()" style="padding:6px 10px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-family:inherit">
           <option value="">Semua Jenis</option>
@@ -571,7 +585,7 @@ body.dark .opname-progress{background:#2a2d3f;}
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>No</th><th>Tanggal</th><th>No. Dokumen</th><th>Jenis</th><th>Sumber</th><th>Gudang</th><th>Nilai Kerugian <span class="avg-tag">AVG</span></th><th>Keterangan</th><th>Status</th><th>Aksi</th></tr></thead>
+        <thead><tr><th>No</th><th data-key="tanggal">Tanggal</th><th>No. Dokumen</th><th>Jenis</th><th>Sumber</th><th>Gudang</th><th>Nilai Kerugian <span class="avg-tag">AVG</span></th><th data-key="keterangan">Keterangan</th><th data-key="status">Status</th><th data-key="aksi">Aksi</th></tr></thead>
         <tbody id="tPenyesuaian"></tbody>
       </table>
     </div>
@@ -582,9 +596,9 @@ body.dark .opname-progress{background:#2a2d3f;}
 <!-- LAPORAN -->
 <div id="pg-laporan" class="pg">
   <div class="pg-head">
-    <h2>📈 Laporan & Analisis</h2>
+    <h2>📈 <span data-key="laporan_analisis">Laporan & Analisis</span></h2>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-ghost" onclick="printLap()">🖨️ Cetak</button>
+      <button class="btn btn-ghost" onclick="printLap()">🖨️ <span data-key="cetak">Cetak</span></button>
       <button class="btn btn-teal" id="lapBtnPDF" onclick="dlPDFByTab(currentLapTab)">📄 PDF Laba Rugi</button>
       <button class="btn btn-blue" id="lapBtnExcel" onclick="dlExcelByTab(currentLapTab)">📊 Excel Laba Rugi</button>
     </div>
@@ -620,50 +634,83 @@ body.dark .opname-progress{background:#2a2d3f;}
 
 <!-- SETTINGS -->
 <div id="pg-settings" class="pg">
-  <div class="pg-head"><h2>⚙️ Settings</h2></div>
+  <div class="pg-head"><h2>⚙️ <span data-key="settings">Settings</span></h2></div>
   <div class="settings-section">
-    <h3>👤 Profil Pengguna</h3>
+    <h3>👤 <span data-key="profil_pengguna">Profil Pengguna</span></h3>
+    <!-- FOTO PROFIL -->
+    <div class="profile-photo-wrap">
+      <div class="profile-photo-circle" onclick="document.getElementById('photoInput').click()" id="profilePhotoCircle">
+        <span id="profilePhotoEmoji">👤</span>
+        <div class="overlay">📷</div>
+      </div>
+      <div class="profile-photo-info">
+        <h4 id="profileDisplayName">Admin Toko</h4>
+        <p data-key="klik_ganti_foto">Klik foto untuk mengganti. Format: JPG, PNG, GIF. Maks 2MB.</p>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('photoInput').click()">📷 <span data-key="ganti_foto">Ganti Foto</span></button>
+          <button class="btn btn-ghost btn-sm" onclick="hapusFoto()" style="color:var(--red)">🗑️ <span data-key="hapus_foto">Hapus Foto</span></button>
+        </div>
+      </div>
+    </div>
+    <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)"/>
+    <!-- /FOTO PROFIL -->
     <div class="fg-row">
-      <div class="fg"><label>Nama Lengkap</label><input id="s-nama" value="Admin Toko"/></div>
+      <div class="fg"><label data-key="nama_lengkap">Nama Lengkap</label><input id="s-nama" value="Admin Toko" oninput="updateProfileName()"/></div>
       <div class="fg"><label>Username</label><input id="s-user" value="admin"/></div>
     </div>
     <div class="fg-row">
       <div class="fg"><label>Email</label><input id="s-email" type="email" value="admin@tokojago.com"/></div>
-      <div class="fg"><label>No HP</label><input id="s-hp" type="tel" placeholder="08xx"/></div>
+      <div class="fg"><label data-key="no_hp">No HP</label><input id="s-hp" type="tel" placeholder="08xx"/></div>
     </div>
     <div class="fg"><label>Role</label>
-      <select id="s-role"><option>Pemilik</option><option>Kasir</option><option>Admin</option><option>Karyawan</option></select>
+      <select id="s-role"><option data-key="pemilik">Pemilik</option><option data-key="kasir">Kasir</option><option>Admin</option><option data-key="karyawan">Karyawan</option></select>
     </div>
-    <h4 style="margin:16px 0 12px;font-size:13px;color:var(--muted)">Ubah Password</h4>
+    <h4 style="margin:16px 0 12px;font-size:13px;color:var(--muted)" data-key="ubah_password">Ubah Password</h4>
     <div class="fg-row">
-      <div class="fg"><label>Password Lama</label><input id="s-plama" type="password"/></div>
-      <div class="fg"><label>Password Baru</label><input id="s-pbaru" type="password" oninput="checkPW()"/>
+      <div class="fg"><label data-key="password_lama">Password Lama</label><input id="s-plama" type="password"/></div>
+      <div class="fg"><label data-key="password_baru">Password Baru</label><input id="s-pbaru" type="password" oninput="checkPW()"/>
         <div id="pwStr" style="font-size:12px;margin-top:4px"></div>
       </div>
     </div>
-    <div class="fg"><label>Konfirmasi Password Baru</label><input id="s-pconf" type="password"/></div>
-    <button class="btn btn-teal btn-sm" onclick="ubahPW()">🔒 Ubah Password</button>
+    <div class="fg"><label data-key="konfirmasi_password">Konfirmasi Password Baru</label><input id="s-pconf" type="password"/></div>
+    <button class="btn btn-teal btn-sm" onclick="ubahPW()">🔒 <span data-key="ubah_password_btn">Ubah Password</span></button>
   </div>
   <div class="settings-section">
-    <h3>🏪 Data Toko</h3>
+    <h3>🏪 <span data-key="data_toko">Data Toko</span></h3>
     <div class="fg-row">
-      <div class="fg"><label>Nama Toko</label><input id="s-ntoko" value="Toko Jago Sumberarum"/></div>
-      <div class="fg"><label>No Telepon</label><input id="s-telp" placeholder="031-xxxxxx"/></div>
+      <div class="fg"><label data-key="nama_toko">Nama Toko</label><input id="s-ntoko" value="Toko Jago Sumberarum"/></div>
+      <div class="fg"><label data-key="no_telepon">No Telepon</label><input id="s-telp" placeholder="031-xxxxxx"/></div>
     </div>
-    <div class="fg"><label>Alamat</label><textarea id="s-alamat" rows="2" placeholder="Jl. Sumberarum No.1, Surabaya"></textarea></div>
-    <button class="btn btn-teal btn-sm" onclick="simpanToko()">💾 Simpan Data Toko</button>
+    <div class="fg"><label data-key="alamat">Alamat</label><textarea id="s-alamat" rows="2" placeholder="Jl. Sumberarum No.1, Surabaya"></textarea></div>
+    <button class="btn btn-teal btn-sm" onclick="simpanToko()">💾 <span data-key="simpan_toko">Simpan Data Toko</span></button>
   </div>
   <div class="settings-section">
-    <h3>🔔 Notifikasi</h3>
-    <div class="toggle-wrap"><span>Notifikasi Stok Menipis</span><button class="toggle on" onclick="toggleBtn(this)"></button></div>
-    <div class="toggle-wrap"><span>Notifikasi Transaksi Baru</span><button class="toggle on" onclick="toggleBtn(this)"></button></div>
-    <div class="fg" style="margin-top:14px"><label>Batas Stok Menipis</label>
+    <h3>🔔 <span data-key="notifikasi">Notifikasi</span></h3>
+    <div class="toggle-wrap"><span data-key="notif_stok">Notifikasi Stok Menipis</span><button class="toggle on" onclick="toggleBtn(this)"></button></div>
+    <div class="toggle-wrap"><span data-key="notif_transaksi">Notifikasi Transaksi Baru</span><button class="toggle on" onclick="toggleBtn(this)"></button></div>
+    <div class="fg" style="margin-top:14px"><label data-key="batas_stok">Batas Stok Menipis</label>
       <input id="s-batas" type="number" value="5" style="width:100px" onchange="stokBatas=parseInt(this.value)||5;renderDash();saveState()"/>
     </div>
   </div>
   <div class="settings-section">
-    <h3>🎨 Preferensi</h3>
-    <div class="toggle-wrap"><span>🌙 Dark Mode</span><button class="toggle" id="darkToggle" onclick="toggleDark(this)"></button></div>
+    <h3>🎨 <span data-key="preferensi">Preferensi</span></h3>
+    <div class="toggle-wrap">
+      <span>🌙 Dark Mode</span>
+      <button class="toggle" id="darkToggle" onclick="toggleDark(this)"></button>
+    </div>
+    <div class="fg" style="margin-top:14px"><label data-key="bahasa">Bahasa / Language</label>
+      <select id="s-lang" style="width:200px" onchange="changeLang(this.value)">
+        <option value="id">🇮🇩 Indonesia</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
+    </div>
+    <div class="fg"><label data-key="mata_uang">Mata Uang</label>
+      <select id="s-curr" style="width:200px" onchange="changeCurrency(this.value)">
+        <option value="IDR">🇮🇩 Rupiah (Rp)</option>
+        <option value="USD">🇺🇸 USD ($)</option>
+      </select>
+      <div id="currInfo" style="font-size:12px;color:var(--muted);margin-top:6px">Kurs: 1 USD = Rp 15.900</div>
+    </div>
   </div>
 </div>
 
@@ -696,7 +743,7 @@ body.dark .opname-progress{background:#2a2d3f;}
       <div class="fg"><label>Stok Awal</label><input id="mb-stok" type="number" value="0" min="0"/></div>
       <div class="fg"><label>Lokasi Rak</label><input id="mb-lok" placeholder="A1"/></div>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">💡 Harga beli juga dipakai sebagai harga rata-rata awal (HPP Average)</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">💡 Harga beli juga dipakai sebagai harga rata-rata awal</p>
     <button class="btn btn-teal" onclick="addBarang()" style="width:100%">💾 Simpan Barang</button>
   </div>
 </div>
@@ -837,7 +884,7 @@ body.dark .opname-progress{background:#2a2d3f;}
     </div>
     <div style="display:flex;gap:8px;margin-top:14px">
       <button class="btn btn-ghost" onclick="saveOpname('Draft')" style="flex:1">💾 Simpan Draft</button>
-      <button class="btn btn-purple" onclick="saveOpname('Selesai')" style="flex:1">✅ Selesaikan Opname</button>
+      <button class="btn btn-purple" onclick="saveOpname('Selesai')" style="flex:1">Selesaikan Opname</button>
     </div>
     <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center">⚡ Saat "Selesaikan", selisih stok otomatis dibuatkan entri Penyesuaian Barang</p>
   </div>
@@ -924,42 +971,371 @@ body.dark .opname-progress{background:#2a2d3f;}
 
 <script>
 // ══════════════════════════════════════════
-//  DATA — hargaAvg ditambahkan ke setiap barang
+//  LANGUAGE SYSTEM
+// ══════════════════════════════════════════
+const LANGS = {
+  id: {
+    nav_dashboard:'Dashboard', nav_masuk:'Barang Masuk', nav_keluar:'Barang Keluar',
+    nav_daftar:'Daftar Barang', nav_opname:'Stok Opname', nav_penyesuaian:'Penyesuaian Barang',
+    nav_laporan:'Laporan & Analisis', nav_settings:'Settings', btn_logout:'Logout',
+    grafik_transaksi:'Grafik Transaksi', panel_stok:'Panel Stok',
+    daftar_barang:'Daftar Barang', tambah_barang:'Tambah Barang', data_barang:'Data Barang',
+    cari_barang:'🔍 Cari barang...', kode:'Kode', nama:'Nama', kategori:'Kategori',
+    harga_beli:'Harga Beli', harga_jual:'Harga Jual', stok:'Stok',
+    nilai_persediaan:'Nilai Persediaan', status:'Status', aksi:'Aksi',
+    barang_masuk:'Barang Masuk', tambah:'Tambah', riwayat_masuk:'Riwayat Barang Masuk',
+    tanggal:'Tanggal', barang:'Barang', jumlah:'Jumlah',
+    barang_keluar:'Barang Keluar', transaksi:'Transaksi', riwayat_keluar:'Riwayat Transaksi Keluar',
+    daftar_opname:'Daftar Stok Opname', mulai_opname:'Mulai Opname Baru', semua_status:'Semua Status', selesai:'Selesai',
+    penyesuaian_barang:'Penyesuaian Barang', tambah_manual:'Tambah Manual',
+    daftar_penyesuaian:'Daftar Penyesuaian', keterangan:'Keterangan',
+    laporan_analisis:'Laporan & Analisis', cetak:'Cetak',
+    settings:'Settings', profil_pengguna:'Profil Pengguna',
+    klik_ganti_foto:'Klik foto untuk mengganti. Format: JPG, PNG, GIF. Maks 2MB.',
+    ganti_foto:'Ganti Foto', hapus_foto:'Hapus Foto',
+    nama_lengkap:'Nama Lengkap', no_hp:'No HP',
+    pemilik:'Pemilik', kasir:'Kasir', karyawan:'Karyawan',
+    ubah_password:'Ubah Password', password_lama:'Password Lama', password_baru:'Password Baru',
+    konfirmasi_password:'Konfirmasi Password Baru', ubah_password_btn:'Ubah Password',
+    data_toko:'Data Toko', nama_toko:'Nama Toko', no_telepon:'No Telepon', alamat:'Alamat',
+    simpan_toko:'Simpan Data Toko', notifikasi:'Notifikasi',
+    notif_stok:'Notifikasi Stok Menipis', notif_transaksi:'Notifikasi Transaksi Baru',
+    batas_stok:'Batas Stok Menipis', preferensi:'Preferensi', bahasa:'Bahasa / Language',
+    mata_uang:'Mata Uang', bayar:'Bayar',
+    minggu:'Minggu', bulan:'Bulan', custom:'Custom',
+    hari_ini:'Hari Ini', minggu_ini:'Minggu Ini', bulan_ini:'Bulan Ini',
+    pgTitles: {dashboard:'Dashboard',daftar:'Daftar Barang',masuk:'Barang Masuk',keluar:'Barang Keluar',opname:'Stok Opname',penyesuaian:'Penyesuaian Barang',laporan:'Laporan & Analisis',settings:'Settings'},
+    habis:'Habis', menipis:'Menipis', cukup:'Cukup',
+    kuat:'Kuat', sedang:'Sedang', lemah:'Lemah',
+    kekuatan:'Kekuatan',
+    stokTidakCukup:'Stok tidak mencukupi!',
+    pilihBarang:'Pilih barang terlebih dahulu',
+    jumlahMin:'Jumlah minimal 1',
+    barangTidakDitemukan:'Barang tidak ditemukan',
+    kodeDanNama:'Kode dan Nama wajib diisi',
+    periodeMinggini:'Minggu ini', periodeBulanIni:'Bulan ini', periodeHariIni:'Hari Ini',
+    belumAdaData:'Tidak ada data pada periode ini',
+    belumAdaOpname:'Belum ada data stok opname',
+    belumAdaPsd:'Belum ada data penyesuaian',
+    isiMinimalStok:'Isi minimal 1 stok fisik barang',
+    tambahMinimal1:'Tambahkan minimal 1   barang',
+    simpanDraft:'💾 Draft opname disimpan',
+    opnameSelesai:'✅ Opname selesai! {0} barang ada selisih. Penyesuaian otomatis dibuat.',
+    opnameTanpaSelisih:'✅ Opname selesai! Semua stok sesuai, tidak ada selisih.',
+    passwordLamaSalah:'Password lama salah', passwordMin8:'Password minimal 8 karakter',
+    konfirmasiTidakCocok:'Konfirmasi tidak cocok', passwordBerhasil:'🔒 Password berhasil diubah',
+    tokoDisimpan:'💾 Data toko disimpan', barangDitambahkan:'✅ Barang ditambahkan',
+    barangDiperbarui:'✅ Barang diperbarui', barangDihapus:'🗑️ Barang dihapus',
+    hapusToko:'Hapus "{0}"?', barangMasukDicatat:'✅ Barang masuk dicatat | Harga Avg baru: {0}',
+    transaksiDisimpan:'✅ Transaksi disimpan | HPP: {0} | Laba: {1}',
+    batalTransaksi:'↩️ Transaksi dibatalkan', batalKonfirm:'Batalkan transaksi ini? Stok akan dikembalikan.',
+    hapusKonfirm:'Hapus data ini?', hapusOpname:'🗑️ Opname dihapus',
+    selesaikanKonfirm:'Selesaikan opname ini? Stok dan penyesuaian akan diperbarui.',
+    opnameSelesaikanToast:'✅ Opname diselesaikan! {0} penyesuaian dibuat.',
+    psdDisetujuiToast:'✅ Penyesuaian disetujui & stok diperbarui',
+    psdDihapus:'🗑️ Penyesuaian dihapus',
+    psdDisetujuiKonfirm:'Setujui penyesuaian ini? Stok akan diperbarui.',
+    barangDitambahkanList:'➕ Barang ditambahkan ke daftar',
+    psdSimpanDraft:'💾 Draft penyesuaian disimpan',
+    psdDisetujui:'✅ Penyesuaian disetujui & stok diperbarui',
+    resetPasswordBerhasil:'🔑 Password berhasil direset',
+    usernameTidakDitemukan:'Username tidak ditemukan',
+    konfirmasiPasswordTidakCocok:'Konfirmasi password tidak cocok',
+    fotoDiupload:'📷 Foto profil berhasil diperbarui',
+    fotoTerlalubesar:'Ukuran foto maks 2MB',
+    fotoDihapus:'🗑️ Foto profil dihapus',
+  },
+  en: {
+    nav_dashboard:'Dashboard', nav_masuk:'Incoming Goods', nav_keluar:'Outgoing Goods',
+    nav_daftar:'Product List', nav_opname:'Stock Opname', nav_penyesuaian:'Stock Adjustment',
+    nav_laporan:'Reports & Analysis', nav_settings:'Settings', btn_logout:'Logout',
+    grafik_transaksi:'Transaction Chart', panel_stok:'Stock Panel',
+    daftar_barang:'Product List', tambah_barang:'Add Product', data_barang:'Product Data',
+    cari_barang:'🔍 Search products...', kode:'Code', nama:'Name', kategori:'Category',
+    harga_beli:'Purchase Price', harga_jual:'Selling Price', stok:'Stock',
+    nilai_persediaan:'Inventory Value', status:'Status', aksi:'Action',
+    barang_masuk:'Incoming Goods', tambah:'Add', riwayat_masuk:'Incoming Goods History',
+    tanggal:'Date', barang:'Product', jumlah:'Qty',
+    barang_keluar:'Outgoing Goods', transaksi:'Transaction', riwayat_keluar:'Sales History',
+    daftar_opname:'Stock Opname List', mulai_opname:'Start New Opname', semua_status:'All Status', selesai:'Done',
+    penyesuaian_barang:'Stock Adjustment', tambah_manual:'Add Manual',
+    daftar_penyesuaian:'Adjustment List', keterangan:'Notes',
+    laporan_analisis:'Reports & Analysis', cetak:'Print',
+    settings:'Settings', profil_pengguna:'User Profile',
+    klik_ganti_foto:'Click photo to change. Format: JPG, PNG, GIF. Max 2MB.',
+    ganti_foto:'Change Photo', hapus_foto:'Remove Photo',
+    nama_lengkap:'Full Name', no_hp:'Phone Number',
+    pemilik:'Owner', kasir:'Cashier', karyawan:'Employee',
+    ubah_password:'Change Password', password_lama:'Current Password', password_baru:'New Password',
+    konfirmasi_password:'Confirm New Password', ubah_password_btn:'Change Password',
+    data_toko:'Store Data', nama_toko:'Store Name', no_telepon:'Phone Number', alamat:'Address',
+    simpan_toko:'Save Store Data', notifikasi:'Notifications',
+    notif_stok:'Low Stock Notification', notif_transaksi:'New Transaction Notification',
+    batas_stok:'Low Stock Threshold', preferensi:'Preferences', bahasa:'Language',
+    mata_uang:'Currency', bayar:'Payment',
+    minggu:'Week', bulan:'Month', custom:'Custom',
+    hari_ini:'Today', minggu_ini:'This Week', bulan_ini:'This Month',
+    pgTitles:{dashboard:'Dashboard',daftar:'Product List',masuk:'Incoming Goods',keluar:'Outgoing Goods',opname:'Stock Opname',penyesuaian:'Stock Adjustment',laporan:'Reports & Analysis',settings:'Settings'},
+    habis:'Out of Stock', menipis:'Low', cukup:'Sufficient',
+    kuat:'Strong', sedang:'Medium', lemah:'Weak', kekuatan:'Strength',
+    stokTidakCukup:'Insufficient stock!', pilihBarang:'Please select a product first',
+    jumlahMin:'Minimum quantity is 1', barangTidakDitemukan:'Product not found',
+    kodeDanNama:'Code and Name are required',
+    periodeMinggini:'This week', periodeBulanIni:'This month', periodeHariIni:'Today',
+    belumAdaData:'No data in this period',
+    belumAdaOpname:'No stock opname data yet',
+    belumAdaPsd:'No adjustment data yet',
+    isiMinimalStok:'Fill in at least 1 physical stock',
+    tambahMinimal1:'Add at least 1 product',
+    simpanDraft:'💾 Opname draft saved',
+    opnameSelesai:'✅ Opname done! {0} products have discrepancy. Auto-adjustment created.',
+    opnameTanpaSelisih:'✅ Opname done! All stock matches, no discrepancy.',
+    passwordLamaSalah:'Current password is wrong', passwordMin8:'Password must be at least 8 characters',
+    konfirmasiTidakCocok:'Confirmation does not match', passwordBerhasil:'🔒 Password successfully changed',
+    tokoDisimpan:'💾 Store data saved', barangDitambahkan:'✅ Product added',
+    barangDiperbarui:'✅ Product updated', barangDihapus:'🗑️ Product deleted',
+    hapusToko:'Delete "{0}"?', barangMasukDicatat:'✅ Incoming goods recorded | New Avg Price: {0}',
+    transaksiDisimpan:'✅ Transaction saved | COGS: {0} | Profit: {1}',
+    batalTransaksi:'↩️ Transaction cancelled', batalKonfirm:'Cancel this transaction? Stock will be restored.',
+    hapusKonfirm:'Delete this data?', hapusOpname:'🗑️ Opname deleted',
+    selesaikanKonfirm:'Finish this opname? Stock and adjustments will be updated.',
+    opnameSelesaikanToast:'✅ Opname finished! {0} adjustments created.',
+    psdDisetujuiToast:'✅ Adjustment approved & stock updated',
+    psdDihapus:'🗑️ Adjustment deleted',
+    psdDisetujuiKonfirm:'Approve this adjustment? Stock will be updated.',
+    barangDitambahkanList:'➕ Product added to list',
+    psdSimpanDraft:'💾 Adjustment draft saved',
+    psdDisetujui:'✅ Adjustment approved & stock updated',
+    resetPasswordBerhasil:'🔑 Password successfully reset',
+    usernameTidakDitemukan:'Username not found',
+    konfirmasiPasswordTidakCocok:'Password confirmation does not match',
+    fotoDiupload:'📷 Profile photo updated',
+    fotoTerlalubesar:'Max photo size is 2MB',
+    fotoDihapus:'🗑️ Profile photo removed',
+  }
+};
+
+let currentLang = 'id';
+let currentCurrency = 'IDR';
+const USD_RATE = 15900; // 1 USD = Rp 15.900
+
+function t(key, ...args) {
+  let str = (LANGS[currentLang] || LANGS['id'])[key] || key;
+  args.forEach((a, i) => { str = str.replace('{'+i+'}', a); });
+  return str;
+}
+
+function applyLang() {
+  // Update all [data-key] elements
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    const val = LANGS[currentLang][key];
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-key-placeholder');
+    const val = LANGS[currentLang][key];
+    if (val !== undefined) el.placeholder = val;
+  });
+}
+
+function changeLang(lang) {
+  currentLang = lang;
+  applyLang();
+  saveState();
+  renderDash();
+  renderDaftar();
+  renderMasuk();
+  renderKeluar();
+  renderOpname();
+  renderPenyesuaian();
+  renderLaporan();
+  toast(lang === 'en' ? '🇬🇧 Language changed to English' : '🇮🇩 Bahasa diubah ke Indonesia');
+}
+
+// ══════════════════════════════════════════
+//  CURRENCY SYSTEM
+// ══════════════════════════════════════════
+function convertVal(rpVal) {
+  if (currentCurrency === 'USD') {
+    return (rpVal / USD_RATE);
+  }
+  return rpVal;
+}
+
+function rp(n) {
+  const val = Number(n || 0);
+  if (currentCurrency === 'USD') {
+    const usd = val / USD_RATE;
+    return '$' + usd.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  return 'Rp ' + val.toLocaleString('id-ID');
+}
+
+function changeCurrency(curr) {
+  currentCurrency = curr;
+  document.getElementById('currInfo').textContent = curr === 'USD'
+    ? 'Rate: 1 USD = Rp 15,900 (approx)'
+    : 'Kurs: 1 USD = Rp 15.900';
+  saveState();
+  renderDash();
+  renderDaftar();
+  renderMasuk();
+  renderKeluar();
+  renderLaporan();
+  toast(curr === 'USD' ? '💵 Currency changed to USD' : '💰 Mata uang diubah ke Rupiah');
+}
+
+// ══════════════════════════════════════════
+//  DATA — Dengan contoh Stok Opname
 // ══════════════════════════════════════════
 let barang = [
-  {kode:'BRG-001',nama:'Indomie Goreng',kat:'Makanan',sat:'pcs',hb:2800,hj:3500,stok:150,lok:'A1',hargaAvg:2800},
+  {kode:'BRG-001',nama:'Indomie Goreng',kat:'Makanan',sat:'pcs',hb:2800,hj:3500,stok:95,lok:'A1',hargaAvg:2800},
   {kode:'BRG-002',nama:'Aqua 600ml',kat:'Minuman',sat:'botol',hb:2000,hj:3000,stok:4,lok:'B1',hargaAvg:2000},
   {kode:'BRG-003',nama:'Beras 5kg',kat:'Makanan',sat:'karung',hb:65000,hj:75000,stok:30,lok:'C2',hargaAvg:65000},
   {kode:'BRG-004',nama:'Sabun Lifebuoy',kat:'Lainnya',sat:'pcs',hb:4500,hj:6000,stok:0,lok:'D1',hargaAvg:4500},
   {kode:'BRG-005',nama:'Minyak Goreng 1L',kat:'Makanan',sat:'botol',hb:14000,hj:16500,stok:25,lok:'C1',hargaAvg:14000},
 ];
-// masuk kini punya field hargaAvgBaru
+
 let masuk = [
   {tgl:'28/04/2026',kode:'BRG-001',nama:'Indomie Goreng',sup:'PT Supplier Utama',jml:100,hb:2800,total:280000,fak:'FK-0001',ket:'',hargaAvgBaru:2800},
   {tgl:'29/04/2026',kode:'BRG-003',nama:'Beras 5kg',sup:'CV Maju Bersama',jml:10,hb:65000,total:650000,fak:'FK-0002',ket:'',hargaAvgBaru:65000},
 ];
-// keluar kini punya field hpp dan labaKotor
+
 let keluar = [
   {tgl:'28/04/2026',kode:'BRG-001',nama:'Indomie Goreng',jml:5,hj:3500,total:17500,hpp:14000,labaKotor:3500,kasir:'Admin',bayar:'Tunai'},
   {tgl:'29/04/2026',kode:'BRG-001',nama:'Indomie Goreng',jml:10,hj:3500,total:35000,hpp:28000,labaKotor:7000,kasir:'Admin',bayar:'Tunai'},
   {tgl:'29/04/2026',kode:'BRG-005',nama:'Minyak Goreng 1L',jml:3,hj:16500,total:49500,hpp:42000,labaKotor:7500,kasir:'Admin',bayar:'QRIS'},
 ];
-let penyesuaian = [];
-let opname = [];
-let psdTempItems = [];
 
+// ── Contoh data Stok Opname (Indomie: sistem=100, fisik=95, selisih=-5) ──
+let penyesuaian = [
+  {
+    nodok:'PSD-AUTO-OPN-0001',
+    tgl:'27/04/2026',
+    gudang:'Gudang Utama',
+    jenis:'Selisih Stok',
+    ket:'Hasil Stok Opname OPN-0001 — Opname bulanan April 2026',
+    status:'Disetujui',
+    sumber:'Stok Opname',
+    refOpname:'OPN-0001',
+    items:[{
+      kode:'BRG-001', nama:'Indomie Goreng', sat:'pcs',
+      stokSistem:100, stokFisik:95,
+      sistem:100, fisik:95,
+      selisih:-5, qty:5,
+      ketbrg:'Hasil Opname OPN-0001',
+      hargaAvg:2800, nilaiKerugian:14000
+    }],
+    totalNilaiKerugian:14000
+  }
+];
+
+// ── Contoh data Opname (sebelum penyesuaian diterapkan, stok sistem=100 fisik=95) ──
+let opname = [
+  {
+    nodok:'OPN-0001',
+    tgl:'27/04/2026',
+    gudang:'Gudang Utama',
+    petugas:'Admin',
+    ket:'Opname bulanan April 2026',
+    status:'Selesai',
+    items:[{
+      kode:'BRG-001', nama:'Indomie Goreng', sat:'pcs',
+      stokSistem:100, stokFisik:95,
+      selisih:-5,
+      hargaAvg:2800,
+      nilaiSelisih:-14000
+    },{
+      kode:'BRG-002', nama:'Aqua 600ml', sat:'botol',
+      stokSistem:4, stokFisik:4,
+      selisih:0,
+      hargaAvg:2000,
+      nilaiSelisih:0
+    },{
+      kode:'BRG-003', nama:'Beras 5kg', sat:'karung',
+      stokSistem:30, stokFisik:30,
+      selisih:0,
+      hargaAvg:65000,
+      nilaiSelisih:0
+    }]
+  }
+];
+
+let psdTempItems = [];
 let currentPW = 'admin';
 let stokBatas = 5;
 let lapCharts = {};
 let currentLapTab = 'laba';
 let prevStok = 205, prevMasuk = 80, prevKeluar = 8;
 let periodState = { masuk: 'today', keluar: 'today' };
-let currentOpnameInputs = {}; // {kode: stokFisik}
+let currentOpnameInputs = {};
+let profilePhotoData = null; // base64 foto profil
+
+// ══════════════════════════════════════════
+//  PROFIL FOTO
+// ══════════════════════════════════════════
+function handlePhotoUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.size > 2 * 1024 * 1024) { toast(t('fotoTerlalubesar'), true); return; }
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    profilePhotoData = ev.target.result;
+    updateAvatarDisplay();
+    saveState();
+    toast(t('fotoDiupload'));
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+function hapusFoto() {
+  profilePhotoData = null;
+  updateAvatarDisplay();
+  saveState();
+  toast(t('fotoDihapus'));
+}
+
+function updateAvatarDisplay() {
+  const circle = document.getElementById('profilePhotoCircle');
+  const emojiEl = document.getElementById('profilePhotoEmoji');
+  const topbarWrap = document.getElementById('topbarAvatarWrap');
+  const topbarEmoji = document.getElementById('topbarAvatarEmoji');
+
+  if (profilePhotoData) {
+    emojiEl.style.display = 'none';
+    // Remove old img if any
+    let imgEl = circle.querySelector('img');
+    if (!imgEl) { imgEl = document.createElement('img'); circle.insertBefore(imgEl, circle.querySelector('.overlay')); }
+    imgEl.src = profilePhotoData;
+    imgEl.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+
+    // Topbar
+    topbarEmoji.style.display = 'none';
+    let topImg = topbarWrap.querySelector('img');
+    if (!topImg) { topImg = document.createElement('img'); topbarWrap.appendChild(topImg); }
+    topImg.src = profilePhotoData;
+    topImg.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;';
+  } else {
+    emojiEl.style.display = '';
+    const imgEl = circle.querySelector('img');
+    if (imgEl) imgEl.remove();
+    topbarEmoji.style.display = '';
+    const topImg = topbarWrap.querySelector('img');
+    if (topImg) topImg.remove();
+  }
+}
+
+function updateProfileName() {
+  const nama = document.getElementById('s-nama').value;
+  document.getElementById('profileDisplayName').textContent = nama || 'Admin Toko';
+  document.getElementById('topbarUserName').textContent = (nama || 'Admin').split(' ')[0];
+}
 
 // ══════════════════════════════════════════
 //  UTILS
 // ══════════════════════════════════════════
-const rp = n => 'Rp ' + Number(n||0).toLocaleString('id-ID');
 const fmt = n => Number(n||0).toLocaleString('id-ID');
 function fmtRp(el, hidId) {
   const raw = el.value.replace(/[^0-9]/g,'');
@@ -991,14 +1367,11 @@ function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 // ══════════════════════════════════════════
 //  HPP AVERAGE CALCULATION
 // ══════════════════════════════════════════
-// Hitung harga rata-rata baru saat barang masuk
 function hitungHargaAvgBaru(stokLama, hargaAvgLama, qtyMasuk, hargaBeli) {
   const totalStokBaru = stokLama + qtyMasuk;
   if (totalStokBaru === 0) return hargaAvgLama;
   return Math.round((stokLama * hargaAvgLama + qtyMasuk * hargaBeli) / totalStokBaru);
 }
-
-// Update harga avg setelah barang masuk
 function updateHargaAvg(kode, qtyMasuk, hargaBeli) {
   const b = barang.find(x => x.kode === kode);
   if (!b) return 0;
@@ -1006,19 +1379,14 @@ function updateHargaAvg(kode, qtyMasuk, hargaBeli) {
   b.hargaAvg = avgBaru;
   return avgBaru;
 }
-
-// Dapatkan nilai persediaan berdasarkan harga rata-rata
 function nilaiPersediaan() {
   return barang.reduce((s, b) => s + (b.hargaAvg || b.hb) * b.stok, 0);
 }
-
-// Preview kalkulasi avg di modal masuk
 function calcMasukTotal() {
   const kode = document.getElementById('mm-brg').value;
   const jml = parseInt(document.getElementById('mm-jml').value) || 0;
   const hb = getRp('mm-hb');
   document.getElementById('mm-total').value = rp(jml * hb);
-  
   const preview = document.getElementById('mm-avg-preview');
   if (kode && jml > 0 && hb > 0) {
     const b = barang.find(x => x.kode === kode);
@@ -1030,18 +1398,14 @@ function calcMasukTotal() {
         Masuk: ${jml} × ${rp(hb)} = ${rp(jml * hb)}<br>
         <strong>Harga Avg Baru = ${rp(avgBaru)} / ${b.sat}</strong>`;
     }
-  } else {
-    preview.style.display = 'none';
-  }
+  } else { preview.style.display = 'none'; }
 }
-
 function calcKeluarTotal() {
   const kode = document.getElementById('mk-brg').value;
   const jml = parseInt(document.getElementById('mk-jml').value) || 0;
   const hjStr = document.getElementById('mk-hj').value.replace(/[^0-9]/g,'');
   const hj = parseInt(hjStr) || 0;
   document.getElementById('mk-total').value = rp(jml * hj);
-  
   const detail = document.getElementById('mk-hpp-detail');
   if (kode && jml > 0) {
     const b = barang.find(x => x.kode === kode);
@@ -1053,35 +1417,27 @@ function calcKeluarTotal() {
         HPP = ${jml} qty × ${rp(b.hargaAvg || b.hb)} (avg) = <strong>${rp(hpp)}</strong><br>
         Laba Kotor = ${rp(jml * hj)} - ${rp(hpp)} = <strong style="color:${labaKotor>=0?'#16a34a':'var(--red)'}">${rp(labaKotor)}</strong>`;
     }
-  } else {
-    detail.style.display = 'none';
-  }
+  } else { detail.style.display = 'none'; }
 }
-
 function calcSelisih() {
   const sistem = parseInt(document.getElementById('psd-sistem').value) || 0;
-  const fisik = parseInt(document.getElementById('psd-fisik').value) || 0;
+  const fisik = parseInt(document.getElementById('psd-fisik').value);
   const selisih = fisik - sistem;
   const el = document.getElementById('psd-selisih');
   el.value = (selisih >= 0 ? '+' : '') + selisih;
   el.style.color = selisih >= 0 ? '#16a34a' : 'var(--red)';
   el.style.fontWeight = '700';
-  
-  // Tampilkan nilai kerugian berdasarkan avg
   const kode = document.getElementById('psd-brg').value;
   const nilaiEl = document.getElementById('psd-nilai-avg');
   if (kode && selisih < 0) {
     const b = barang.find(x => x.kode === kode);
     if (b) {
-      const qty = document.getElementById('psd-qty').value || Math.abs(selisih);
       const nilaiKerugian = Math.abs(selisih) * (b.hargaAvg || b.hb);
       nilaiEl.style.display = 'block';
       nilaiEl.innerHTML = `📊 Estimasi nilai kerugian (HPP Average): <strong>${rp(nilaiKerugian)}</strong><br>
         (${Math.abs(selisih)} qty × ${rp(b.hargaAvg || b.hb)} harga rata-rata)`;
     }
-  } else {
-    nilaiEl.style.display = 'none';
-  }
+  } else { nilaiEl.style.display = 'none'; }
 }
 
 // ══════════════════════════════════════════
@@ -1090,17 +1446,18 @@ function calcSelisih() {
 function getPeriodRange(period, type) {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  if(period === 'today') {
-    return { from: today, to: today, label: 'Hari Ini: ' + todayStr() };
-  } else if(period === 'week') {
+  if(period === 'today') return { from: today, to: today, label: t('periodeHariIni')+': ' + todayStr() };
+  if(period === 'week') {
     const dow = today.getDay();
     const mon = new Date(today);
     mon.setDate(today.getDate() - (dow === 0 ? 6 : dow - 1));
-    return { from: mon, to: today, label: `Minggu Ini: ${fmtDate(mon)} – ${todayStr()}` };
-  } else if(period === 'month') {
+    return { from: mon, to: today, label: `${t('periodeMinggini')}: ${fmtDate(mon)} – ${todayStr()}` };
+  }
+  if(period === 'month') {
     const first = new Date(today.getFullYear(), today.getMonth(), 1);
-    return { from: first, to: today, label: `Bulan Ini: ${fmtDate(first)} – ${todayStr()}` };
-  } else if(period === 'custom') {
+    return { from: first, to: today, label: `${t('periodeBulanIni')}: ${fmtDate(first)} – ${todayStr()}` };
+  }
+  if(period === 'custom') {
     const fromVal = document.getElementById(`cd${cap(type)}From`).value;
     const toVal = document.getElementById(`cd${cap(type)}To`).value;
     if(!fromVal || !toVal) return { from: null, to: null, label: 'Pilih rentang tanggal di atas' };
@@ -1156,17 +1513,13 @@ function doLogout(){
 // ══════════════════════════════════════════
 //  NAVIGATION
 // ══════════════════════════════════════════
-const pgTitles = {
-  dashboard:'Dashboard', daftar:'Daftar Barang', masuk:'Barang Masuk',
-  keluar:'Barang Keluar', opname:'Stok Opname', penyesuaian:'Penyesuaian Barang',
-  laporan:'Laporan & Analisis', settings:'Settings'
-};
 function showPg(id, btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.snav').forEach(b=>b.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
-  document.getElementById('pgTitle').textContent = pgTitles[id]||id;
+  const titles = t('pgTitles') || {};
+  document.getElementById('pgTitle').textContent = titles[id] || id;
   if(id==='dashboard') renderDash();
   if(id==='daftar') renderDaftar();
   if(id==='masuk') renderMasuk();
@@ -1181,10 +1534,7 @@ function showPg(id, btn){
 // ══════════════════════════════════════════
 function openModal(id){
   document.getElementById(id).classList.add('open');
-  if(id==='mMasuk'){
-    document.getElementById('mm-tgl').value=todayInput();
-    calcMasukTotal();
-  }
+  if(id==='mMasuk'){ document.getElementById('mm-tgl').value=todayInput(); calcMasukTotal(); }
   if(id==='mKeluar'){ document.getElementById('mk-tgl').value=todayInput(); }
   if(id==='mPenyesuaian'){
     document.getElementById('psd-tgl').value=todayInput();
@@ -1230,7 +1580,6 @@ function acBarang(inputEl, hidId, acId){
       document.getElementById(hidId).value=b.kode;
       list.classList.remove('open');
       if(acId==='mm-ac'){
-        // Show avg info
         const info=document.getElementById('mm-avg-info');
         info.style.display='block';
         info.innerHTML=`📊 <strong>Info Harga Rata-rata Saat Ini:</strong> Stok=${b.stok} ${b.sat} | Avg=${rp(b.hargaAvg||b.hb)}/pcs`;
@@ -1265,56 +1614,35 @@ function renderDash(){
   const totalMasuk=masuk.reduce((s,m)=>s+m.jml,0);
   const totalKeluar=keluar.reduce((s,k)=>s+k.jml,0);
   const totalNilai=nilaiPersediaan();
-
   const dStok=totalStok-prevStok, dMasuk=totalMasuk-prevMasuk, dKeluar=totalKeluar-prevKeluar;
-
-  document.getElementById('kpiCards').innerHTML = `
-    <div class="cards3" style="margin:0">
-      ${kpiCard('teal','📦','Total Stok Barang',totalStok.toLocaleString('id-ID'),dStok,'unit vs periode lalu')}
-      ${kpiCard('blue','📥','Transaksi Masuk',totalMasuk.toLocaleString('id-ID'),dMasuk,'item masuk vs periode lalu')}
-      ${kpiCard('orange','📤','Transaksi Keluar',totalKeluar.toLocaleString('id-ID'),dKeluar,'item terjual vs periode lalu')}
-    </div>
-    <div style="margin-bottom:22px">
-      ${kpiCard('purple','💰','Nilai Persediaan (Avg)',rp(totalNilai),0,'HPP Average method')}
-    </div>`;
-
-  // Override karena layout khusus
-  document.getElementById('kpiCards').innerHTML = kpiCard('teal','📦','Total Stok Barang',totalStok.toLocaleString('id-ID'),dStok,'unit vs periode lalu') +
-    kpiCard('blue','📥','Transaksi Masuk',totalMasuk.toLocaleString('id-ID'),dMasuk,'item masuk vs periode lalu') +
-    kpiCard('orange','📤','Transaksi Keluar',totalKeluar.toLocaleString('id-ID'),dKeluar,'item terjual vs periode lalu');
-
+  document.getElementById('kpiCards').innerHTML =
+    kpiCard('teal','📦',currentLang==='en'?'Total Stock':t('nav_daftar').split(' ')[0]+' Stok',totalStok.toLocaleString('id-ID'),dStok,currentLang==='en'?'units vs last period':'Unit vs Periode Lalu') +
+    kpiCard('blue','📥',currentLang==='en'?'Incoming':'Transaksi Masuk',totalMasuk.toLocaleString('id-ID'),dMasuk,currentLang==='en'?'items in vs last period':'Item Masuk vs Periode Lalu') +
+    kpiCard('orange','📤',currentLang==='en'?'Outgoing':'Transaksi Keluar',totalKeluar.toLocaleString('id-ID'),dKeluar,currentLang==='en'?'items sold vs last period':'Item Terjual vs Periode Lalu');
   renderStokPanel();
   renderDashChart();
 }
-
 function kpiCard(color,icon,label,val,delta,sub){
   const isPos=delta>0, isNeu=delta===0;
   const deltaClass=isNeu?'neu':(isPos?'pos':'neg');
   const arrow=isNeu?'—':(isPos?'▲':'▼');
   const deltaStr=isNeu?'0':(isPos?'+'+delta:String(delta));
   return `<div class="kpi-v2 ${color}">
-    <div class="kpi-top">
-      <div class="kpi-icon">${icon}</div>
-      <span class="kpi-delta ${deltaClass}">${arrow} ${deltaStr}</span>
-    </div>
+    <div class="kpi-top"><div class="kpi-icon">${icon}</div><span class="kpi-delta ${deltaClass}">${arrow} ${deltaStr}</span></div>
     <div class="kpi-label">${label}</div>
     <div class="kpi-val">${val}</div>
     <div class="kpi-sub">${sub}</div>
   </div>`;
 }
-
 function renderStokPanel(){
   const panel=document.getElementById('stokPanel');
   panel.innerHTML='';
   const sorted=[...barang].sort((a,b)=>a.stok-b.stok);
   sorted.forEach(b=>{
     const cls=b.stok===0?'danger':b.stok<=stokBatas?'warn':'ok';
-    const label=b.stok===0?'Habis':b.stok<=stokBatas?'Menipis':'Cukup';
+    const label=b.stok===0?t('habis'):b.stok<=stokBatas?t('menipis'):t('cukup');
     panel.innerHTML+=`<div class="stok-item ${cls}">
-      <span class="stok-name">
-        <strong>${b.nama}</strong>
-        <span class="stok-code">${b.kode} | Avg: ${rp(b.hargaAvg||b.hb)}</span>
-      </span>
+      <span class="stok-name"><strong>${b.nama}</strong><span class="stok-code">${b.kode} | Avg: ${rp(b.hargaAvg||b.hb)}</span></span>
       <span class="stok-right">
         <span class="badge ${cls==='danger'?'badge-red':cls==='warn'?'badge-warn':'badge-green'}">${b.stok} ${b.sat}</span>
         <span class="status-pill ${cls}">${label}</span>
@@ -1339,7 +1667,7 @@ function dashRange(){
   const now=new Date(), today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   if(dashPeriod==='month'){
     const first=new Date(today.getFullYear(),today.getMonth(),1);
-    return {from:first,to:today,label:`Bulan ini: ${fmtDate(first)} - ${todayStr()}`,mode:'month'};
+    return {from:first,to:today,label:`${t('periodeBulanIni')}: ${fmtDate(first)} - ${todayStr()}`,mode:'month'};
   }
   if(dashPeriod==='custom'){
     const fv=document.getElementById('cdDashFrom').value, tv=document.getElementById('cdDashTo').value;
@@ -1348,15 +1676,16 @@ function dashRange(){
   }
   const dow=today.getDay(), mon=new Date(today);
   mon.setDate(today.getDate()-(dow===0?6:dow-1));
-  return {from:mon,to:today,label:`Minggu ini: ${fmtDate(mon)} - ${todayStr()}`,mode:'week'};
+  return {from:mon,to:today,label:`${t('periodeMinggini')}: ${fmtDate(mon)} - ${todayStr()}`,mode:'week'};
 }
 function buildDashSeries(){
   const r=dashRange();
-  document.getElementById('filterInfoDash').textContent='Periode: '+r.label;
+  document.getElementById('filterInfoDash').textContent=(currentLang==='en'?'Period: ':'Periode: ')+r.label;
   if(!r.from||!r.to) return {labels:[],masukData:[],keluarData:[]};
   const labels=[],masukData=[],keluarData=[];
   if(r.mode==='month'){
-    ['Minggu 1','Minggu 2','Minggu 3','Minggu 4','Minggu 5'].forEach(w=>{labels.push(w);masukData.push(0);keluarData.push(0);});
+    const wLabels=currentLang==='en'?['Week 1','Week 2','Week 3','Week 4','Week 5']:['Minggu 1','Minggu 2','Minggu 3','Minggu 4','Minggu 5'];
+    wLabels.forEach(w=>{labels.push(w);masukData.push(0);keluarData.push(0);});
     masuk.forEach(m=>{const d=parseDispDate(m.tgl);if(d>=r.from&&d<=r.to){const idx=Math.min(4,Math.floor((d.getDate()-1)/7));masukData[idx]+=m.jml;}});
     keluar.forEach(k=>{const d=parseDispDate(k.tgl);if(d>=r.from&&d<=r.to){const idx=Math.min(4,Math.floor((d.getDate()-1)/7));keluarData[idx]+=k.jml;}});
   } else {
@@ -1372,8 +1701,8 @@ function renderDashChart(){
   const series=buildDashSeries();
   if(dashChartObj) dashChartObj.destroy();
   dashChartObj=new Chart(ctx,{type:'line',data:{labels:series.labels,datasets:[
-    {label:'Barang Masuk',data:series.masukData,borderColor:'#1a73e8',backgroundColor:'#1a73e815',fill:true,tension:.35},
-    {label:'Barang Keluar',data:series.keluarData,borderColor:'#00C9A7',backgroundColor:'#00C9A715',fill:true,tension:.35}
+    {label:currentLang==='en'?'Incoming':'Barang Masuk',data:series.masukData,borderColor:'#1a73e8',backgroundColor:'#1a73e815',fill:true,tension:.35},
+    {label:currentLang==='en'?'Outgoing':'Barang Keluar',data:series.keluarData,borderColor:'#00C9A7',backgroundColor:'#00C9A715',fill:true,tension:.35}
   ]},options:{responsive:true,plugins:{legend:{position:'top'}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
 }
 
@@ -1391,7 +1720,7 @@ function renderDaftar(){
   tbody.innerHTML='';
   slice.forEach((b,i)=>{
     const cls=b.stok===0?'row-danger':b.stok<=stokBatas?'row-warn':'';
-    const badge=b.stok===0?'<span class="badge badge-red">Habis</span>':b.stok<=stokBatas?'<span class="badge badge-warn">Menipis</span>':'<span class="badge badge-teal">Cukup</span>';
+    const badge=b.stok===0?`<span class="badge badge-red">${t('habis')}</span>`:b.stok<=stokBatas?`<span class="badge badge-warn">${t('menipis')}</span>`:`<span class="badge badge-teal">${t('cukup')}</span>`;
     const nilaiPers=(b.hargaAvg||b.hb)*b.stok;
     tbody.innerHTML+=`<tr class="${cls}${i%2===1&&!cls?' zeb':''}">
       <td class="mono">${(daftarPage-1)*daftarPP+i+1}</td>
@@ -1427,25 +1756,13 @@ function openEdit(idx){
 }
 function saveEditBarang(){
   const idx=parseInt(document.getElementById('eb-idx').value);
-  const hbBaru = getRp('eb-hb');
-  barang[idx]={
-    ...barang[idx],
-    kode:document.getElementById('eb-kode').value.trim(),
-    nama:document.getElementById('eb-nama').value.trim(),
-    kat:document.getElementById('eb-kat').value,
-    sat:document.getElementById('eb-sat').value.trim(),
-    hb:hbBaru,
-    hj:getRp('eb-hj'),
-    stok:parseInt(document.getElementById('eb-stok').value)||0,
-    lok:document.getElementById('eb-lok').value.trim()
-    // hargaAvg tidak diubah dari edit — hanya berubah dari transaksi
-  };
-  closeModal('mEditBarang'); renderDaftar(); saveState(); toast('✅ Barang diperbarui');
+  barang[idx]={...barang[idx],kode:document.getElementById('eb-kode').value.trim(),nama:document.getElementById('eb-nama').value.trim(),kat:document.getElementById('eb-kat').value,sat:document.getElementById('eb-sat').value.trim(),hb:getRp('eb-hb'),hj:getRp('eb-hj'),stok:parseInt(document.getElementById('eb-stok').value)||0,lok:document.getElementById('eb-lok').value.trim()};
+  closeModal('mEditBarang'); renderDaftar(); saveState(); toast(t('barangDiperbarui'));
 }
 function addBarang(){
   const nama=document.getElementById('mb-nama').value.trim();
   const kode=document.getElementById('mb-kode').value.trim();
-  if(!nama||!kode){ toast('Kode dan Nama wajib diisi',true); return; }
+  if(!nama||!kode){ toast(t('kodeDanNama'),true); return; }
   const hb=getRp('mb-hb');
   barang.push({kode,nama,kat:document.getElementById('mb-kat').value,sat:document.getElementById('mb-sat').value.trim()||'pcs',hb,hj:getRp('mb-hj'),stok:parseInt(document.getElementById('mb-stok').value)||0,lok:document.getElementById('mb-lok').value.trim(),hargaAvg:hb});
   closeModal('mBarang');
@@ -1453,15 +1770,15 @@ function addBarang(){
   document.getElementById('mb-stok').value='0';
   document.getElementById('mb-hb').value='0';
   document.getElementById('mb-hj').value='0';
-  renderDaftar(); saveState(); toast('✅ Barang ditambahkan');
+  renderDaftar(); saveState(); toast(t('barangDitambahkan'));
 }
 function hapusBarang(idx){
-  if(!confirm(`Hapus "${barang[idx].nama}"?`)) return;
-  barang.splice(idx,1); renderDaftar(); saveState(); toast('🗑️ Barang dihapus');
+  if(!confirm(t('hapusToko').replace('{0}',barang[idx].nama))) return;
+  barang.splice(idx,1); renderDaftar(); saveState(); toast(t('barangDihapus'));
 }
 
 // ══════════════════════════════════════════
-//  BARANG MASUK — Update HPP Average
+//  BARANG MASUK
 // ══════════════════════════════════════════
 let masukPage=1; const masukPP=10;
 function renderMasuk(){
@@ -1474,7 +1791,7 @@ function renderMasuk(){
   const tbody=document.getElementById('tMasuk');
   tbody.innerHTML='';
   if(!slice.length){
-    tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">Tidak ada data pada periode ini</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">${t('belumAdaData')}</td></tr>`;
     renderPag('pagMasuk',1,1,()=>{}); return;
   }
   slice.forEach((m,i)=>{
@@ -1496,21 +1813,15 @@ function addMasuk(){
   const jml=parseInt(document.getElementById('mm-jml').value)||0;
   const hb=getRp('mm-hb');
   const fak=document.getElementById('mm-fak').value.trim()||`FK-${String(masuk.length+1).padStart(4,'0')}`;
-  if(!kode){ toast('Pilih barang terlebih dahulu',true); return; }
-  if(jml<1){ toast('Jumlah minimal 1',true); return; }
+  if(!kode){ toast(t('pilihBarang'),true); return; }
+  if(jml<1){ toast(t('jumlahMin'),true); return; }
   const b=barang.find(x=>x.kode===kode);
-  if(!b){ toast('Barang tidak ditemukan',true); return; }
-  
+  if(!b){ toast(t('barangTidakDitemukan'),true); return; }
   const hargaBeli = hb || b.hb;
-  // Hitung harga average baru SEBELUM update stok
   const avgBaru = hitungHargaAvgBaru(b.stok, b.hargaAvg||b.hb, jml, hargaBeli);
-  
-  // Update stok dan harga avg
   b.stok += jml;
   b.hargaAvg = avgBaru;
-  
   masuk.push({tgl,kode,nama:b.nama,sup:document.getElementById('mm-sup').value,jml,hb:hargaBeli,total:hargaBeli*jml,fak,ket:document.getElementById('mm-ket').value,hargaAvgBaru:avgBaru});
-  
   closeModal('mMasuk');
   ['mm-brg','mm-brg-d','mm-fak','mm-ket'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('mm-jml').value=1;
@@ -1519,13 +1830,12 @@ function addMasuk(){
   document.getElementById('mm-total').value='';
   document.getElementById('mm-avg-info').style.display='none';
   document.getElementById('mm-avg-preview').style.display='none';
-  
   renderMasuk(); renderDash(); renderDaftar(); saveState();
-  toast(`✅ Barang masuk dicatat | Harga Avg baru: ${rp(avgBaru)}`);
+  toast(t('barangMasukDicatat').replace('{0}',rp(avgBaru)));
 }
 
 // ══════════════════════════════════════════
-//  BARANG KELUAR — HPP dari Average
+//  BARANG KELUAR
 // ══════════════════════════════════════════
 let keluarPage=1; const keluarPP=10;
 function renderKeluar(){
@@ -1538,7 +1848,7 @@ function renderKeluar(){
   const tbody=document.getElementById('tKeluar');
   tbody.innerHTML='';
   if(!slice.length){
-    tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;padding:24px;color:var(--muted)">Tidak ada data pada periode ini</td></tr>`;
+    tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;padding:24px;color:var(--muted)">${t('belumAdaData')}</td></tr>`;
     renderPag('pagKeluar',1,1,()=>{}); return;
   }
   slice.forEach((k,i)=>{
@@ -1569,52 +1879,42 @@ function addKeluar(){
   const hj=parseInt(hjStr)||0;
   const kasir=document.getElementById('mk-kasir').value||'Admin';
   const bayar=document.getElementById('mk-bayar').value;
-  if(!kode){ toast('Pilih barang terlebih dahulu',true); return; }
-  if(jml<1){ toast('Jumlah minimal 1',true); return; }
+  if(!kode){ toast(t('pilihBarang'),true); return; }
+  if(jml<1){ toast(t('jumlahMin'),true); return; }
   const b=barang.find(x=>x.kode===kode);
-  if(!b){ toast('Barang tidak ditemukan',true); return; }
-  if(b.stok<jml){ toast('Stok tidak mencukupi!',true); return; }
-  
-  // Hitung HPP dengan metode Average
+  if(!b){ toast(t('barangTidakDitemukan'),true); return; }
+  if(b.stok<jml){ toast(t('stokTidakCukup'),true); return; }
   const hargaAvgSaatIni = b.hargaAvg || b.hb;
   const hppTotal = jml * hargaAvgSaatIni;
   const totalJual = jml * hj;
   const labaKotor = totalJual - hppTotal;
-  
   b.stok -= jml;
-  // Harga avg TIDAK berubah saat barang keluar (ini benar di metode average)
-  
   keluar.push({tgl,kode,nama:b.nama,jml,hj:hj||b.hj,total:totalJual,hpp:hppTotal,labaKotor,kasir,bayar,hargaAvgUsed:hargaAvgSaatIni});
-  
   closeModal('mKeluar');
   ['mk-brg','mk-brg-d','mk-hj','mk-total'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('mk-jml').value=1;
   document.getElementById('mk-hpp-info').style.display='none';
   document.getElementById('mk-hpp-detail').style.display='none';
   renderKeluar(); renderDash(); renderDaftar(); saveState();
-  toast(`✅ Transaksi disimpan | HPP: ${rp(hppTotal)} | Laba: ${rp(labaKotor)}`);
+  toast(t('transaksiDisimpan').replace('{0}',rp(hppTotal)).replace('{1}',rp(labaKotor)));
 }
 function batalKeluar(idx){
-  if(!confirm('Batalkan transaksi ini? Stok akan dikembalikan.')) return;
+  if(!confirm(t('batalKonfirm'))) return;
   const k=keluar[idx];
   const b=barang.find(x=>x.kode===k.kode);
-  if(b){
-    b.stok+=k.jml;
-    // Catatan: idealnya harga avg direcalculate, tapi untuk simplisitas kita biarkan
-  }
+  if(b) b.stok+=k.jml;
   keluar.splice(idx,1);
-  renderKeluar(); renderDash(); renderDaftar(); saveState(); toast('↩️ Transaksi dibatalkan');
+  renderKeluar(); renderDash(); renderDaftar(); saveState(); toast(t('batalTransaksi'));
 }
 function cetakStruk(idx){
   const k=keluar[idx];
   const w=window.open('','_blank','width=380,height=520');
-  w.document.write(`<html><head><title>Struk</title><style>body{font-family:monospace;font-size:13px;padding:16px;max-width:320px;margin:0 auto}h3{text-align:center;margin:0 0 4px}p{text-align:center;margin:2px 0;font-size:12px}hr{border:1px dashed #000;margin:10px 0}.row{display:flex;justify-content:space-between;margin:4px 0}.total{font-weight:bold;font-size:15px}.laba{color:green;font-size:11px;text-align:right}@media print{button{display:none}}</style></head><body>
-    <h3>TOKO JAGO SUMBERARUM</h3><p>Jl. Sumberarum, Surabaya</p><p>${k.tgl} | Kasir: ${k.kasir}</p><hr>
+  w.document.write(`<html><head><title>Struk</title><style>body{font-family:monospace;font-size:13px;padding:16px;max-width:320px;margin:0 auto}h3{text-align:center;margin:0 0 4px}p{text-align:center;margin:2px 0;font-size:12px}hr{border:1px dashed #000;margin:10px 0}.row{display:flex;justify-content:space-between;margin:4px 0}.total{font-weight:bold;font-size:15px}@media print{button{display:none}}</style></head><body>
+    <h3>🏪 TOKO JAGO SUMBERARUM</h3><p>Jl. Sumberarum, Surabaya</p><p>${k.tgl} | Kasir: ${k.kasir}</p><hr>
     <div class="row"><span>${k.nama}</span></div>
     <div class="row"><span>${k.jml} x ${rp(k.hj)}</span><span>${rp(k.total)}</span></div><hr>
     <div class="row total"><span>TOTAL</span><span>${rp(k.total)}</span></div>
-    <div class="row"><span>Bayar (${k.bayar})</span><span>${rp(k.total)}</span></div>
-    <div class="row"><span>Kembalian</span><span>Rp 0</span></div><hr>
+    <div class="row"><span>Bayar (${k.bayar})</span><span>${rp(k.total)}</span></div><hr>
     <p>Terima kasih sudah berbelanja!</p>
     <button onclick="window.print()" style="width:100%;padding:8px;margin-top:12px;cursor:pointer">🖨️ Cetak</button>
   </body></html>`);
@@ -1624,37 +1924,30 @@ function cetakStruk(idx){
 //  STOK OPNAME
 // ══════════════════════════════════════════
 let opnamePage=1; const opnamePP=10;
-
 function renderOpnameItemsTable(){
   const tbody=document.getElementById('opname-items-table');
   tbody.innerHTML='';
   let totalOk=0, totalDiff=0, totalEmpty=0;
-  
   barang.forEach((b,i)=>{
     const fisik=currentOpnameInputs[b.kode];
     const fisikVal = fisik !== undefined ? fisik : null;
     const selisih = fisikVal !== null ? fisikVal - b.stok : null;
     const nilaiSelisih = selisih !== null ? selisih * (b.hargaAvg||b.hb) : null;
-    
     let rowClass='';
     if(fisikVal===null){ totalEmpty++; }
     else if(selisih===0){ totalOk++; rowClass='opname-row-ok'; }
     else { totalDiff++; rowClass='opname-row-diff'; }
-    
     const selisihDisplay = selisih===null ? '<span style="color:var(--muted)">—</span>' :
       `<strong style="color:${selisih===0?'#16a34a':selisih>0?'var(--blue)':'var(--red)'}">${selisih>=0?'+':''}${selisih}</strong>`;
-    
     const nilaiDisplay = nilaiSelisih===null ? '—' :
       nilaiSelisih===0 ? '<span style="color:#16a34a">0</span>' :
       `<strong style="color:${nilaiSelisih>0?'var(--blue)':'var(--red)'}">${rp(Math.abs(nilaiSelisih))}</strong>`;
-    
     tbody.innerHTML+=`<tr class="${rowClass}" id="opname-row-${b.kode}">
       <td style="padding:8px 12px;border-bottom:1px solid var(--border);font-family:'JetBrains Mono';font-size:12px">${b.kode}</td>
       <td style="padding:8px 12px;border-bottom:1px solid var(--border)"><strong>${b.nama}</strong><br><span style="font-size:11px;color:var(--muted)">${b.kat} | Avg: ${rp(b.hargaAvg||b.hb)}</span></td>
       <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;font-family:'JetBrains Mono'">${b.stok}</td>
       <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:center">
-        <input type="number" min="0" value="${fisikVal!==null?fisikVal:''}" 
-          placeholder="Isi stok fisik"
+        <input type="number" min="0" value="${fisikVal!==null?fisikVal:''}" placeholder="Isi stok fisik"
           style="width:90px;padding:5px 8px;border:1.5px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;text-align:center"
           oninput="updateOpnameInput('${b.kode}',this.value)"/>
       </td>
@@ -1662,149 +1955,80 @@ function renderOpnameItemsTable(){
       <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:right" id="op-nilai-${b.kode}">${nilaiDisplay}</td>
     </tr>`;
   });
-  
   document.getElementById('op-total-count').textContent=barang.length;
   document.getElementById('op-ok-count').textContent=totalOk;
   document.getElementById('op-diff-count').textContent=totalDiff;
   document.getElementById('op-empty-count').textContent=totalEmpty;
 }
-
 function updateOpnameInput(kode, val){
   const b=barang.find(x=>x.kode===kode);
   if(!b) return;
   const fisik = val==='' ? null : parseInt(val);
   if(fisik!==null) currentOpnameInputs[kode]=fisik;
   else delete currentOpnameInputs[kode];
-  
   const selisih = fisik!==null ? fisik - b.stok : null;
   const nilaiSelisih = selisih!==null ? selisih*(b.hargaAvg||b.hb) : null;
-  
   const selEl=document.getElementById(`op-selisih-${kode}`);
   const nilEl=document.getElementById(`op-nilai-${kode}`);
   const row=document.getElementById(`opname-row-${kode}`);
-  
-  if(selisih===null){
-    selEl.innerHTML='<span style="color:var(--muted)">—</span>';
-    nilEl.innerHTML='—';
-    row.className='';
-  } else if(selisih===0){
-    selEl.innerHTML='<strong style="color:#16a34a">0</strong>';
-    nilEl.innerHTML='<span style="color:#16a34a">0</span>';
-    row.className='opname-row-ok';
-  } else {
-    selEl.innerHTML=`<strong style="color:${selisih>0?'var(--blue)':'var(--red)'}">${selisih>=0?'+':''}${selisih}</strong>`;
-    nilEl.innerHTML=`<strong style="color:${nilaiSelisih>0?'var(--blue)':'var(--red)'}">${rp(Math.abs(nilaiSelisih))}</strong>`;
-    row.className='opname-row-diff';
-  }
-  
-  // Update progress counters
+  if(selisih===null){ selEl.innerHTML='<span style="color:var(--muted)">—</span>'; nilEl.innerHTML='—'; row.className=''; }
+  else if(selisih===0){ selEl.innerHTML='<strong style="color:#16a34a">0</strong>'; nilEl.innerHTML='<span style="color:#16a34a">0</span>'; row.className='opname-row-ok'; }
+  else { selEl.innerHTML=`<strong style="color:${selisih>0?'var(--blue)':'var(--red)'}">${selisih>=0?'+':''}${selisih}</strong>`; nilEl.innerHTML=`<strong style="color:${nilaiSelisih>0?'var(--blue)':'var(--red)'}">${rp(Math.abs(nilaiSelisih))}</strong>`; row.className='opname-row-diff'; }
   let ok=0,diff=0,empty=0;
-  barang.forEach(b=>{
-    const f=currentOpnameInputs[b.kode];
-    if(f===undefined) empty++;
-    else if(f===b.stok) ok++;
-    else diff++;
-  });
+  barang.forEach(b=>{const f=currentOpnameInputs[b.kode];if(f===undefined)empty++;else if(f===b.stok)ok++;else diff++;});
   document.getElementById('op-ok-count').textContent=ok;
   document.getElementById('op-diff-count').textContent=diff;
   document.getElementById('op-empty-count').textContent=empty;
 }
-
 function saveOpname(status){
   const nodok=document.getElementById('op-nodok').value.trim()||`OPN-${String(opname.length+1).padStart(4,'0')}`;
   const tgl=inputToDisp(document.getElementById('op-tgl').value);
   const gudang=document.getElementById('op-gudang').value;
   const petugas=document.getElementById('op-petugas').value;
   const ket=document.getElementById('op-ket').value;
-  
-  // Buat items dari semua barang yang sudah diisi stok fisiknya
   const items=[];
   barang.forEach(b=>{
     const fisik=currentOpnameInputs[b.kode];
     if(fisik!==undefined){
-      items.push({
-        kode:b.kode, nama:b.nama, sat:b.sat,
-        stokSistem:b.stok, stokFisik:fisik,
-        selisih:fisik-b.stok,
-        hargaAvg:b.hargaAvg||b.hb,
-        nilaiSelisih:(fisik-b.stok)*(b.hargaAvg||b.hb)
-      });
+      items.push({kode:b.kode,nama:b.nama,sat:b.sat,stokSistem:b.stok,stokFisik:fisik,selisih:fisik-b.stok,hargaAvg:b.hargaAvg||b.hb,nilaiSelisih:(fisik-b.stok)*(b.hargaAvg||b.hb)});
     }
   });
-  
-  if(items.length===0 && status==='Selesai'){
-    toast('Isi minimal 1 stok fisik barang',true); return;
-  }
-  
+  if(items.length===0 && status==='Selesai'){ toast(t('isiMinimalStok'),true); return; }
   const docOpname={nodok,tgl,gudang,petugas,ket,status,items:[...items]};
-  
   if(status==='Selesai'){
-    // Hitung selisih dan buat penyesuaian otomatis
     const itemsSelisih=items.filter(x=>x.selisih!==0);
-    
     if(itemsSelisih.length>0){
-      // Update stok
-      itemsSelisih.forEach(item=>{
-        const b=barang.find(x=>x.kode===item.kode);
-        if(b) b.stok=item.stokFisik;
-        // Harga avg tetap sama (tidak berubah karena penyesuaian)
-      });
-      
-      // Auto-generate penyesuaian barang
-      const psdItems=itemsSelisih.map(item=>({
-        kode:item.kode, nama:item.nama,
-        sistem:item.stokSistem, fisik:item.stokFisik,
-        selisih:item.selisih, qty:Math.abs(item.selisih),
-        ketbrg:`Hasil Stok Opname ${nodok}`,
-        hargaAvg:item.hargaAvg,
-        nilaiKerugian:Math.abs(item.nilaiSelisih)
-      }));
-      
-      const totalNilaiKerugian=psdItems.reduce((s,x)=>s+x.nilaiKerugian,0);
-      
+      itemsSelisih.forEach(item=>{const b=barang.find(x=>x.kode===item.kode);if(b)b.stok=item.stokFisik;});
       penyesuaian.push({
-        nodok:`PSD-AUTO-${nodok}`,
-        tgl, gudang, jenis:'Selisih Stok',
-        ket:`Hasil Stok Opname ${nodok}`,
-        status:'Disetujui',
-        sumber:'Stok Opname',
-        refOpname:nodok,
-        items:psdItems,
-        totalNilaiKerugian
+        nodok:`PSD-AUTO-${nodok}`,tgl,gudang,jenis:'Selisih Stok',
+        ket:`Hasil Stok Opname ${nodok}`,status:'Disetujui',sumber:'Stok Opname',refOpname:nodok,
+        items:itemsSelisih.map(item=>({...item,qty:Math.abs(item.selisih),ketbrg:`Hasil Opname ${nodok}`,nilaiKerugian:Math.abs(item.nilaiSelisih)})),
+        totalNilaiKerugian:itemsSelisih.reduce((s,x)=>s+Math.abs(x.nilaiSelisih),0)
       });
-      
-      toast(`✅ Opname selesai! ${itemsSelisih.length} barang ada selisih. Penyesuaian otomatis dibuat.`);
-    } else {
-      toast('✅ Opname selesai! Semua stok sesuai, tidak ada selisih.');
-    }
-  } else {
-    toast('💾 Draft opname disimpan');
-  }
-  
+      toast(t('opnameSelesai').replace('{0}',itemsSelisih.length));
+    } else { toast(t('opnameTanpaSelisih')); }
+  } else { toast(t('simpanDraft')); }
   opname.push(docOpname);
   closeModal('mOpname');
   currentOpnameInputs={};
   renderOpname(); renderPenyesuaian(); renderDash(); renderDaftar(); saveState();
 }
-
 function renderOpname(){
   const filterStatus=document.getElementById('filterStatusOpname').value;
   let filtered=[...opname];
   if(filterStatus) filtered=filtered.filter(x=>x.status===filterStatus);
-  
   const pages=Math.max(1,Math.ceil(filtered.length/opnamePP));
   if(opnamePage>pages) opnamePage=1;
   const slice=[...filtered].reverse().slice((opnamePage-1)*opnamePP,opnamePage*opnamePP);
-  
   const tbody=document.getElementById('tOpname');
   tbody.innerHTML='';
   if(!slice.length){
-    tbody.innerHTML='<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--muted)">Belum ada data stok opname</td></tr>';
+    tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--muted)">${t('belumAdaOpname')}</td></tr>`;
     renderPag('pagOpname',1,1,()=>{}); return;
   }
   slice.forEach((op,i)=>{
     const ri=opname.indexOf(op);
-    const statusBadge=op.status==='Selesai'?'<span class="badge badge-green">✅ Selesai</span>':'<span class="badge badge-gray">📝 Draft</span>';
+    const statusBadge=op.status==='Selesai'?`<span class="badge badge-green">${t('selesai')}</span>`:'<span class="badge badge-gray">📝 Draft</span>';
     const itemsSelisih=op.items.filter(x=>x.selisih!==0).length;
     tbody.innerHTML+=`<tr class="${i%2===1?'zeb':''}">
       <td class="mono">${(opnamePage-1)*opnamePP+i+1}</td>
@@ -1823,10 +2047,9 @@ function renderOpname(){
   });
   renderPag('pagOpname',pages,opnamePage,p=>{opnamePage=p;renderOpname();});
 }
-
 function detailOpname(idx){
   const op=opname[idx];
-  const statusBadge=op.status==='Selesai'?'<span class="badge badge-green">✅ Selesai</span>':'<span class="badge badge-gray">📝 Draft</span>';
+  const statusBadge=op.status==='Selesai'?`<span class="badge badge-green">✅ ${t('selesai')}</span>`:'<span class="badge badge-gray">📝 Draft</span>';
   let rows='';
   op.items.forEach(item=>{
     const selClass=item.selisih>0?'color:var(--blue)':item.selisih<0?'color:var(--red)':'color:#16a34a';
@@ -1844,6 +2067,18 @@ function detailOpname(idx){
   });
   const totalKerugian=op.items.filter(x=>x.selisih<0).reduce((s,x)=>s+Math.abs(x.nilaiSelisih),0);
   document.getElementById('detailOpnameContent').innerHTML=`
+    <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px">
+      <strong style="color:#e65100;font-size:14px">📋 Contoh Stok Opname — Indomie Goreng</strong><br>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div>🏭 Stok Sistem: <strong>100 pcs</strong></div>
+        <div>📦 Stok Fisik: <strong>95 pcs</strong></div>
+        <div>⚠️ Selisih: <strong style="color:var(--red)">-5 pcs</strong></div>
+        <div>💸 Nilai Selisih: <strong style="color:var(--red)">${rp(5*2800)}</strong></div>
+      </div>
+      <div style="margin-top:8px;padding:8px;background:#fce4ec;border-radius:8px;font-size:12px">
+        ⚡ Auto Penyesuaian: <strong>PSD-AUTO-${op.nodok}</strong> • Jenis: Selisih Stok • Qty: -5
+      </div>
+    </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;background:#f9fbff;border-radius:10px;padding:14px">
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">No. Dokumen</span><br><strong style="font-family:'JetBrains Mono'">${op.nodok}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Tanggal</span><br><strong>${op.tgl}</strong></div>
@@ -1870,60 +2105,51 @@ function detailOpname(idx){
     </div>`;
   openModal('mDetailOpname');
 }
-
 function finishOpname(idx){
-  if(!confirm('Selesaikan opname ini? Stok dan penyesuaian akan diperbarui.')) return;
+  if(!confirm(t('selesaikanKonfirm'))) return;
   const op=opname[idx];
   const itemsSelisih=op.items.filter(x=>x.selisih!==0);
-  itemsSelisih.forEach(item=>{
-    const b=barang.find(x=>x.kode===item.kode);
-    if(b) b.stok=item.stokFisik;
-  });
+  itemsSelisih.forEach(item=>{const b=barang.find(x=>x.kode===item.kode);if(b)b.stok=item.stokFisik;});
   if(itemsSelisih.length>0){
     penyesuaian.push({
-      nodok:`PSD-AUTO-${op.nodok}`, tgl:op.tgl, gudang:op.gudang, jenis:'Selisih Stok',
-      ket:`Hasil Stok Opname ${op.nodok}`, status:'Disetujui', sumber:'Stok Opname',
-      refOpname:op.nodok,
+      nodok:`PSD-AUTO-${op.nodok}`,tgl:op.tgl,gudang:op.gudang,jenis:'Selisih Stok',
+      ket:`Hasil Stok Opname ${op.nodok}`,status:'Disetujui',sumber:'Stok Opname',refOpname:op.nodok,
       items:itemsSelisih.map(item=>({...item,qty:Math.abs(item.selisih),ketbrg:`Hasil Opname ${op.nodok}`,nilaiKerugian:Math.abs(item.nilaiSelisih)})),
       totalNilaiKerugian:itemsSelisih.reduce((s,x)=>s+Math.abs(x.nilaiSelisih),0)
     });
   }
   op.status='Selesai';
   renderOpname(); renderPenyesuaian(); renderDash(); renderDaftar(); saveState();
-  toast(`✅ Opname diselesaikan! ${itemsSelisih.length} penyesuaian dibuat.`);
+  toast(t('opnameSelesaikanToast').replace('{0}',itemsSelisih.length));
 }
-
 function hapusOpname(idx){
-  if(!confirm('Hapus data opname ini?')) return;
-  opname.splice(idx,1); renderOpname(); saveState(); toast('🗑️ Opname dihapus');
+  if(!confirm(t('hapusKonfirm'))) return;
+  opname.splice(idx,1); renderOpname(); saveState(); toast(t('hapusOpname'));
 }
 
 // ══════════════════════════════════════════
 //  PENYESUAIAN BARANG
 // ══════════════════════════════════════════
 let psdPage=1; const psdPP=10;
-
 function addItemPsd(){
   const kode=document.getElementById('psd-brg').value;
   const sistem=parseInt(document.getElementById('psd-sistem').value)||0;
   const fisik=parseInt(document.getElementById('psd-fisik').value);
   const qty=parseInt(document.getElementById('psd-qty').value)||0;
   const ketbrg=document.getElementById('psd-ketbrg').value;
-  if(!kode){ toast('Pilih barang terlebih dahulu',true); return; }
+  if(!kode){ toast(t('pilihBarang'),true); return; }
   if(isNaN(fisik)){ toast('Isi stok fisik terlebih dahulu',true); return; }
   if(qty<1){ toast('Qty penyesuaian minimal 1',true); return; }
   const b=barang.find(x=>x.kode===kode);
   const hargaAvg=b?(b.hargaAvg||b.hb):0;
-  const nilaiKerugian=qty*hargaAvg;
-  psdTempItems.push({kode,nama:b?b.nama:'',sistem,fisik,selisih:fisik-sistem,qty,ketbrg,hargaAvg,nilaiKerugian});
+  psdTempItems.push({kode,nama:b?b.nama:'',sistem,fisik,selisih:fisik-sistem,qty,ketbrg,hargaAvg,nilaiKerugian:qty*hargaAvg});
   ['psd-brg','psd-brg-d','psd-sistem','psd-fisik','psd-selisih','psd-qty','psd-ketbrg'].forEach(id=>{
     const el=document.getElementById(id); if(el){ el.value=''; el.style.color=''; el.style.fontWeight=''; }
   });
   document.getElementById('psd-nilai-avg').style.display='none';
   renderPsdTempItems();
-  toast('➕ Barang ditambahkan ke daftar');
+  toast(t('barangDitambahkanList'));
 }
-
 function renderPsdTempItems(){
   const el=document.getElementById('psdItemList');
   const totalKerEl=document.getElementById('psd-total-kerugian');
@@ -1957,64 +2183,52 @@ function renderPsdTempItems(){
   });
   html+='</tbody></table>';
   el.innerHTML=html;
-  
   totalKerEl.style.display='block';
   totalKerEl.innerHTML=`📉 Total Nilai Kerugian (HPP Average): ${rp(totalKerugian)}`;
 }
 function removePsdItem(i){ psdTempItems.splice(i,1); renderPsdTempItems(); }
-
 function savePenyesuaian(status){
-  if(!psdTempItems.length){ toast('Tambahkan minimal 1 barang',true); return; }
+  if(!psdTempItems.length){ toast(t('tambahMinimal1'),true); return; }
   const nodok=document.getElementById('psd-nodok').value.trim()||`PSD-${String(penyesuaian.length+1).padStart(4,'0')}`;
   const tgl=inputToDisp(document.getElementById('psd-tgl').value);
   const gudang=document.getElementById('psd-gudang').value;
   const jenis=document.getElementById('psd-jenis').value;
   const ket=document.getElementById('psd-ket').value;
   const totalNilaiKerugian=psdTempItems.reduce((s,x)=>s+(x.nilaiKerugian||0),0);
-
   if(status==='Disetujui'){
     psdTempItems.forEach(item=>{
       const b=barang.find(x=>x.kode===item.kode);
-      if(b){
-        if(item.selisih<0) b.stok=Math.max(0,b.stok-item.qty);
-        else b.stok+=item.qty;
-      }
+      if(b){ if(item.selisih<0) b.stok=Math.max(0,b.stok-item.qty); else b.stok+=item.qty; }
     });
   }
-
   penyesuaian.push({nodok,tgl,gudang,jenis,ket,status,sumber:'Manual',refOpname:null,items:[...psdTempItems],totalNilaiKerugian});
   closeModal('mPenyesuaian');
   psdTempItems=[];
   renderPenyesuaian(); renderDash(); renderDaftar(); saveState();
-  toast(status==='Disetujui'?'✅ Penyesuaian disetujui & stok diperbarui':'💾 Draft penyesuaian disimpan');
+  toast(status==='Disetujui'?t('psdDisetujui'):t('psdSimpanDraft'));
 }
-
 function renderPenyesuaian(){
   const filterJenis=document.getElementById('filterJenisPsd').value;
   const filterSumber=document.getElementById('filterSumberPsd').value;
   const filterStatus=document.getElementById('filterStatusPsd').value;
-
   let filtered=[...penyesuaian];
   if(filterJenis) filtered=filtered.filter(p=>p.jenis===filterJenis);
   if(filterSumber) filtered=filtered.filter(p=>(p.sumber||'Manual')===filterSumber);
   if(filterStatus) filtered=filtered.filter(p=>p.status===filterStatus);
-
   const pages=Math.max(1,Math.ceil(filtered.length/psdPP));
   if(psdPage>pages) psdPage=1;
   const slice=[...filtered].reverse().slice((psdPage-1)*psdPP,psdPage*psdPP);
   const tbody=document.getElementById('tPenyesuaian');
   tbody.innerHTML='';
-
   if(!slice.length){
-    tbody.innerHTML='<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">Belum ada data penyesuaian</td></tr>';
+    tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">${t('belumAdaPsd')}</td></tr>`;
     renderPag('pagPsd',1,1,()=>{}); return;
   }
-
   slice.forEach((p,i)=>{
     const ri=penyesuaian.indexOf(p);
-    const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">✅ Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
-    const jenisBadge=p.jenis==='Barang Rusak'?'<span class="badge badge-red">🔴 Rusak</span>':p.jenis==='Barang Return'?'<span class="badge badge-blue">🔄 Return</span>':'<span class="badge badge-warn">⚖️ Selisih</span>';
-    const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">🔄 Opname</span>':'<span class="badge badge-gray">✏️ Manual</span>';
+    const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
+    const jenisBadge=p.jenis==='Barang Rusak'?'<span class="badge badge-red">🔴 Rusak</span>':p.jenis==='Barang Return'?'<span class="badge badge-blue">🔄 Return</span>':'<span class="badge badge-warn">Selisih</span>';
+    const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">Opname</span>':'<span class="badge badge-gray">✏️ Manual</span>';
     tbody.innerHTML+=`<tr class="${i%2===1?'zeb':''}">
       <td class="mono">${(psdPage-1)*psdPP+i+1}</td>
       <td>${p.tgl}</td>
@@ -2034,10 +2248,9 @@ function renderPenyesuaian(){
   });
   renderPag('pagPsd',pages,psdPage,p=>{psdPage=p;renderPenyesuaian();});
 }
-
 function detailPsd(idx){
   const p=penyesuaian[idx];
-  const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">✅ Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
+  const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
   const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">🔄 Stok Opname</span>':'<span class="badge badge-gray">✏️ Manual</span>';
   let rows='';
   p.items.forEach(item=>{
@@ -2053,7 +2266,24 @@ function detailPsd(idx){
       <td style="padding:8px 12px">${item.ketbrg||'-'}</td>
     </tr>`;
   });
+  // Show opname example banner if from opname
+  const opnameBanner = p.sumber==='Stok Opname' ? `
+    <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px">
+      <strong style="color:#e65100">📋 Otomatis dari Stok Opname — ${p.refOpname||''}</strong><br>
+      <div style="margin-top:8px;line-height:2">
+        ${p.items.map(item=>`
+          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+            <span>📦 <strong>${item.nama}</strong></span>
+            <span>🏭 Sistem: <strong>${item.sistem||item.stokSistem}</strong></span>
+            <span>📲 Fisik: <strong>${item.fisik||item.stokFisik}</strong></span>
+            <span style="color:var(--red)">⚠️ Selisih: <strong>${item.selisih}</strong></span>
+            <span>📝 Keterangan: ${item.ketbrg}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>` : '';
   document.getElementById('detailPsdContent').innerHTML=`
+    ${opnameBanner}
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;background:#f9fbff;border-radius:10px;padding:14px">
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">No. Dokumen</span><br><strong style="font-family:'JetBrains Mono'">${p.nodok}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">Tanggal</span><br><strong>${p.tgl}</strong></div>
@@ -2080,37 +2310,30 @@ function detailPsd(idx){
     </div>`;
   openModal('mDetailPsd');
 }
-
 function approvePsd(idx){
-  if(!confirm('Setujui penyesuaian ini? Stok akan diperbarui.')) return;
+  if(!confirm(t('psdDisetujuiKonfirm'))) return;
   const p=penyesuaian[idx];
   p.items.forEach(item=>{
     const b=barang.find(x=>x.kode===item.kode);
-    if(b){
-      if(item.selisih<0) b.stok=Math.max(0,b.stok-item.qty);
-      else b.stok+=item.qty;
-    }
+    if(b){ if(item.selisih<0) b.stok=Math.max(0,b.stok-item.qty); else b.stok+=item.qty; }
   });
   p.status='Disetujui';
-  renderPenyesuaian(); renderDash(); renderDaftar(); saveState(); toast('✅ Penyesuaian disetujui & stok diperbarui');
+  renderPenyesuaian(); renderDash(); renderDaftar(); saveState(); toast(t('psdDisetujuiToast'));
 }
 function hapusPsd(idx){
-  if(!confirm('Hapus penyesuaian ini?')) return;
-  penyesuaian.splice(idx,1); renderPenyesuaian(); saveState(); toast('🗑️ Penyesuaian dihapus');
+  if(!confirm(t('hapusKonfirm'))) return;
+  penyesuaian.splice(idx,1); renderPenyesuaian(); saveState(); toast(t('psdDihapus'));
 }
 
 // ══════════════════════════════════════════
-//  LAPORAN — HPP dari Average
+//  LAPORAN
 // ══════════════════════════════════════════
 function getLapData(){
   const penjualan=keluar.reduce((s,k)=>s+k.total,0);
-  // HPP dari transaksi keluar menggunakan metode average
   const hppTotal=keluar.reduce((s,k)=>s+(k.hpp||0),0);
   const totalPembelian=masuk.reduce((s,m)=>s+m.total,0);
   const persediaan=nilaiPersediaan();
-  const pendapatanLain=0, retPenjualan=0;
-  const totalPendapatan=penjualan+pendapatanLain-retPenjualan;
-  // Laba kotor = total penjualan - HPP (dari transaksi)
+  const totalPendapatan=penjualan;
   const labaKotor=keluar.reduce((s,k)=>s+(k.labaKotor||0),0);
   const biayaGaji=0, biayaIklan=0, biayaLain=50000;
   const totalBeban=biayaGaji+biayaIklan+biayaLain;
@@ -2122,9 +2345,8 @@ function getLapData(){
   const totalPasiva=utang+totalEkuitas;
   const kasAwal=4500000, kasOps=penjualan-totalPembelian-totalBeban;
   const kasAkhir=kasAwal+kasOps;
-  return {penjualan,retPenjualan,pendapatanLain,totalPendapatan,hppTotal,labaKotor,totalPembelian,persediaan,biayaGaji,biayaIklan,biayaLain,totalBeban,labaBersih,kas,piutang,totalAktiva,utang,modalAwal,labaDitahan,totalEkuitas,totalPasiva,kasOps,kasInvestasi:0,kasPendanaan:0,kasAwal,kasAkhir};
+  return {penjualan,totalPendapatan,hppTotal,labaKotor,totalPembelian,persediaan,biayaGaji,biayaIklan,biayaLain,totalBeban,labaBersih,kas,piutang,totalAktiva,utang,modalAwal,labaDitahan,totalEkuitas,totalPasiva,kasOps,kasAwal,kasAkhir};
 }
-
 const lapTabNames={laba:'Laba Rugi',neraca:'Neraca',kas:'Arus Kas',ekuitas:'Ekuitas',grafik:'Top Selling'};
 function updateLapBtns(tab){
   document.getElementById('lapBtnPDF').textContent=`📄 PDF ${lapTabNames[tab]||tab}`;
@@ -2132,33 +2354,27 @@ function updateLapBtns(tab){
 }
 function showLapTab(id,btn){
   currentLapTab=id;
-  ['laba','neraca','kas','ekuitas','grafik'].forEach(t=>{
-    document.getElementById('lt-'+t).style.display=t===id?'block':'none';
-  });
+  ['laba','neraca','kas','ekuitas','grafik'].forEach(t=>{document.getElementById('lt-'+t).style.display=t===id?'block':'none';});
   document.querySelectorAll('#pg-laporan .tab').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   updateLapBtns(id);
   if(id==='grafik') renderLapGrafik();
 }
-
 function renderLaporan(){
   const d=getLapData();
   const periode='April 2026';
   const isPos=d.labaBersih>=0;
-
   document.getElementById('lt-laba').innerHTML=`
-    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Laba Rugi &nbsp;|&nbsp; Periode: ${periode} &nbsp;|&nbsp; <span style="background:#dbeafe;color:#1a73e8;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700">Metode HPP: Average</span></p></div>
+    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Laba Rugi &nbsp;|&nbsp; Periode: ${periode}</p></div>
     <div class="lap-section-hd">Pendapatan</div>
     <table class="lap-table">
       <tr class="indent"><td>Penjualan Barang</td><td>${rp(d.penjualan)}</td></tr>
-      <tr class="indent"><td>Pendapatan Lain-lain</td><td>${rp(d.pendapatanLain)}</td></tr>
-      <tr class="indent neg"><td>Retur & Potongan Penjualan</td><td>(${rp(d.retPenjualan)})</td></tr>
       <tr class="sub"><td>Jumlah Pendapatan</td><td>${rp(d.totalPendapatan)}</td></tr>
     </table>
     <div class="lap-section-hd flat">Harga Pokok Penjualan (HPP — Metode Average)</div>
     <table class="lap-table">
-      <tr class="indent"><td>HPP dari Transaksi Penjualan (Qty × Harga Avg)</td><td>${rp(d.hppTotal)}</td></tr>
-      <tr class="indent"><td>Nilai Persediaan Akhir (Harga Avg)</td><td>${rp(d.persediaan)}</td></tr>
+      <tr class="indent"><td>HPP dari Transaksi Penjualan</td><td>${rp(d.hppTotal)}</td></tr>
+      <tr class="indent"><td>Nilai Persediaan Akhir</td><td>${rp(d.persediaan)}</td></tr>
       <tr class="sub neg"><td>Jumlah HPP</td><td>(${rp(d.hppTotal)})</td></tr>
     </table>
     <table class="lap-table"><tr class="lap-mid"><td><strong>Laba Kotor</strong></td><td><strong>${rp(d.labaKotor)}</strong></td></tr></table>
@@ -2171,13 +2387,12 @@ function renderLaporan(){
     </table>
     <table class="lap-table">
       <tr class="lap-total ${isPos?'laba-positif':'laba-negatif'}">
-        <td>${isPos?'💰':'📉'} Laba Bersih</td>
+        <td>${isPos?'(Untung)':'(Rugi)'} Laba Bersih</td>
         <td>${isPos?rp(d.labaBersih):'('+rp(Math.abs(d.labaBersih))+')' }</td>
       </tr>
     </table>`;
-
   document.getElementById('lt-neraca').innerHTML=`
-    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Posisi Keuangan (Neraca) &nbsp;|&nbsp; Per ${todayStr()} &nbsp;|&nbsp; <span style="background:#dbeafe;color:#1a73e8;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:700">Persediaan @ Harga Avg</span></p></div>
+    <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Posisi Keuangan (Neraca) &nbsp;|&nbsp; Per ${todayStr()}</p></div>
     <div class="neraca-grid">
       <div class="neraca-aktiva">
         <h5>AKTIVA</h5>
@@ -2207,8 +2422,6 @@ function renderLaporan(){
         <table class="lap-table"><tr class="lap-total"><td>Total Pasiva</td><td>${rp(d.totalPasiva)}</td></tr></table>
       </div>
     </div>`;
-
-  const kasNet=d.kasOps;
   document.getElementById('lt-kas').innerHTML=`
     <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Arus Kas &nbsp;|&nbsp; Periode: ${periode}</p></div>
     <div class="lap-section-hd">Aktivitas Operasi</div>
@@ -2218,16 +2431,11 @@ function renderLaporan(){
       <tr class="indent neg"><td>Pembayaran Beban Operasional</td><td>(${rp(d.totalBeban)})</td></tr>
       <tr class="sub"><td>Arus Kas dari Aktivitas Operasi</td><td>${rp(d.kasOps)}</td></tr>
     </table>
-    <div class="lap-section-hd gray flat">Aktivitas Investasi</div>
     <table class="lap-table">
-      <tr class="sub"><td>Arus Kas dari Aktivitas Investasi</td><td>${rp(0)}</td></tr>
-    </table>
-    <table class="lap-table">
-      <tr class="lap-mid"><td>Kenaikan Kas Bersih</td><td>${rp(kasNet)}</td></tr>
+      <tr class="lap-mid"><td>Kenaikan Kas Bersih</td><td>${rp(d.kasOps)}</td></tr>
       <tr class="indent"><td>Kas Awal Periode</td><td>${rp(d.kasAwal)}</td></tr>
-      <tr class="lap-total"><td>💵 Kas Akhir Periode</td><td>${rp(d.kasAkhir)}</td></tr>
+      <tr class="lap-total"><td>Kas Akhir Periode</td><td>${rp(d.kasAkhir)}</td></tr>
     </table>`;
-
   const modalSaham=d.modalAwal;
   document.getElementById('lt-ekuitas').innerHTML=`
     <div class="lap-header"><h2>Toko Jago Sumberarum</h2><p>Laporan Perubahan Ekuitas &nbsp;|&nbsp; Periode: 01/04/2026 – 30/04/2026</p></div>
@@ -2241,10 +2449,8 @@ function renderLaporan(){
         <tr class="total-row"><td colspan="2">TOTAL</td><td>${fmt(modalSaham+d.labaDitahan)}</td><td>${fmt(0)}</td><td>${fmt(d.labaBersih)}</td><td>${fmt(d.totalEkuitas)}</td></tr>
       </tbody>
     </table></div>`;
-
   updateLapBtns(currentLapTab);
 }
-
 function renderLapGrafik(){
   if(lapCharts.line) lapCharts.line.destroy();
   if(lapCharts.bar) lapCharts.bar.destroy();
@@ -2274,25 +2480,25 @@ function renderPag(elId,pages,current,cb){
 // ══════════════════════════════════════════
 function toggleBtn(el){ el.classList.toggle('on'); }
 function toggleDark(el){ el.classList.toggle('on'); document.body.classList.toggle('dark'); saveState(); }
-function simpanToko(){ saveState(); toast('💾 Data toko disimpan'); }
+function simpanToko(){ saveState(); toast(t('tokoDisimpan')); }
 function checkPW(){
   const pw=document.getElementById('s-pbaru').value;
   const el=document.getElementById('pwStr');
-  let s='Lemah',c='var(--red)';
-  if(pw.length>=8){ s='Sedang'; c='var(--warn)'; }
-  if(pw.length>=12&&/[A-Z]/.test(pw)&&/[0-9]/.test(pw)){ s='Kuat'; c='var(--green)'; }
-  el.textContent=pw?'Kekuatan: '+s:''; el.style.color=c;
+  let s=t('lemah'),c='var(--red)';
+  if(pw.length>=8){ s=t('sedang'); c='var(--warn)'; }
+  if(pw.length>=12&&/[A-Z]/.test(pw)&&/[0-9]/.test(pw)){ s=t('kuat'); c='var(--green)'; }
+  el.textContent=pw?t('kekuatan')+': '+s:''; el.style.color=c;
 }
 function ubahPW(){
   const lama=document.getElementById('s-plama').value;
   const baru=document.getElementById('s-pbaru').value;
   const conf=document.getElementById('s-pconf').value;
-  if(lama!==currentPW){ toast('Password lama salah',true); return; }
-  if(baru.length<8){ toast('Password minimal 8 karakter',true); return; }
-  if(baru!==conf){ toast('Konfirmasi tidak cocok',true); return; }
+  if(lama!==currentPW){ toast(t('passwordLamaSalah'),true); return; }
+  if(baru.length<8){ toast(t('passwordMin8'),true); return; }
+  if(baru!==conf){ toast(t('konfirmasiTidakCocok'),true); return; }
   currentPW=baru;
   ['s-plama','s-pbaru','s-pconf'].forEach(id=>document.getElementById(id).value='');
-  saveState(); toast('🔒 Password berhasil diubah');
+  saveState(); toast(t('passwordBerhasil'));
 }
 
 // ══════════════════════════════════════════
@@ -2301,7 +2507,7 @@ function ubahPW(){
 function dlCSV(type){
   let csv='',fn='';
   if(type==='barang'){
-    csv='Kode,Nama,Kategori,Satuan,Harga Beli,Harga Rata-rata (Avg),Harga Jual,Stok,Nilai Persediaan,Lokasi\n';
+    csv='Kode,Nama,Kategori,Satuan,Harga Beli,Harga Rata-rata,Harga Jual,Stok,Nilai Persediaan,Lokasi\n';
     barang.forEach(b=>csv+=`${b.kode},${b.nama},${b.kat},${b.sat},${b.hb},${b.hargaAvg||b.hb},${b.hj},${b.stok},${(b.hargaAvg||b.hb)*b.stok},${b.lok}\n`);
     fn='daftar_barang.csv';
   } else if(type==='masuk'){
@@ -2325,9 +2531,7 @@ function dlCSV(type){
   a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
   a.download=fn; a.click(); toast('⬇️ '+fn+' didownload');
 }
-
 function getReportName(tab){ return ({laba:'laba_rugi',neraca:'neraca',kas:'arus_kas',ekuitas:'ekuitas',grafik:'top_selling'})[tab]||'laporan'; }
-
 function dlPDFByTab(tab){
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF();
@@ -2340,7 +2544,7 @@ function dlPDFByTab(tab){
     doc.setFontSize(15);doc.setFont(undefined,'bold');doc.setTextColor(26,42,58);
     doc.text('Toko Jago Sumberarum',105,y,{align:'center'}); y+=7;
     doc.setFontSize(11);doc.setFont(undefined,'normal');doc.setTextColor(107,127,153);
-    doc.text(judul+' | '+sub+' | Metode: HPP Average',105,y,{align:'center'}); y+=8;
+    doc.text(judul+' | '+sub,105,y,{align:'center'}); y+=8;
     doc.setDrawColor(224,231,239);doc.line(14,y,196,y);y+=8;resetFont();
   };
   const section=(title,color=[26,115,232])=>{
@@ -2358,9 +2562,7 @@ function dlPDFByTab(tab){
     doc.text(String(value),194,y,{align:'right'});
     y+=6;resetFont();
   };
-  const line=()=>{doc.setDrawColor(224,231,239);doc.line(14,y-2,196,y-2);};
   const fileName=getReportName(tab)+'.pdf';
-
   if(tab==='laba'){
     header('Laporan Laba Rugi','Periode: '+periode);
     section('Pendapatan');
@@ -2368,20 +2570,10 @@ function dlPDFByTab(tab){
     row('Jumlah Pendapatan',rp(d.totalPendapatan),{bold:true,fill:[244,248,252]});y+=3;
     section('HPP (Metode Average)');
     row('HPP dari Transaksi Penjualan','('+rp(d.hppTotal)+')',{indent:true,neg:true});
-    line();row('Jumlah HPP','('+rp(d.hppTotal)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
     row('Laba Kotor',rp(d.labaKotor),{bold:true,fill:[219,234,254]});y+=3;
     section('Beban Operasional',[75,94,117]);
-    row('Beban Lain-lain',rp(d.biayaLain),{indent:true});
     row('Total Beban','('+rp(d.totalBeban)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
     row('Laba Bersih',rp(d.labaBersih),{total:true,fill:d.labaBersih>=0?[220,252,231]:[253,236,234]});
-  } else if(tab==='neraca'){
-    header('Laporan Posisi Keuangan (Neraca)','Per '+todayStr());
-    const pair=(l,lv,r,rv,b=false)=>{checkPage(8);doc.setFontSize(9.2);doc.setFont(undefined,b?'bold':'normal');doc.text(l,16,y);doc.text(lv,98,y,{align:'right'});doc.text(r,114,y);doc.text(rv,194,y,{align:'right'});y+=6;resetFont();};
-    pair('Kas & Setara Kas',rp(d.kas),'Utang Usaha',rp(d.utang));
-    pair('Persediaan (Avg)',rp(d.persediaan),'Modal Pemilik',rp(d.modalAwal));
-    pair('','','Laba Bersih',rp(d.labaBersih));
-    doc.setDrawColor(224,231,239);doc.line(14,y-2,196,y-2);
-    pair('Total Aktiva',rp(d.totalAktiva),'Total Pasiva',rp(d.totalPasiva),true);
   } else {
     header('Laporan: '+lapTabNames[tab],'Per '+todayStr());
     row('Total Penjualan',rp(d.penjualan));
@@ -2389,20 +2581,18 @@ function dlPDFByTab(tab){
     row('Laba Kotor',rp(d.labaKotor));
     row('Laba Bersih',rp(d.labaBersih),{total:true,fill:[220,252,231]});
   }
-  doc.save(fileName); toast('📄 PDF '+lapTabNames[tab]+' didownload');
+  doc.save(fileName); toast('📄 PDF didownload');
 }
-
 function dlExcelByTab(tab){
   const d=getLapData();
   let csv=''; const name=lapTabNames[tab]||tab;
-  csv+=`${name.toUpperCase()} - TOKO JAGO SUMBERARUM\nMetode HPP: Average (Rata-rata Bergerak)\nDicetak: ${todayStr()}\n\n`;
+  csv+=`${name.toUpperCase()} - TOKO JAGO SUMBERARUM\nMetode HPP: Average\nDicetak: ${todayStr()}\n\n`;
   if(tab==='laba') csv+='Keterangan,Jumlah\n'+`Penjualan,${d.penjualan}\nJumlah Pendapatan,${d.totalPendapatan}\nHPP (Average),${d.hppTotal}\nLaba Kotor,${d.labaKotor}\nTotal Beban,${d.totalBeban}\nLaba Bersih,${d.labaBersih}\n`;
   else if(tab==='neraca') csv+='Keterangan,Jumlah\n'+`Kas,${d.kas}\nPersediaan (Avg),${d.persediaan}\nTotal Aktiva,${d.totalAktiva}\nUtang,${d.utang}\nModal,${d.modalAwal}\nTotal Pasiva,${d.totalPasiva}\n`;
   else if(tab==='kas') csv+='Keterangan,Jumlah\n'+`Penerimaan,${d.penjualan}\nPembayaran,${d.totalPembelian}\nKas Operasi,${d.kasOps}\nKas Awal,${d.kasAwal}\nKas Akhir,${d.kasAkhir}\n`;
-  else { csv+='Produk,Qty Terjual,Total Penjualan,Total HPP\n'; [...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0),hpp:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+(k.hpp||0),0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty).forEach(x=>csv+=`${x.nama},${x.qty},${x.total},${x.hpp}\n`); }
-  const a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv); a.download=getReportName(tab)+'.csv'; a.click(); toast('📊 Excel '+name+' didownload');
+  else { csv+='Produk,Qty Terjual,Total Penjualan\n'; [...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty).forEach(x=>csv+=`${x.nama},${x.qty},${x.total}\n`); }
+  const a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv); a.download=getReportName(tab)+'.csv'; a.click(); toast('📊 Excel didownload');
 }
-
 function dlFakturModal(){
   const kode=document.getElementById('mm-brg').value;
   const jml=parseInt(document.getElementById('mm-jml').value)||1;
@@ -2410,7 +2600,7 @@ function dlFakturModal(){
   const fak=document.getElementById('mm-fak').value||'FK-DRAFT';
   const sup=document.getElementById('mm-sup').value;
   const b=barang.find(x=>x.kode===kode);
-  if(!b){ toast('Pilih barang terlebih dahulu',true); return; }
+  if(!b){ toast(t('pilihBarang'),true); return; }
   cetakFakturData({fak,tgl:todayStr(),sup,nama:b.nama,sat:b.sat,jml,hb:hb||b.hb,total:jml*(hb||b.hb)});
 }
 function dlFakturData(idx){ cetakFakturData(masuk[idx]); }
@@ -2432,9 +2622,9 @@ function printLap(){ window.print(); }
 // ══════════════════════════════════════════
 //  LOCAL STORAGE
 // ══════════════════════════════════════════
-const LS_KEY='tokoJagoSumberarum_v4_avg';
+const LS_KEY='tokoJagoSumberarum_v5_multilang';
 function saveState(){
-  const state={barang,masuk,keluar,penyesuaian,opname,currentPW,stokBatas,periodState,dark:document.body.classList.contains('dark')};
+  const state={barang,masuk,keluar,penyesuaian,opname,currentPW,stokBatas,periodState,currentLang,currentCurrency,profilePhotoData,dark:document.body.classList.contains('dark')};
   try{ localStorage.setItem(LS_KEY,JSON.stringify(state)); }catch(e){}
 }
 function loadState(){
@@ -2450,21 +2640,23 @@ function loadState(){
     if(s.currentPW) currentPW=s.currentPW;
     if(s.stokBatas) stokBatas=s.stokBatas;
     if(s.periodState) periodState=s.periodState;
+    if(s.currentLang){ currentLang=s.currentLang; document.getElementById('s-lang').value=s.currentLang; }
+    if(s.currentCurrency){ currentCurrency=s.currentCurrency; document.getElementById('s-curr').value=s.currentCurrency; }
+    if(s.profilePhotoData){ profilePhotoData=s.profilePhotoData; }
     if(s.dark) document.body.classList.add('dark');
   }catch(e){ console.warn('Gagal load data lokal',e); }
 }
-
 function showForgotPassword(){ openModal('mForgot'); }
 function resetForgotPassword(){
   const u=document.getElementById('fp-user').value.trim();
   const n=document.getElementById('fp-new').value;
   const c=document.getElementById('fp-conf').value;
-  if(u!=='admin'){ toast('Username tidak ditemukan',true); return; }
-  if(n.length<8){ toast('Password minimal 8 karakter',true); return; }
-  if(n!==c){ toast('Konfirmasi password tidak cocok',true); return; }
+  if(u!=='admin'){ toast(t('usernameTidakDitemukan'),true); return; }
+  if(n.length<8){ toast(t('passwordMin8'),true); return; }
+  if(n!==c){ toast(t('konfirmasiPasswordTidakCocok'),true); return; }
   currentPW=n; saveState();
   ['fp-user','fp-new','fp-conf'].forEach(id=>document.getElementById(id).value='');
-  closeModal('mForgot'); toast('🔑 Password berhasil direset');
+  closeModal('mForgot'); toast(t('resetPasswordBerhasil'));
 }
 
 window.addEventListener('beforeunload',saveState);
@@ -2475,6 +2667,8 @@ setInterval(saveState,3000);
 // ══════════════════════════════════════════
 function initAll(){
   loadState();
+  applyLang();
+  updateAvatarDisplay();
   if(document.body.classList.contains('dark')){
     const dt=document.getElementById('darkToggle');
     if(dt) dt.classList.add('on');

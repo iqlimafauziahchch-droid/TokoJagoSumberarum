@@ -444,7 +444,7 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
     </div>
     <div class="tbl-wrap">
       <table>
-        <thead><tr><th>#</th><th data-key="kode">Kode</th><th data-key="nama">Nama</th><th data-key="kategori">Kategori</th><th data-key="harga_beli">Harga Beli</th><th>Harga Rata-rata <span class="avg-tag">AVG</span></th><th data-key="harga_jual">Harga Jual</th><th data-key="stok">Stok</th><th data-key="nilai_persediaan">Nilai Persediaan</th><th data-key="status">Status</th><th data-key="aksi">Aksi</th></tr></thead>
+        <thead><tr><th>#</th><th data-key="kode">Kode</th><th data-key="nama">Nama</th><th data-key="kategori">Kategori</th><th data-key="harga_beli">Harga Beli</th><th>Harga Rata-rata </th><th data-key="harga_jual">Harga Jual</th><th data-key="stok">Stok</th><th data-key="nilai_persediaan">Nilai Persediaan</th><th data-key="status">Status</th><th data-key="aksi">Aksi</th></tr></thead>
         <tbody id="tDaftar"></tbody>
       </table>
     </div>
@@ -743,7 +743,7 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
       <div class="fg"><label>Stok Awal</label><input id="mb-stok" type="number" value="0" min="0"/></div>
       <div class="fg"><label>Lokasi Rak</label><input id="mb-lok" placeholder="A1"/></div>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">💡 Harga beli juga dipakai sebagai harga rata-rata awal</p>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Note: Harga beli juga dipakai sebagai harga rata-rata awal</p>
     <button class="btn btn-teal" onclick="addBarang()" style="width:100%">💾 Simpan Barang</button>
   </div>
 </div>
@@ -834,7 +834,7 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
     </div>
     <div id="mk-hpp-detail" style="display:none;background:var(--teal-l);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12.5px;color:var(--teal-d)"></div>
     <div class="fg"><label>Metode Pembayaran</label>
-      <select id="mk-bayar"><option>Tunai</option><option>Transfer Bank</option><option>QRIS</option><option>Kartu Debit</option></select>
+      <select id="mk-bayar"><option>Tunai</option><option>Transfer Bank</option><option>QRIS</option><option>Kartu Debit</option><option>Piutang</option></select>
     </div>
     <button class="btn btn-teal" onclick="addKeluar()" style="width:100%">💾 Simpan Transaksi</button>
   </div>
@@ -876,7 +876,7 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
             <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Stok Sistem</th>
             <th style="padding:9px 12px;text-align:center;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Stok Fisik</th>
             <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Selisih</th>
-            <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Nilai Selisih <span class="avg-tag">AVG</span></th>
+            <th style="padding:9px 12px;text-align:right;font-size:11px;color:var(--muted);text-transform:uppercase;border-bottom:1px solid var(--border)">Nilai Selisih </th>
           </tr>
         </thead>
         <tbody id="opname-items-table"></tbody>
@@ -886,7 +886,7 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
       <button class="btn btn-ghost" onclick="saveOpname('Draft')" style="flex:1">💾 Simpan Draft</button>
       <button class="btn btn-purple" onclick="saveOpname('Selesai')" style="flex:1">Selesaikan Opname</button>
     </div>
-    <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center">⚡ Saat "Selesaikan", selisih stok otomatis dibuatkan entri Penyesuaian Barang</p>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px;text-align:center"> Saat "Selesaikan", selisih stok otomatis dibuatkan entri Penyesuaian Barang</p>
   </div>
 </div>
 
@@ -964,6 +964,50 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
       <div class="fg"><label>Konfirmasi</label><input id="fp-conf" type="password"/></div>
     </div>
     <button class="btn btn-teal" onclick="resetForgotPassword()" style="width:100%">🔑 Reset Password</button>
+  </div>
+</div>
+
+<!-- Edit Penyesuaian Barang -->
+<div id="mEditPsd" class="modal-bg">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('mEditPsd')">×</button>
+    <h3>✏️ Edit Penyesuaian Barang</h3>
+    <input id="epsd-idx" type="hidden"/>
+    <div class="fg-row">
+      <div class="fg"><label>No. Dokumen</label><input id="epsd-nodok"/></div>
+      <div class="fg"><label>Tanggal</label><input id="epsd-tgl" type="date"/></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Gudang</label>
+        <select id="epsd-gudang"><option>Gudang Utama</option><option>Gudang 2</option><option>Etalase</option></select>
+      </div>
+      <div class="fg"><label>Jenis Penyesuaian</label>
+        <select id="epsd-jenis"><option>Barang Rusak</option><option>Barang Return</option><option>Selisih Stok</option></select>
+      </div>
+    </div>
+    <div class="fg"><label>Keterangan</label><input id="epsd-ket"/></div>
+    <button class="btn btn-teal" onclick="saveEditPsd()" style="width:100%;margin-top:8px">💾 Simpan Perubahan</button>
+  </div>
+</div>
+
+<!-- Edit Stok Opname -->
+<div id="mEditOpname" class="modal-bg">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('mEditOpname')">×</button>
+    <h3>✏️ Edit Stok Opname</h3>
+    <input id="eop-idx" type="hidden"/>
+    <div class="fg-row">
+      <div class="fg"><label>No. Dokumen</label><input id="eop-nodok"/></div>
+      <div class="fg"><label>Tanggal</label><input id="eop-tgl" type="date"/></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Gudang</label>
+        <select id="eop-gudang"><option>Gudang Utama</option><option>Gudang 2</option><option>Etalase</option></select>
+      </div>
+      <div class="fg"><label>Petugas</label><input id="eop-petugas"/></div>
+    </div>
+    <div class="fg"><label>Keterangan</label><input id="eop-ket"/></div>
+    <button class="btn btn-teal" onclick="saveEditOpname()" style="width:100%;margin-top:8px">💾 Simpan Perubahan</button>
   </div>
 </div>
 
@@ -1151,6 +1195,62 @@ function changeLang(lang) {
   renderPenyesuaian();
   renderLaporan();
   toast(lang === 'en' ? '🇬🇧 Language changed to English' : '🇮🇩 Bahasa diubah ke Indonesia');
+}
+
+// ── HELPER DATE ──
+function dispToInput(tgl){
+  if(!tgl) return '';
+  const parts=tgl.split('/');
+  if(parts.length===3) return `${parts[2]}-${parts[1]}-${parts[0]}`;
+  return tgl;
+}
+
+// ── EDIT PENYESUAIAN ──
+function editPsd(idx){
+  const p=penyesuaian[idx];
+  if(p.status!=='Draft'){ toast('Hanya Draft yang bisa diedit',true); return; }
+  document.getElementById('epsd-idx').value=idx;
+  document.getElementById('epsd-nodok').value=p.nodok;
+  document.getElementById('epsd-tgl').value=dispToInput(p.tgl);
+  document.getElementById('epsd-gudang').value=p.gudang;
+  document.getElementById('epsd-jenis').value=p.jenis;
+  document.getElementById('epsd-ket').value=p.ket||'';
+  openModal('mEditPsd');
+}
+function saveEditPsd(){
+  const idx=parseInt(document.getElementById('epsd-idx').value);
+  const p=penyesuaian[idx];
+  p.nodok=document.getElementById('epsd-nodok').value.trim()||p.nodok;
+  p.tgl=inputToDisp(document.getElementById('epsd-tgl').value);
+  p.gudang=document.getElementById('epsd-gudang').value;
+  p.jenis=document.getElementById('epsd-jenis').value;
+  p.ket=document.getElementById('epsd-ket').value;
+  closeModal('mEditPsd');
+  renderPenyesuaian(); saveState(); toast('✏️ Penyesuaian berhasil diupdate');
+}
+
+// ── EDIT STOK OPNAME ──
+function editOpname(idx){
+  const op=opname[idx];
+  if(op.status!=='Draft'){ toast('Hanya Draft yang bisa diedit',true); return; }
+  document.getElementById('eop-idx').value=idx;
+  document.getElementById('eop-nodok').value=op.nodok;
+  document.getElementById('eop-tgl').value=dispToInput(op.tgl);
+  document.getElementById('eop-gudang').value=op.gudang;
+  document.getElementById('eop-petugas').value=op.petugas||'';
+  document.getElementById('eop-ket').value=op.ket||'';
+  openModal('mEditOpname');
+}
+function saveEditOpname(){
+  const idx=parseInt(document.getElementById('eop-idx').value);
+  const op=opname[idx];
+  op.nodok=document.getElementById('eop-nodok').value.trim()||op.nodok;
+  op.tgl=inputToDisp(document.getElementById('eop-tgl').value);
+  op.gudang=document.getElementById('eop-gudang').value;
+  op.petugas=document.getElementById('eop-petugas').value;
+  op.ket=document.getElementById('eop-ket').value;
+  closeModal('mEditOpname');
+  renderOpname(); saveState(); toast('✏️ Stok Opname berhasil diupdate');
 }
 
 // ══════════════════════════════════════════
@@ -2040,7 +2140,10 @@ function renderOpname(){
       <td>${statusBadge}</td>
       <td>
         <button class="btn-icon btn-sm" onclick="detailOpname(${ri})" title="Detail">🔍</button>
-        ${op.status==='Draft'?`<button class="btn-icon btn-sm" onclick="finishOpname(${ri})" title="Selesaikan" style="color:var(--teal-d)">✅</button>`:''}
+        ${op.status==='Draft'?`
+          <button class="btn-icon btn-sm" onclick="editOpname(${ri})" title="Edit" style="color:var(--blue)">✏️</button>
+          <button class="btn-icon btn-sm" onclick="finishOpname(${ri})" title="Selesaikan" style="color:var(--teal-d)">✅</button>
+        `:''}
         <button class="btn-icon btn-sm" onclick="hapusOpname(${ri})" title="Hapus" style="color:var(--red)">🗑️</button>
       </td>
     </tr>`;
@@ -2067,17 +2170,6 @@ function detailOpname(idx){
   });
   const totalKerugian=op.items.filter(x=>x.selisih<0).reduce((s,x)=>s+Math.abs(x.nilaiSelisih),0);
   document.getElementById('detailOpnameContent').innerHTML=`
-    <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px">
-      <strong style="color:#e65100;font-size:14px">📋 Contoh Stok Opname — Indomie Goreng</strong><br>
-      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div>🏭 Stok Sistem: <strong>100 pcs</strong></div>
-        <div>📦 Stok Fisik: <strong>95 pcs</strong></div>
-        <div>⚠️ Selisih: <strong style="color:var(--red)">-5 pcs</strong></div>
-        <div>💸 Nilai Selisih: <strong style="color:var(--red)">${rp(5*2800)}</strong></div>
-      </div>
-      <div style="margin-top:8px;padding:8px;background:#fce4ec;border-radius:8px;font-size:12px">
-        ⚡ Auto Penyesuaian: <strong>PSD-AUTO-${op.nodok}</strong> • Jenis: Selisih Stok • Qty: -5
-      </div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;background:#f9fbff;border-radius:10px;padding:14px">
       <div><span style="font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:700">No. Dokumen</span><br><strong style="font-family:'JetBrains Mono'">${op.nodok}</strong></div>
@@ -2224,11 +2316,12 @@ function renderPenyesuaian(){
     tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">${t('belumAdaPsd')}</td></tr>`;
     renderPag('pagPsd',1,1,()=>{}); return;
   }
+  
   slice.forEach((p,i)=>{
     const ri=penyesuaian.indexOf(p);
     const statusBadge=p.status==='Disetujui'?'<span class="badge badge-green">Disetujui</span>':'<span class="badge badge-gray">📝 Draft</span>';
-    const jenisBadge=p.jenis==='Barang Rusak'?'<span class="badge badge-red">🔴 Rusak</span>':p.jenis==='Barang Return'?'<span class="badge badge-blue">🔄 Return</span>':'<span class="badge badge-warn">Selisih</span>';
-    const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">Opname</span>':'<span class="badge badge-gray">✏️ Manual</span>';
+    const jenisBadge=p.jenis==='Barang Rusak'?'<span class="badge badge-red"> Rusak</span>':p.jenis==='Barang Return'?'<span class="badge badge-blue">🔄 Return</span>':'<span class="badge badge-warn">Selisih</span>';
+    const sumberBadge=p.sumber==='Stok Opname'?'<span class="badge badge-purple">Opname</span>':'<span class="badge badge-gray"> Manual</span>';
     tbody.innerHTML+=`<tr class="${i%2===1?'zeb':''}">
       <td class="mono">${(psdPage-1)*psdPP+i+1}</td>
       <td>${p.tgl}</td>
@@ -2241,7 +2334,10 @@ function renderPenyesuaian(){
       <td>${statusBadge}</td>
       <td>
         <button class="btn-icon btn-sm" onclick="detailPsd(${ri})" title="Detail">🔍</button>
-        ${p.status==='Draft'?`<button class="btn-icon btn-sm" onclick="approvePsd(${ri})" title="Setujui" style="color:var(--teal-d)">✅</button>`:''}
+        ${p.status==='Draft'?`
+          <button class="btn-icon btn-sm" onclick="editPsd(${ri})" title="Edit" style="color:var(--blue)">✏️</button>
+          <button class="btn-icon btn-sm" onclick="approvePsd(${ri})" title="Setujui" style="color:var(--teal-d)">✅</button>
+        `:''}
         <button class="btn-icon btn-sm" onclick="hapusPsd(${ri})" title="Hapus" style="color:var(--red)">🗑️</button>
       </td>
     </tr>`;
@@ -2268,19 +2364,6 @@ function detailPsd(idx){
   });
   // Show opname example banner if from opname
   const opnameBanner = p.sumber==='Stok Opname' ? `
-    <div style="background:#fff3e0;border:1px solid #ffb74d;border-radius:10px;padding:14px;margin-bottom:16px;font-size:13px">
-      <strong style="color:#e65100">📋 Otomatis dari Stok Opname — ${p.refOpname||''}</strong><br>
-      <div style="margin-top:8px;line-height:2">
-        ${p.items.map(item=>`
-          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
-            <span>📦 <strong>${item.nama}</strong></span>
-            <span>🏭 Sistem: <strong>${item.sistem||item.stokSistem}</strong></span>
-            <span>📲 Fisik: <strong>${item.fisik||item.stokFisik}</strong></span>
-            <span style="color:var(--red)">⚠️ Selisih: <strong>${item.selisih}</strong></span>
-            <span>📝 Keterangan: ${item.ketbrg}</span>
-          </div>
-        `).join('')}
-      </div>
     </div>` : '';
   document.getElementById('detailPsdContent').innerHTML=`
     ${opnameBanner}
@@ -2347,7 +2430,7 @@ function getLapData(){
   const kasAkhir=kasAwal+kasOps;
   return {penjualan,totalPendapatan,hppTotal,labaKotor,totalPembelian,persediaan,biayaGaji,biayaIklan,biayaLain,totalBeban,labaBersih,kas,piutang,totalAktiva,utang,modalAwal,labaDitahan,totalEkuitas,totalPasiva,kasOps,kasAwal,kasAkhir};
 }
-const lapTabNames={laba:'Laba Rugi',neraca:'Neraca',kas:'Arus Kas',ekuitas:'Ekuitas',grafik:'Top Selling'};
+const lapTabNames={laba:'Laba Rugi',neraca:'Neraca',kas:'Arus Kas',ekuitas:'Ekuitas',grafik:'Grafik & Analisis'};
 function updateLapBtns(tab){
   document.getElementById('lapBtnPDF').textContent=`📄 PDF ${lapTabNames[tab]||tab}`;
   document.getElementById('lapBtnExcel').textContent=`📊 Excel ${lapTabNames[tab]||tab}`;
@@ -2583,41 +2666,234 @@ function dlPDFByTab(tab){
   }
   doc.save(fileName); toast('📄 PDF didownload');
 }
-function dlExcelByTab(tab){
+function dlPDFByTab(tab){
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF();
   const d=getLapData();
-  let csv=''; const name=lapTabNames[tab]||tab;
-  csv+=`${name.toUpperCase()} - TOKO JAGO SUMBERARUM\nMetode HPP: Average\nDicetak: ${todayStr()}\n\n`;
-  if(tab==='laba') csv+='Keterangan,Jumlah\n'+`Penjualan,${d.penjualan}\nJumlah Pendapatan,${d.totalPendapatan}\nHPP (Average),${d.hppTotal}\nLaba Kotor,${d.labaKotor}\nTotal Beban,${d.totalBeban}\nLaba Bersih,${d.labaBersih}\n`;
-  else if(tab==='neraca') csv+='Keterangan,Jumlah\n'+`Kas,${d.kas}\nPersediaan (Avg),${d.persediaan}\nTotal Aktiva,${d.totalAktiva}\nUtang,${d.utang}\nModal,${d.modalAwal}\nTotal Pasiva,${d.totalPasiva}\n`;
-  else if(tab==='kas') csv+='Keterangan,Jumlah\n'+`Penerimaan,${d.penjualan}\nPembayaran,${d.totalPembelian}\nKas Operasi,${d.kasOps}\nKas Awal,${d.kasAwal}\nKas Akhir,${d.kasAkhir}\n`;
-  else { csv+='Produk,Qty Terjual,Total Penjualan\n'; [...barang].map(b=>({nama:b.nama,qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0)})).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty).forEach(x=>csv+=`${x.nama},${x.qty},${x.total}\n`); }
-  const a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv); a.download=getReportName(tab)+'.csv'; a.click(); toast('📊 Excel didownload');
+  const periode='April 2026';
+  let y=16;
+  const resetFont=()=>{doc.setTextColor(26,42,58);doc.setFont(undefined,'normal');doc.setFontSize(9.5);};
+  const checkPage=(h=10)=>{if(y+h>282){doc.addPage();y=16;}};
+  const header=(judul,sub)=>{
+    doc.setFontSize(15);doc.setFont(undefined,'bold');doc.setTextColor(26,42,58);
+    doc.text('Toko Jago Sumberarum',105,y,{align:'center'}); y+=7;
+    doc.setFontSize(11);doc.setFont(undefined,'normal');doc.setTextColor(107,127,153);
+    doc.text(judul+' | '+sub,105,y,{align:'center'}); y+=8;
+    doc.setDrawColor(224,231,239);doc.line(14,y,196,y);y+=8;resetFont();
+  };
+  const section=(title,color=[26,115,232])=>{
+    checkPage(12);doc.setFillColor(...color);doc.roundedRect(14,y,182,8,1.5,1.5,'F');
+    doc.setTextColor(255,255,255);doc.setFontSize(9);doc.setFont(undefined,'bold');doc.text(title.toUpperCase(),18,y+5.5);
+    y+=11;resetFont();
+  };
+  const row=(label,value,opt={})=>{
+    checkPage(8);
+    const {indent=false,bold=false,neg=false,fill=null,total=false}=opt;
+    if(fill){doc.setFillColor(...fill);doc.rect(14,y-4,182,8,'F');}
+    doc.setFontSize(total?10.5:9.5);doc.setFont(undefined,bold||total?'bold':'normal');
+    doc.setTextColor(neg?229:26,neg?57:42,neg?53:58);
+    doc.text((indent?'    ':'')+label,16,y);
+    doc.text(String(value),194,y,{align:'right'});
+    y+=6;resetFont();
+  };
+  const fileName=getReportName(tab)+'.pdf';
+
+  if(tab==='laba'){
+    header('Laporan Laba Rugi','Periode: '+periode);
+    section('Pendapatan');
+    row('Penjualan Barang',rp(d.penjualan),{indent:true});
+    row('Jumlah Pendapatan',rp(d.totalPendapatan),{bold:true,fill:[244,248,252]});y+=3;
+    section('HPP (Metode Average)',[75,94,117]);
+    row('HPP dari Transaksi Penjualan','('+rp(d.hppTotal)+')',{indent:true,neg:true});
+    row('Nilai Persediaan Akhir',rp(d.persediaan),{indent:true});
+    row('Jumlah HPP','('+rp(d.hppTotal)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
+    row('Laba Kotor',rp(d.labaKotor),{bold:true,fill:[219,234,254]});y+=3;
+    section('Beban Operasional',[75,94,117]);
+    row('Beban Gaji',rp(d.biayaGaji),{indent:true});
+    row('Beban Iklan & Promosi',rp(d.biayaIklan),{indent:true});
+    row('Beban Lain-lain',rp(d.biayaLain),{indent:true});
+    row('Total Beban','('+rp(d.totalBeban)+')',{bold:true,neg:true,fill:[244,248,252]});y+=3;
+    const isPos=d.labaBersih>=0;
+    row((isPos?'(Untung) ':'(Rugi) ')+'Laba Bersih',isPos?rp(d.labaBersih):'('+rp(Math.abs(d.labaBersih))+')',{total:true,fill:isPos?[220,252,231]:[253,236,234]});
+
+  } else if(tab==='neraca'){
+    header('Laporan Posisi Keuangan (Neraca)','Per '+todayStr());
+    // AKTIVA
+    section('Aktiva',[26,115,232]);
+    doc.setFontSize(9);doc.setFont(undefined,'bold');doc.setTextColor(107,127,153);
+    doc.text('AKTIVA LANCAR',16,y);y+=6;resetFont();
+    row('Kas & Setara Kas',rp(d.kas),{indent:true});
+    row('Piutang Usaha',rp(d.piutang),{indent:true});
+    row('Persediaan Barang (Avg)',rp(d.persediaan),{indent:true});
+    row('Total Aktiva Lancar',rp(d.totalAktiva),{bold:true,fill:[244,248,252]});y+=2;
+    row('Total Aktiva',rp(d.totalAktiva),{total:true,fill:[219,234,254]});y+=5;
+    // PASIVA
+    section('Pasiva',[75,94,117]);
+    doc.setFontSize(9);doc.setFont(undefined,'bold');doc.setTextColor(107,127,153);
+    doc.text('KEWAJIBAN',16,y);y+=6;resetFont();
+    row('Utang Usaha',rp(d.utang),{indent:true});
+    row('Total Kewajiban',rp(d.utang),{bold:true,fill:[244,248,252]});y+=3;
+    doc.setFontSize(9);doc.setFont(undefined,'bold');doc.setTextColor(107,127,153);
+    doc.text('EKUITAS',16,y);y+=6;resetFont();
+    row('Modal Pemilik',rp(d.modalAwal),{indent:true});
+    row('Laba Ditahan',rp(d.labaDitahan),{indent:true});
+    row('Laba Periode Ini',rp(d.labaBersih),{indent:true});
+    row('Total Ekuitas',rp(d.totalEkuitas),{bold:true,fill:[244,248,252]});y+=2;
+    row('Total Pasiva',rp(d.totalPasiva),{total:true,fill:[220,252,231]});
+
+  } else if(tab==='kas'){
+    header('Laporan Arus Kas','Periode: '+periode);
+    section('Aktivitas Operasi',[26,115,232]);
+    row('Penerimaan dari Penjualan',rp(d.penjualan),{indent:true});
+    row('Pembayaran Pembelian Barang','('+rp(d.totalPembelian)+')',{indent:true,neg:true});
+    row('Pembayaran Beban Operasional','('+rp(d.totalBeban)+')',{indent:true,neg:true});
+    row('Arus Kas dari Aktivitas Operasi',rp(d.kasOps),{bold:true,fill:[244,248,252]});y+=5;
+    row('Kenaikan Kas Bersih',rp(d.kasOps),{bold:true,fill:[219,234,254]});y+=2;
+    row('Kas Awal Periode',rp(d.kasAwal),{indent:true});
+    row('Kas Akhir Periode',rp(d.kasAkhir),{total:true,fill:[220,252,231]});
+
+  } else if(tab==='ekuitas'){
+    header('Laporan Perubahan Ekuitas','Periode: 01/04/2026 – 30/04/2026');
+    const modalSaham=d.modalAwal;
+    // Table header
+    checkPage(12);
+    const cols=[14,50,95,127,159,194];
+    const heads=['Kode','Nama Akun','Permulaan (Rp)','Debit (Rp)','Kredit (Rp)','Saldo Akhir (Rp)'];
+    doc.setFillColor(26,115,232);doc.rect(14,y-4,182,8,'F');
+    doc.setTextColor(255,255,255);doc.setFontSize(8);doc.setFont(undefined,'bold');
+    heads.forEach((h,i)=>doc.text(h,cols[i]+(i>1?3:0),y,{align:i>1?'right':'left'}));
+    y+=7;resetFont();
+    // Rows
+    const tRows=[
+      ['301','Modal Saham',fmt(modalSaham),fmt(0),fmt(0),fmt(modalSaham)],
+      ['302','Tambahan Modal Disetor',fmt(0),fmt(0),fmt(0),fmt(0)],
+      ['303','Laba Ditahan',fmt(d.labaDitahan),fmt(0),fmt(d.labaBersih),fmt(d.labaDitahan+d.labaBersih)],
+    ];
+    tRows.forEach((r,ri)=>{
+      checkPage(8);
+      if(ri%2===0){doc.setFillColor(244,248,252);doc.rect(14,y-4,182,8,'F');}
+      doc.setTextColor(26,42,58);doc.setFontSize(8.5);doc.setFont(undefined,'normal');
+      r.forEach((cell,i)=>doc.text(cell,cols[i]+(i>1?3:0),y,{align:i>1?'right':'left'}));
+      y+=7;
+    });
+    // Total row
+    checkPage(10);
+    doc.setFillColor(26,42,58);doc.rect(14,y-4,182,9,'F');
+    doc.setTextColor(255,255,255);doc.setFontSize(9);doc.setFont(undefined,'bold');
+    doc.text('TOTAL',16,y+1);
+    [fmt(modalSaham+d.labaDitahan),fmt(0),fmt(d.labaBersih),fmt(d.totalEkuitas)].forEach((v,i)=>{
+      doc.text(v,cols[i+2]+3,y+1,{align:'right'});
+    });
+    y+=12;resetFont();
+
+// Auto-render grafik kalau belum
+if(!lapCharts.line){
+  document.getElementById('lt-grafik').style.display='block';
+  renderLapGrafik();
+  document.getElementById('lt-grafik').style.display='none';
 }
-function dlFakturModal(){
-  const kode=document.getElementById('mm-brg').value;
-  const jml=parseInt(document.getElementById('mm-jml').value)||1;
-  const hb=getRp('mm-hb');
-  const fak=document.getElementById('mm-fak').value||'FK-DRAFT';
-  const sup=document.getElementById('mm-sup').value;
-  const b=barang.find(x=>x.kode===kode);
-  if(!b){ toast(t('pilihBarang'),true); return; }
-  cetakFakturData({fak,tgl:todayStr(),sup,nama:b.nama,sat:b.sat,jml,hb:hb||b.hb,total:jml*(hb||b.hb)});
+} else if(tab==='grafik'){
+  header('Laporan Grafik Analisis','Per '+todayStr());
+
+  // Ambil gambar dari canvas Chart.js yang sudah render di halaman
+  const canvasLine = document.getElementById('lapLine');
+  const canvasBar  = document.getElementById('lapBar');
+  const canvasPie  = document.getElementById('lapPie');
+
+  // Pastikan tab grafik sudah dirender dulu
+  if(!lapCharts.line || !lapCharts.bar){
+    toast('Buka tab Grafik dulu sebelum download PDF',true); return;
+  }
+
+  // Helper: tambah gambar canvas ke PDF dengan judul
+  const addChart = (canvas, judul, tinggi=70) => {
+    checkPage(tinggi+18);
+    // Judul chart
+    doc.setFontSize(10); doc.setFont(undefined,'bold'); doc.setTextColor(26,42,58);
+    doc.text(judul, 105, y, {align:'center'}); y+=6;
+    // Garis tipis
+    doc.setDrawColor(224,231,239); doc.line(14,y,196,y); y+=4;
+    try {
+      const imgData = canvas.toDataURL('image/png');
+      // Hitung lebar proporsional (max width 176)
+      const ratio = canvas.width / canvas.height;
+      const w = 176, h = w / ratio;
+      const finalH = Math.min(h, tinggi);
+      const finalW = finalH * ratio;
+      const x = (210 - finalW) / 2; // center
+      doc.addImage(imgData, 'PNG', x, y, finalW, finalH);
+      y += finalH + 10;
+    } catch(e) {
+      doc.setFontSize(9); doc.setTextColor(150,150,150);
+      doc.text('(Grafik tidak tersedia)', 105, y+10, {align:'center'});
+      y += 20;
+    }
+    resetFont();
+  };
+
+  // Summary KPI dulu
+  section('Ringkasan Kinerja', [26,115,232]);
+  const d2 = getLapData();
+  const topSelling=[...barang].map(b=>({
+    nama:b.nama,
+    qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),
+    total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0)
+  })).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty);
+  row('Total Penjualan', rp(d2.penjualan), {indent:true});
+  row('Total HPP (Average)', rp(d2.hppTotal), {indent:true});
+  row('Laba Kotor', rp(d2.labaKotor), {indent:true, bold:true, fill:[219,234,254]});
+  row('Total Produk Terjual', topSelling.reduce((s,p)=>s+p.qty,0)+' pcs', {indent:true});
+  y+=4;
+
+  // Grafik 1 — Line Chart Pendapatan 6 Bulan
+  addChart(canvasLine, 'Tren Pendapatan & HPP — 6 Bulan Terakhir', 65);
+
+  // Grafik 2 — Bar Chart Stok per Kategori
+  addChart(canvasBar, 'Stok per Kategori Barang', 60);
+
+  // Grafik 3 — Pie Chart Top Selling (hanya jika ada data)
+  if(lapCharts.pie && canvasPie && topSelling.length > 0){
+    addChart(canvasPie, 'Top Selling Product', 80);
+  } else {
+    checkPage(20);
+    doc.setFontSize(10); doc.setFont(undefined,'bold'); doc.setTextColor(26,42,58);
+    doc.text('Top Selling Product', 105, y, {align:'center'}); y+=8;
+    doc.setFontSize(9); doc.setTextColor(150,150,150);
+    doc.text('Belum ada data penjualan untuk ditampilkan.', 105, y, {align:'center'});
+    y+=12;
+  }
+
+  // Tabel top selling di bawah grafik
+  if(topSelling.length > 0){
+    checkPage(14);
+    section('Detail Top Selling Product', [0,158,130]);
+    // Header tabel
+    doc.setFillColor(0,158,130); doc.rect(14,y-4,182,8,'F');
+    doc.setTextColor(255,255,255); doc.setFontSize(8.5); doc.setFont(undefined,'bold');
+    doc.text('No', 16, y);
+    doc.text('Nama Produk', 28, y);
+    doc.text('Qty Terjual', 143, y, {align:'right'});
+    doc.text('Total Penjualan', 194, y, {align:'right'});
+    y+=7; resetFont();
+    topSelling.slice(0,10).forEach((p,i)=>{
+      checkPage(8);
+      if(i%2===0){doc.setFillColor(244,248,252);doc.rect(14,y-4,182,8,'F');}
+      doc.setTextColor(26,42,58); doc.setFontSize(9); doc.setFont(undefined,'normal');
+      doc.text(String(i+1), 16, y);
+      doc.text(p.nama.length>35?p.nama.slice(0,33)+'...':p.nama, 28, y);
+      doc.text(String(p.qty), 143, y, {align:'right'});
+      doc.text(rp(p.total), 194, y, {align:'right'});
+      y+=7;
+    });
+    y+=4;
+    const totalQty=topSelling.reduce((s,p)=>s+p.qty,0);
+    const totalVal=topSelling.reduce((s,p)=>s+p.total,0);
+    row('TOTAL', rp(totalVal), {total:true, fill:[220,252,231]});
+  }
 }
-function dlFakturData(idx){ cetakFakturData(masuk[idx]); }
-function cetakFakturData(m){
-  const w=window.open('','_blank','width:480,height:600');
-  w.document.write(`<html><head><title>Faktur ${m.fak}</title><style>body{font-family:'Arial',sans-serif;padding:24px;color:#222;max-width:420px;margin:0 auto}h2{color:#009e84;margin:0 0 4px}.sub{font-size:12px;color:#666;margin-bottom:20px}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:14px}.total-row{display:flex;justify-content:space-between;padding:10px 0;font-size:16px;font-weight:bold;color:#009e84}.info{background:#f4f8fc;padding:12px;border-radius:8px;font-size:13px;margin-bottom:16px}@media print{button{display:none}}</style></head><body>
-    <h2>🏪 Toko Jago Sumberarum</h2>
-    <div class="sub">Jl. Sumberarum, Surabaya</div>
-    <div class="info"><div><strong>No Faktur:</strong> ${m.fak}</div><div><strong>Tanggal:</strong> ${m.tgl}</div><div><strong>Supplier:</strong> ${m.sup}</div></div>
-    <div class="row"><span><strong>Barang</strong></span><span><strong>${m.nama}</strong></span></div>
-    <div class="row"><span>Jumlah</span><span>${m.jml} ${m.sat||'pcs'}</span></div>
-    <div class="row"><span>Harga Beli</span><span>${rp(m.hb)}</span></div>
-    <div class="total-row"><span>TOTAL</span><span>${rp(m.total)}</span></div><br>
-    <button onclick="window.print()" style="width:100%;padding:10px;background:#00C9A7;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px">🖨️ Cetak Faktur</button>
-  </body></html>`);
+
+  doc.save(fileName); toast('📄 PDF didownload');
 }
-function printLap(){ window.print(); }
 
 // ══════════════════════════════════════════
 //  LOCAL STORAGE

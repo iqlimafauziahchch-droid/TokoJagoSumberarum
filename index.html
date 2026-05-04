@@ -26,7 +26,9 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-/* ── LOGIN ── */
+/* ── 
+
+── */
 #loginPage{display:flex;align-items:center;justify-content:center;min-height:100vh;position:relative;overflow:hidden;}
 .login-bg{position:absolute;inset:0;background:linear-gradient(135deg,#0f2942 0%,#1a4a7a 30%,#0d6e5c 60%,#005f4b 100%);z-index:0;}
 .login-bg::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
@@ -648,7 +650,7 @@ body.dark .profile-photo-wrap{background:#2a2d3f;}
         <p data-key="klik_ganti_foto">Klik foto untuk mengganti. Format: JPG, PNG, GIF. Maks 2MB.</p>
         <div style="display:flex;gap:8px">
           <button class="btn btn-ghost btn-sm" onclick="document.getElementById('photoInput').click()">📷 <span data-key="ganti_foto">Ganti Foto</span></button>
-          <button class="btn btn-ghost btn-sm" onclick="hapusFoto()" style="color:var(--red)">🗑️ <span data-key="hapus_foto">Hapus Foto</span></button>
+          <button class="btn btn-ghost btn-sm" onclick="hapusFoto()" style="color:var(--red)">❌ <span data-key="hapus_foto">Hapus Foto</span></button>
         </div>
       </div>
     </div>
@@ -1069,15 +1071,15 @@ const LANGS = {
     passwordLamaSalah:'Password lama salah', passwordMin8:'Password minimal 8 karakter',
     konfirmasiTidakCocok:'Konfirmasi tidak cocok', passwordBerhasil:'🔒 Password berhasil diubah',
     tokoDisimpan:'💾 Data toko disimpan', barangDitambahkan:'✅ Barang ditambahkan',
-    barangDiperbarui:'✅ Barang diperbarui', barangDihapus:'🗑️ Barang dihapus',
+    barangDiperbarui:'✅ Barang diperbarui', barangDihapus:'❌ Barang dihapus',
     hapusToko:'Hapus "{0}"?', barangMasukDicatat:'✅ Barang masuk dicatat | Harga Avg baru: {0}',
     transaksiDisimpan:'✅ Transaksi disimpan | HPP: {0} | Laba: {1}',
     batalTransaksi:'↩️ Transaksi dibatalkan', batalKonfirm:'Batalkan transaksi ini? Stok akan dikembalikan.',
-    hapusKonfirm:'Hapus data ini?', hapusOpname:'🗑️ Opname dihapus',
+    hapusKonfirm:'Hapus data ini?', hapusOpname:'❌ Opname dihapus',
     selesaikanKonfirm:'Selesaikan opname ini? Stok dan penyesuaian akan diperbarui.',
     opnameSelesaikanToast:'✅ Opname diselesaikan! {0} penyesuaian dibuat.',
     psdDisetujuiToast:'✅ Penyesuaian disetujui & stok diperbarui',
-    psdDihapus:'🗑️ Penyesuaian dihapus',
+    psdDihapus:'❌ Penyesuaian dihapus',
     psdDisetujuiKonfirm:'Setujui penyesuaian ini? Stok akan diperbarui.',
     barangDitambahkanList:'➕ Barang ditambahkan ke daftar',
     psdSimpanDraft:'💾 Draft penyesuaian disimpan',
@@ -1087,7 +1089,7 @@ const LANGS = {
     konfirmasiPasswordTidakCocok:'Konfirmasi password tidak cocok',
     fotoDiupload:'📷 Foto profil berhasil diperbarui',
     fotoTerlalubesar:'Ukuran foto maks 2MB',
-    fotoDihapus:'🗑️ Foto profil dihapus',
+    fotoDihapus:'❌ Foto profil dihapus',
   },
   en: {
     nav_dashboard:'Dashboard', nav_masuk:'Incoming Goods', nav_keluar:'Outgoing Goods',
@@ -1137,15 +1139,15 @@ const LANGS = {
     passwordLamaSalah:'Current password is wrong', passwordMin8:'Password must be at least 8 characters',
     konfirmasiTidakCocok:'Confirmation does not match', passwordBerhasil:'🔒 Password successfully changed',
     tokoDisimpan:'💾 Store data saved', barangDitambahkan:'✅ Product added',
-    barangDiperbarui:'✅ Product updated', barangDihapus:'🗑️ Product deleted',
+    barangDiperbarui:'✅ Product updated', barangDihapus:'❌ Product deleted',
     hapusToko:'Delete "{0}"?', barangMasukDicatat:'✅ Incoming goods recorded | New Avg Price: {0}',
     transaksiDisimpan:'✅ Transaction saved | COGS: {0} | Profit: {1}',
     batalTransaksi:'↩️ Transaction cancelled', batalKonfirm:'Cancel this transaction? Stock will be restored.',
-    hapusKonfirm:'Delete this data?', hapusOpname:'🗑️ Opname deleted',
+    hapusKonfirm:'Delete this data?', hapusOpname:'❌ Opname deleted',
     selesaikanKonfirm:'Finish this opname? Stock and adjustments will be updated.',
     opnameSelesaikanToast:'✅ Opname finished! {0} adjustments created.',
     psdDisetujuiToast:'✅ Adjustment approved & stock updated',
-    psdDihapus:'🗑️ Adjustment deleted',
+    psdDihapus:'❌ Adjustment deleted',
     psdDisetujuiKonfirm:'Approve this adjustment? Stock will be updated.',
     barangDitambahkanList:'➕ Product added to list',
     psdSimpanDraft:'💾 Adjustment draft saved',
@@ -1155,7 +1157,7 @@ const LANGS = {
     konfirmasiPasswordTidakCocok:'Password confirmation does not match',
     fotoDiupload:'📷 Profile photo updated',
     fotoTerlalubesar:'Max photo size is 2MB',
-    fotoDihapus:'🗑️ Profile photo removed',
+    fotoDihapus:'❌ Profile photo removed',
   }
 };
 
@@ -1835,7 +1837,7 @@ function renderDaftar(){
       <td>${badge}</td>
       <td>
         <button class="btn-icon" onclick="openEdit(${barang.indexOf(b)})">✏️</button>
-        <button class="btn-icon" onclick="hapusBarang(${barang.indexOf(b)})">🗑️</button>
+        <button class="btn-icon" onclick="hapusBarang(${barang.indexOf(b)})">❌</button>
       </td>
     </tr>`;
   });
@@ -1933,7 +1935,6 @@ function addMasuk(){
   renderMasuk(); renderDash(); renderDaftar(); saveState();
   toast(t('barangMasukDicatat').replace('{0}',rp(avgBaru)));
 }
-
 // ══════════════════════════════════════════
 //  BARANG KELUAR
 // ══════════════════════════════════════════
@@ -2144,7 +2145,7 @@ function renderOpname(){
           <button class="btn-icon btn-sm" onclick="editOpname(${ri})" title="Edit" style="color:var(--blue)">✏️</button>
           <button class="btn-icon btn-sm" onclick="finishOpname(${ri})" title="Selesaikan" style="color:var(--teal-d)">✅</button>
         `:''}
-        <button class="btn-icon btn-sm" onclick="hapusOpname(${ri})" title="Hapus" style="color:var(--red)">🗑️</button>
+        <button class="btn-icon btn-sm" onclick="hapusOpname(${ri})" title="Hapus" style="color:var(--red)">❌</button>
       </td>
     </tr>`;
   });
@@ -2270,7 +2271,7 @@ function renderPsdTempItems(){
       <td style="padding:8px 10px;text-align:right" class="${selClass}">${item.selisih>=0?'+':''}${item.selisih}</td>
       <td style="padding:8px 10px;text-align:right">${item.qty}</td>
       <td style="padding:8px 10px;text-align:right;font-family:'JetBrains Mono';font-size:12px;color:var(--red)">${rp(item.nilaiKerugian)}</td>
-      <td style="padding:8px 10px;text-align:center"><button class="btn-icon btn-sm" onclick="removePsdItem(${i})">🗑️</button></td>
+      <td style="padding:8px 10px;text-align:center"><button class="btn-icon btn-sm" onclick="removePsdItem(${i})">❌</button></td>
     </tr>`;
   });
   html+='</tbody></table>';
@@ -2338,7 +2339,7 @@ function renderPenyesuaian(){
           <button class="btn-icon btn-sm" onclick="editPsd(${ri})" title="Edit" style="color:var(--blue)">✏️</button>
           <button class="btn-icon btn-sm" onclick="approvePsd(${ri})" title="Setujui" style="color:var(--teal-d)">✅</button>
         `:''}
-        <button class="btn-icon btn-sm" onclick="hapusPsd(${ri})" title="Hapus" style="color:var(--red)">🗑️</button>
+        <button class="btn-icon btn-sm" onclick="hapusPsd(${ri})" title="Hapus" style="color:var(--red)">❌</button>
       </td>
     </tr>`;
   });

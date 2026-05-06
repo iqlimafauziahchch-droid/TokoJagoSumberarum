@@ -2942,6 +2942,108 @@ setInterval(saveState,3000);
 // ══════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════
+function dlFakturModal(){
+  const kode=document.getElementById('mm-brg').value;
+  const jml=parseInt(document.getElementById('mm-jml').value)||1;
+  const hb=getRp('mm-hb');
+  const fak=document.getElementById('mm-fak').value||'FK-DRAFT';
+  const sup=document.getElementById('mm-sup').value;
+  const b=barang.find(x=>x.kode===kode);
+  if(!b){ toast(t('pilihBarang'),true); return; }
+  cetakFakturData({fak,tgl:todayStr(),sup,nama:b.nama,sat:b.sat,jml,hb:hb||b.hb,total:jml*(hb||b.hb)});
+}
+
+function dlFakturData(idx){ cetakFakturData(masuk[idx]); }
+
+function cetakFakturData(m){
+  const html=`<!DOCTYPE html><html><head><title>Faktur ${m.fak}</title><style>
+    body{font-family:Arial,sans-serif;padding:24px;color:#222;max-width:420px;margin:0 auto}
+    h2{color:#009e84;margin:0 0 4px}
+    .sub{font-size:12px;color:#666;margin-bottom:20px}
+    .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:14px}
+    .total-row{display:flex;justify-content:space-between;padding:10px 0;font-size:16px;font-weight:bold;color:#009e84}
+    .info{background:#f4f8fc;padding:12px;border-radius:8px;font-size:13px;margin-bottom:16px}
+    button{width:100%;padding:10px;background:#00C9A7;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;margin-top:12px}
+    @media print{button{display:none}}
+  </style></head><body>
+    <h2>Toko Jago Sumberarum</h2>
+    <div class="sub">Jl. Sumberarum, Surabaya</div>
+    <div class="info">
+      <div><strong>No Faktur:</strong> ${m.fak}</div>
+      <div><strong>Tanggal:</strong> ${m.tgl}</div>
+      <div><strong>Supplier:</strong> ${m.sup}</div>
+    </div>
+    <div class="row"><span><strong>Barang</strong></span><span><strong>${m.nama}</strong></span></div>
+    <div class="row"><span>Jumlah</span><span>${m.jml} ${m.sat||'pcs'}</span></div>
+    <div class="row"><span>Harga Beli</span><span>${rp(m.hb)}</span></div>
+    <div class="total-row"><span>TOTAL</span><span>${rp(m.total)}</span></div>
+    <button onclick="window.print()">Cetak Faktur</button>
+  </body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const url=URL.createObjectURL(blob);
+  const w=window.open(url,'_blank');
+  if(!w){ toast('Popup diblok! Izinkan popup di browser.',true); return; }
+  setTimeout(()=>URL.revokeObjectURL(url),10000);
+}
+
+function printLap(){ window.print(); }
+function dlExcelByTab(tab){
+  const d=getLapData();
+  let csv='';
+  const name=lapTabNames[tab]||tab;
+  csv+=`${name.toUpperCase()} - TOKO JAGO SUMBERARUM\nMetode HPP: Average\nDicetak: ${todayStr()}\n\n`;
+  if(tab==='laba'){
+    csv+='Keterangan,Jumlah\n';
+    csv+=`Penjualan Barang,${d.penjualan}\n`;
+    csv+=`Jumlah Pendapatan,${d.totalPendapatan}\n`;
+    csv+=`HPP (Average),${d.hppTotal}\n`;
+    csv+=`Laba Kotor,${d.labaKotor}\n`;
+    csv+=`Beban Gaji,${d.biayaGaji}\n`;
+    csv+=`Beban Iklan,${d.biayaIklan}\n`;
+    csv+=`Beban Lain-lain,${d.biayaLain}\n`;
+    csv+=`Total Beban,${d.totalBeban}\n`;
+    csv+=`Laba Bersih,${d.labaBersih}\n`;
+  } else if(tab==='neraca'){
+    csv+='Keterangan,Jumlah\n';
+    csv+=`Kas & Setara Kas,${d.kas}\n`;
+    csv+=`Piutang Usaha,${d.piutang}\n`;
+    csv+=`Persediaan Barang (Avg),${d.persediaan}\n`;
+    csv+=`Total Aktiva,${d.totalAktiva}\n`;
+    csv+=`Utang Usaha,${d.utang}\n`;
+    csv+=`Modal Pemilik,${d.modalAwal}\n`;
+    csv+=`Laba Ditahan,${d.labaDitahan}\n`;
+    csv+=`Laba Periode Ini,${d.labaBersih}\n`;
+    csv+=`Total Ekuitas,${d.totalEkuitas}\n`;
+    csv+=`Total Pasiva,${d.totalPasiva}\n`;
+  } else if(tab==='kas'){
+    csv+='Keterangan,Jumlah\n';
+    csv+=`Penerimaan dari Penjualan,${d.penjualan}\n`;
+    csv+=`Pembayaran Pembelian Barang,${-d.totalPembelian}\n`;
+    csv+=`Pembayaran Beban Operasional,${-d.totalBeban}\n`;
+    csv+=`Arus Kas dari Aktivitas Operasi,${d.kasOps}\n`;
+    csv+=`Kas Awal Periode,${d.kasAwal}\n`;
+    csv+=`Kas Akhir Periode,${d.kasAkhir}\n`;
+  } else if(tab==='ekuitas'){
+    csv+='Kode,Nama Akun,Permulaan,Debit,Kredit,Saldo Akhir\n';
+    csv+=`301,Modal Saham,${d.modalAwal},0,0,${d.modalAwal}\n`;
+    csv+=`302,Tambahan Modal Disetor,0,0,0,0\n`;
+    csv+=`303,Laba Ditahan,${d.labaDitahan},0,${d.labaBersih},${d.labaDitahan+d.labaBersih}\n`;
+    csv+=`,,TOTAL,${d.modalAwal+d.labaDitahan},0,${d.labaBersih},${d.totalEkuitas}\n`;
+  } else if(tab==='grafik'){
+    csv+='Produk,Qty Terjual,Total Penjualan\n';
+    [...barang].map(b=>({
+      nama:b.nama,
+      qty:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.jml,0),
+      total:keluar.filter(k=>k.kode===b.kode).reduce((s,k)=>s+k.total,0)
+    })).filter(x=>x.qty>0).sort((a,b)=>b.qty-a.qty)
+    .forEach(x=>csv+=`${x.nama},${x.qty},${x.total}\n`);
+  }
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download=getReportName(tab)+'.csv';
+  a.click();
+  toast('📊 Excel '+name+' didownload');
+}
 function initAll(){
   loadState();
   applyLang();
